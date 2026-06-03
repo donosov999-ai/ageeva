@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Бесплатный тест на тип привязанности — Валя Агеева</title>
+<meta name="description" content="Узнай свой тип привязанности за 5 минут. Бесплатно + PDF-гайд в подарок.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand">Валя <span>Агеева</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="about.html">Обо мне</a>
+      <a href="course.html">Курс</a>
+      <a href="blog.html">Блог</a>
+      <a href="free.html">Бесплатное</a>
+      <a href="free.html" class="btn btn-primary btn-sm nav-cta">Бесплатный тест</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- 1-2. ЗАГОЛОВОК + ЗАЧЕМ -->
+<section class="hero">
+  <div class="container" style="grid-template-columns:1fr;text-align:center;max-width:760px">
+    <div>
+      <span class="eyebrow">Бесплатно · 5 минут</span>
+      <h1>Узнай свой тип<br>привязанности</h1>
+      <p class="lead" style="margin-left:auto;margin-right:auto">Это то, как ты ведёшь себя в близости: бросаешься спасать, требуешь, замираешь или убегаешь. От типа привязанности зависит, почему вы ссоритесь именно так — и что с этим делать. 5 минут, и ты поймёшь про себя то, что объясняет годы отношений.</p>
+      <a href="#test" class="btn btn-primary btn-lg">Начать тест →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. ТЕСТ -->
+<section class="section bg-cream2" id="test">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Шаг 1</span>
+      <h2>Пройди тест</h2>
+      <hr class="rule center">
+    </div>
+    <div class="test-frame narrow" style="margin-top:28px">
+      <span class="big">Здесь встроится тест</span>
+      <p>Интерактивный тест на тип привязанности (iframe с Netlify).<br>Переиспользуем готовые HTML-дашборды из проекта.</p>
+      <p class="note">⟡ заглушка — вставить ссылку на размещённый тест в <code>&lt;iframe src="…"&gt;</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- 4-5. ЗАХВАТ + БОНУС -->
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Шаг 2</span>
+      <h2>Куда прислать результат + подарок</h2>
+      <hr class="rule center">
+      <p class="lead narrow">Оставь имя и контакт — пришлю развёрнутый разбор твоего типа и <strong>PDF-гайд «Какой у тебя тип привязанности и что с этим делать»</strong> в подарок.</p>
+    </div>
+    <form class="form" style="margin-top:28px" onsubmit="return false">
+      <div>
+        <label for="name">Как тебя зовут</label>
+        <input id="name" type="text" placeholder="Имя">
+      </div>
+      <div>
+        <label for="contact">Email или Telegram</label>
+        <input id="contact" type="text" placeholder="email@почта.ру или @username">
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">Получить результат + PDF →</button>
+      <p class="note">⟡ форма-макет: подключим к Tilda-форме → Telegram-бот (выдача результата, PDF и прогрев)</p>
+    </form>
+  </div>
+</section>
+
+<!-- 6. ЧТО ДАЛЬШЕ -->
+<section class="section bg-blush">
+  <div class="container narrow center">
+    <span class="eyebrow">Что дальше</span>
+    <h2>После теста</h2>
+    <hr class="rule center">
+    <p class="lead">Telegram-бот сразу пришлёт тебе результат и PDF-гайд. А дальше — без спама и продаж в лоб: время от времени буду делиться разборами и историями. Захочешь глубже — там и расскажу про курс «Ближе». Не захочешь — просто оставишь себе тест и гайд.</p>
+    <div class="btn-row center" style="margin-top:10px">
+      <a href="course.html" class="btn btn-ghost btn-lg">А что за курс «Ближе»?</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot">
+      <div>
+        <div class="brand">Валя <span>Агеева</span></div>
+        <p>Про отношения — честно. За семью, без «бросай при первом же».</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <a href="about.html">Обо мне</a>
+        <a href="course.html">Курс «Ближе»</a>
+        <a href="free.html">Бесплатный тест</a>
+        <a href="blog.html">Блог</a>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <a href="https://instagram.com/ageeva_valya" target="_blank" rel="noopener">Instagram @ageeva_valya</a>
+        <a href="#">Telegram</a>
+        <a href="#">Оферта</a>
+        <a href="#">Политика конфиденциальности</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Валя Агеева, 2026 · ageeva.win</span>
+      <span>Сделано с любовью</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
