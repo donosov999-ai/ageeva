@@ -1,0 +1,122 @@
+/* ===========================================================
+   Конверсионные хуки — стили (дополняет style.css)
+   bottom-bar (моб) · dock (десктоп) · exit-intent · sticky-CTA ·
+   back-to-top · Aa · trust · SEO-спойлер · отзывы-свайп
+   =========================================================== */
+
+/* Aa — крупнее текст */
+body.text-lg { font-size: 18.5px; }
+
+/* ── Мобильный нижний бар ───────────────────────────────── */
+.mbar { display: none; }
+@media (max-width: 768px) {
+  .mbar {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    background: rgba(252,248,243,.97); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(120,90,80,.10);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .mbar a {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 9px 4px 8px; font-size: .72rem; font-weight: 700; color: var(--muted);
+    text-decoration: none; border-top: 2px solid transparent;
+  }
+  .mbar a.is-active { color: var(--rose-ink); border-top-color: var(--rose-deep); }
+  .mbar__i { font-size: 1.15rem; line-height: 1; }
+  body { padding-bottom: 64px; }
+}
+
+/* ── Десктоп dock (TG / Aa / ↑) ─────────────────────────── */
+.dock {
+  position: fixed; right: 18px; bottom: 18px; z-index: 80;
+  display: flex; flex-direction: column; gap: 10px;
+  opacity: 0; transform: translateY(10px); pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.dock.show { opacity: 1; transform: none; pointer-events: auto; }
+.dock__b {
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line);
+  background: #fff; color: var(--rose-ink); font-weight: 700; font-size: 1.1rem;
+  cursor: pointer; box-shadow: var(--shadow-sm); text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .15s, background .15s;
+}
+.dock__b:hover { transform: translateY(-2px); background: var(--blush); }
+@media (max-width: 768px) { .dock { display: none; } }
+
+/* ── Back-to-top (моб) ──────────────────────────────────── */
+.to-top {
+  position: fixed; right: 14px; bottom: 76px; z-index: 85;
+  width: 44px; height: 44px; border-radius: 50%; border: 0;
+  background: var(--rose-deep); color: #fff; font-size: 1.2rem; cursor: pointer;
+  box-shadow: 0 8px 20px rgba(190,126,117,.4);
+  opacity: 0; transform: scale(.8); pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+@media (min-width: 769px) { .to-top { display: none; } }
+
+/* ── Sticky-CTA на странице курса (десктоп) ─────────────── */
+.ccta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  padding: 12px 20px; background: rgba(252,248,243,.97); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(120,90,80,.10);
+  transform: translateY(100%); transition: transform .3s;
+}
+.ccta.show { transform: none; }
+.ccta__t { font-family: var(--serif); font-weight: 700; color: var(--ink); }
+@media (max-width: 768px) { .ccta { display: none; } }
+
+/* ── Exit-intent ────────────────────────────────────────── */
+.exit-ov {
+  position: fixed; inset: 0; z-index: 120; padding: 22px;
+  background: rgba(74,64,58,.45); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .25s;
+}
+.exit-ov.show { opacity: 1; }
+.exit-bx {
+  background: var(--cream); border-radius: 24px; max-width: 440px; width: 100%;
+  padding: 40px 32px; text-align: center; box-shadow: var(--shadow);
+  position: relative; transform: translateY(14px); transition: transform .25s;
+}
+.exit-ov.show .exit-bx { transform: none; }
+.exit-bx h3 { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 12px; color: var(--ink); }
+.exit-bx p { color: var(--muted); margin-bottom: 22px; }
+.exit-x {
+  position: absolute; top: 12px; right: 16px; background: none; border: 0;
+  font-size: 1.7rem; color: var(--muted); cursor: pointer; line-height: 1;
+}
+
+/* ── Trust-строка (курс) ────────────────────────────────── */
+.trust {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px;
+  max-width: 760px; margin: 0 auto; color: var(--muted); font-size: .95rem; font-weight: 600;
+}
+.trust span { display: inline-flex; align-items: center; gap: 8px; }
+.trust span::before { content: "✓"; color: #9CAE84; font-weight: 800; }
+
+/* ── TG-вопрос у тарифов ────────────────────────────────── */
+.tg-ask { text-align: center; margin-top: 24px; color: var(--muted); }
+.tg-ask a { color: var(--rose-ink); font-weight: 700; }
+
+/* ── SEO-спойлер ────────────────────────────────────────── */
+.seo-spoiler { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 34px; }
+.seo-spoiler details { border-top: 1px solid var(--line); padding-top: 18px; }
+.seo-spoiler summary {
+  cursor: pointer; color: var(--muted); font-weight: 700; font-size: .92rem; list-style: none;
+}
+.seo-spoiler summary::-webkit-details-marker { display: none; }
+.seo-spoiler p { color: var(--muted); font-size: .92rem; margin-top: 14px; line-height: 1.7; }
+
+/* ── Отзывы свайпом на мобиле ───────────────────────────── */
+@media (max-width: 768px) {
+  .quotes {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px;
+    margin-left: -24px; margin-right: -24px; padding: 4px 24px 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quotes::-webkit-scrollbar { display: none; }
+  .quote { flex: 0 0 86%; scroll-snap-align: center; }
+}

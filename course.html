@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/hooks.css">
 </head>
 <body>
 
@@ -45,6 +46,8 @@
     </div>
   </div>
 </section>
+
+<section class="section--tight"><div class="container"><div class="trust"><span>Доступ остаётся с тобой</span><span>Старт — конец июня</span><span>Оплата картой · ЮKassa</span><span>Возврат по оферте</span></div></div></section>
 
 <!-- 2. ДЛЯ КОГО / НЕ ДЛЯ КОГО -->
 <section class="section bg-cream2">
@@ -149,7 +152,7 @@
           <li class="off">психопортрет и стратегия</li>
         </ul>
         <div class="amount">2 900–4 900 ₽</div>
-        <a href="#" class="btn btn-ghost">Выбрать «Сама»</a>
+        <a href="#" class="btn btn-ghost" data-goal="tariff_sama">Выбрать «Сама»</a>
       </div>
       <div class="price price--featured">
         <span class="price__badge">⭐ Выбор большинства</span>
@@ -163,7 +166,7 @@
           <li class="off">психопортрет и стратегия</li>
         </ul>
         <div class="amount">5 900–7 900 ₽</div>
-        <a href="#" class="btn btn-primary">Выбрать «С Валентиной»</a>
+        <a href="#" class="btn btn-primary" data-goal="tariff_valya">Выбрать «С Валентиной»</a>
       </div>
       <div class="price">
         <h3>VIP 1-на-1</h3>
@@ -175,11 +178,12 @@
           <li>индивидуальная стратегия</li>
         </ul>
         <div class="amount">500 000 ₽</div>
-        <a href="#" class="btn btn-ghost">Обсудить VIP</a>
+        <a href="#" class="btn btn-ghost" data-goal="tariff_vip">Обсудить VIP</a>
       </div>
     </div>
     <p class="lead narrow center" style="margin-top:30px">Большинство берёт «Сама» — этого хватает, чтобы выйти из круга самостоятельно. «С Валентиной» — если хочешь, чтобы тебя вели за руку и отвечали лично.</p>
     <p class="note narrow" style="margin-top:14px">⟡ цены — рыба-ориентир, финал после анализа рынка</p>
+    <p class="tg-ask">Остались вопросы по курсу? <a href="https://t.me/ageeva_valya" target="_blank" rel="noopener" data-goal="tg_click">Спросить Валентину в Telegram →</a></p>
   </div>
 </section>
 
@@ -187,8 +191,7 @@
 <section class="section">
   <div class="container grid grid-2" style="align-items:center">
     <div class="photo photo--round">
-      <span class="photo__deco"></span>
-      <span class="photo__tag">фото Валентины</span>
+      <img src="assets/photo-round.jpg" alt="Валентина Агеева">
     </div>
     <div>
       <span class="eyebrow">Кто ведёт</span>
@@ -261,5 +264,15 @@
   </div>
 </footer>
 
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Как оплатить курс?","acceptedAnswer":{"@type":"Answer","text":"Картой через ЮKassa — моментально, прямо на сайте."}},
+{"@type":"Question","name":"Что будет сразу после оплаты?","acceptedAnswer":{"@type":"Answer","text":"Доступ к курсу приходит в Telegram сразу после оплаты."}},
+{"@type":"Question","name":"Можно вернуть деньги?","acceptedAnswer":{"@type":"Answer","text":"Условия возврата прописаны в оферте."}},
+{"@type":"Question","name":"Сколько остаётся доступ?","acceptedAnswer":{"@type":"Answer","text":"Доступ к материалам курса остаётся с тобой."}},
+{"@type":"Question","name":"А если мне не подойдёт?","acceptedAnswer":{"@type":"Answer","text":"Начни с бесплатного теста — там понятно, мой это подход или нет."}}
+]}
+</script>
+<script src="assets/app.js" defer></script>
 </body>
 </html>
