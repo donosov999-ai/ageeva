@@ -29,6 +29,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/hooks.css">
+<style>
+/* Тест привязанности — на бренде «Отношения длиною в жизнь» */
+.atest{max-width:680px;margin:30px auto 0;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 10px 30px rgba(155,84,78,.06)}
+.atest .scale-note{font-size:.92rem;color:var(--muted);margin:0 0 16px;text-align:center}
+.slider-q{padding:15px 0;border-bottom:1px solid var(--line)}
+.slider-q:last-of-type{border-bottom:0}
+.slider-q .q{font-weight:700;margin-bottom:12px;color:var(--ink)}
+.slider-row{display:flex;align-items:center;gap:12px}
+.slider-min,.slider-max{font-size:.76rem;color:var(--muted);flex:0 0 70px;line-height:1.2}
+.slider-max{text-align:right}
+.slider-q input[type=range]{flex:1;accent-color:var(--rose-deep)}
+.slider-val{flex:0 0 20px;text-align:center;font-weight:800;color:var(--rose-deep)}
+.slider-val.unset{color:var(--rose)}
+.atest-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.result-box{margin-top:22px;background:var(--blush-2);border:1.5px solid var(--rose);border-radius:16px;padding:24px}
+.result-box h3{margin:0 0 4px}
+.result-box .stat{font-family:var(--serif);font-size:1.55rem;color:var(--rose-ink);margin-bottom:12px}
+.progress{height:10px;background:rgba(154,95,87,.12);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;border-radius:999px}
+.atest .note{background:#fff;border-left:3px solid var(--rose-deep);padding:12px 16px;border-radius:8px;margin-top:14px;font-size:.96rem}
+.atest details{margin-top:18px}
+.atest summary{cursor:pointer;font-weight:700;color:var(--rose-ink)}
+.atest details p{font-size:.95rem;margin:8px 0;color:var(--ink)}
+.atest-src{font-size:.8rem;color:var(--muted);margin-top:16px;text-align:center}
+</style>
 </head>
 <body>
 
@@ -65,10 +90,22 @@
       <h2>Пройди тест</h2>
       <hr class="rule center">
     </div>
-    <div class="test-frame narrow" style="margin-top:28px">
-      <span class="big">Здесь встроится тест</span>
-      <p>Интерактивный тест на тип привязанности (iframe с Netlify).<br>Переиспользуем готовые HTML-дашборды из проекта.</p>
-      <p class="note">⟡ заглушка — вставить ссылку на размещённый тест в <code>&lt;iframe src="…"&gt;</code></p>
+    <div class="atest">
+      <p class="scale-note">Шкала: 1 — совсем не про меня · 5 — очень про меня. 12 вопросов, отвечай честно — это для тебя.</p>
+      <form id="testForm"></form>
+      <div class="atest-btns">
+        <button class="btn btn-primary" id="calcBtn" type="button">Посчитать мой тип →</button>
+        <button class="btn btn-ghost" id="resetBtn" type="button">Сбросить</button>
+      </div>
+      <div id="result"></div>
+      <details>
+        <summary>Что такое типы привязанности?</summary>
+        <p><strong>Надёжная (Якорь, ~50%):</strong> комфортно и в близости, и наедине с собой. Эмоции регулируются спокойно, конфликт не разрушает чувство безопасности.</p>
+        <p><strong>Тревожная (Волна, ~20%):</strong> паника при отдалении, постоянная проверка «а как он ко мне сейчас», страх быть оставленной.</p>
+        <p><strong>Избегающая (Остров, ~25%):</strong> дискомфорт от близости, желание отстраниться при «слишком близко», автономия ценится выше связи.</p>
+        <p><strong>К надёжной можно прийти.</strong> Это реальный путь через работу над собой, а не врождённый приговор.</p>
+      </details>
+      <p class="atest-src">В основе — теория привязанности (Боулби), исследования Микулинцера и Шейвера, модель Таткина (PACT) и ЭФТ Сью Джонсон.</p>
     </div>
   </div>
 </section>
@@ -150,6 +187,79 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var QUESTIONS = [
+    {h:'anchor', q:'Мне комфортно и одной, и в близких отношениях'},
+    {h:'anchor', q:'Я могу попросить о поддержке без чувства вины'},
+    {h:'anchor', q:'Конфликт не разрушает моё чувство безопасности с партнёром'},
+    {h:'anchor', q:'Я доверяю, что партнёр вернётся, если ушёл остыть'},
+    {h:'wave',   q:'Когда партнёр не отвечает быстро — я начинаю тревожиться'},
+    {h:'wave',   q:'Часто проверяю, как партнёр ко мне относится прямо сейчас'},
+    {h:'wave',   q:'При охлаждении паникую и начинаю «дёргать» партнёра'},
+    {h:'wave',   q:'Боюсь, что меня бросят, даже без объективных причин'},
+    {h:'island', q:'Когда партнёр «слишком близко» — хочется отстраниться'},
+    {h:'island', q:'Свободу и автономию ценю выше глубокой эмоциональной связи'},
+    {h:'island', q:'Эмоциональные разговоры утомляют меня'},
+    {h:'island', q:'В стрессе предпочитаю справляться одна, без помощи'}
+  ];
+  var LABELS = {anchor:'Надёжная (Якорь)', wave:'Тревожная (Волна)', island:'Избегающая (Остров)'};
+  var COLORS = {anchor:'#5B9A78', wave:'#C9756E', island:'#B8946A'};
+  var form = document.getElementById('testForm');
+  if(!form) return;
+  QUESTIONS.forEach(function(item, i){
+    var row = document.createElement('div');
+    row.className = 'slider-q';
+    row.innerHTML =
+      '<div class="q">' + (i+1) + '. ' + item.q + '</div>' +
+      '<div class="slider-row">' +
+        '<span class="slider-min">не про меня</span>' +
+        '<input type="range" min="1" max="5" value="3" data-h="' + item.h + '">' +
+        '<span class="slider-val unset">·</span>' +
+        '<span class="slider-max">очень про меня</span>' +
+      '</div>';
+    var inp = row.querySelector('input[type=range]');
+    var val = row.querySelector('.slider-val');
+    inp.dataset.touched = '0';
+    inp.addEventListener('input', function(){
+      val.textContent = inp.value; val.classList.remove('unset'); inp.dataset.touched = '1';
+    });
+    form.appendChild(row);
+  });
+  document.getElementById('calcBtn').addEventListener('click', function(){
+    var sums={anchor:0,wave:0,island:0}, counts={anchor:0,wave:0,island:0}, answered=0;
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){
+      if(r.dataset.touched==='1'){ sums[r.dataset.h]+=parseInt(r.value,10); counts[r.dataset.h]+=1; answered++; }
+    });
+    if(answered < QUESTIONS.length){ alert('Подвинь слайдер на каждом из '+QUESTIONS.length+' вопросов. Отвечено: '+answered); return; }
+    var avgs={anchor:sums.anchor/counts.anchor, wave:sums.wave/counts.wave, island:sums.island/counts.island};
+    var max='anchor',maxV=avgs.anchor;
+    if(avgs.wave>maxV){max='wave';maxV=avgs.wave;}
+    if(avgs.island>maxV){max='island';maxV=avgs.island;}
+    var html='<div class="result-box"><h3>Твой тип:</h3><div class="stat">'+LABELS[max]+'</div>';
+    ['anchor','wave','island'].forEach(function(k){
+      var pct=Math.round((avgs[k]-1)/4*100);
+      html+='<div style="margin:14px 0;"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;"><span>'+LABELS[k]+'</span><span>'+pct+'%</span></div>';
+      html+='<div class="progress"><div class="progress-bar" style="width:'+pct+'%;background:'+COLORS[k]+'"></div></div></div>';
+    });
+    var rec='';
+    if(max==='anchor'){ rec='<strong>Надёжная привязанность.</strong> Это твой ресурс. Поддерживай тёплый контакт и ритуалы близости — и помогай партнёру (если он тревожный или избегающий) двигаться к этой же опоре.'; }
+    else if(max==='wave'){ rec='<strong>Тревожная.</strong> Учись успокаивать себя сама (техника 5-4-3-2-1, дыхание 4-7-8) ДО того, как «дёргать» партнёра. Если партнёр избегающий — твоя тревога его пугает; вместо проверок скажи прямо: «мне нужно подтверждение».'; }
+    else{ rec='<strong>Избегающая.</strong> Учись оставаться в контакте 20 минут, даже когда хочется уйти. Если партнёр тревожный — твой уход для него триггер; вместо исчезновения — «мне нужно 20 минут, я вернусь».'; }
+    html+='<div class="note">'+rec+'</div>';
+    html+='<div class="atest-btns"><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Разобрать свой тип на курсе →</a></div></div>';
+    html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>Для пары: ловушка «тревожный + избегающий»</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">Самый частый цикл: одна требует близости — другой отступает — первая паникует и требует ещё — второй отступает дальше. Это «преследователь — отстраняющийся» (Сью Джонсон, ЭФТ). Выход: оба учатся <strong>называть цикл</strong>, а не воевать в нём.</p></div>';
+    var box=document.getElementById('result');
+    box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
+    if(window.track){ try{ track('test_complete'); }catch(e){} }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){ r.value=3; r.dataset.touched='0'; });
+    document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='·'; v.classList.add('unset'); });
+    document.getElementById('result').innerHTML='';
+  });
+})();
+</script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>
