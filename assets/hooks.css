@@ -120,3 +120,14 @@ body.text-lg { font-size: 20.5px; }
   .quotes::-webkit-scrollbar { display: none; }
   .quote { flex: 0 0 86%; scroll-snap-align: center; }
 }
+
+/* ── Футер: CTA-блок + соцсети ─────────────────────────── */
+.foot-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  background:var(--blush-2);border:1px solid var(--line);border-radius:18px;padding:26px 32px;margin-bottom:42px}
+.foot-cta h3{font-family:var(--serif);font-size:1.45rem;margin:0 0 6px;color:var(--rose-ink)}
+.foot-cta p{margin:0;color:var(--ink);opacity:.82;font-size:.97rem;max-width:48ch}
+.foot-social{display:flex;gap:14px;margin-top:14px}
+.foot-social a{display:inline-block!important;margin:0!important;font-weight:700;color:var(--rose-ink)!important}
+.foot-bottom a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.foot-bottom a:hover{color:var(--rose-ink)}
+@media (max-width:640px){ .foot-cta{flex-direction:column;align-items:flex-start;padding:22px} }
