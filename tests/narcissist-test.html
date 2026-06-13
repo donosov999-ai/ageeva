@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест: нарцисс рядом или просто тяжёлый характер? — Валентина Агеева</title>
+<meta name="description" content="Где заканчивается сложный характер и начинается нарциссизм. Тест на основе работ Дурвасулы, Готтмана и Джонсон.">
+<meta name="keywords" content="тест на нарцисса, нарцисс в отношениях, признаки нарциссизма, тяжёлый характер партнёра, психология отношений">
+<meta name="author" content="Валентина Агеева">
+<link rel="canonical" href="https://ageeva.win/tests/narcissist-test.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Тест: нарцисс рядом или просто тяжёлый характер? — Валентина Агеева">
+<meta property="og:description" content="Где заканчивается сложный характер и начинается нарциссизм. Тест на основе работ Дурвасулы, Готтмана и Джонсон.">
+<meta property="og:url" content="https://ageeva.win/tests/narcissist-test.html">
+<meta property="og:image" content="https://ageeva.win/assets/og-cover.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109819083', 'ym');
+    ym(109819083, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<style>
+:root {
+  --bg: #FCF8F3;
+  --bg2: #F6EEE6;
+  --bg3: #F4E3DC;
+  --red: #C8765E;
+  --red-dim: #9A5F57;
+  --orange: #C39A6A;
+  --yellow: #C8A24A;
+  --green: #5B9A78;
+  --blue: #6B8FAE;
+  --text: #4A403A;
+  --text2: #6B5E54;
+  --text3: #9B8E82;
+  --border: #E9DDD3;
+  --border2: #E2CFC4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito Sans',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+.screen{display:none;position:relative;z-index:1;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* ===== TOPBAR ===== */
+.va-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 20px;background:#FCF8F3;border-bottom:1px solid #E9DDD3;font-family:'Nunito Sans',system-ui,sans-serif;position:sticky;top:0;z-index:60}
+.va-brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;color:#9A5F57;text-decoration:none;font-size:18px}
+.va-brand span{font-style:italic;font-weight:600}
+.va-nav{display:flex;gap:16px}
+.va-nav a{color:#BE7E75;text-decoration:none;font-weight:700;font-size:13.5px}
+.va-nav a:hover{color:#9A5F57}
+
+/* ===== INTRO ===== */
+#intro{min-height:calc(100vh - 56px);align-items:center;justify-content:center;text-align:center;padding:40px 20px;}
+.intro-warning{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red);
+  margin-bottom:24px;font-weight:700;
+}
+.intro-title{
+  font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,7vw,52px);font-weight:900;
+  line-height:1.15;margin-bottom:16px;
+  letter-spacing:-0.5px;color:var(--text);
+}
+.intro-title .red{color:var(--red);font-style:italic;}
+.intro-sub{font-size:18px;color:var(--text2);line-height:1.6;max-width:480px;margin-bottom:32px;}
+.intro-sub em{color:var(--red-dim);font-style:normal;font-weight:700;}
+.intro-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;}
+.intro-tag{
+  font-size:12px;padding:6px 14px;border:1px solid var(--border2);border-radius:20px;
+  color:var(--text2);letter-spacing:0.5px;background:var(--bg2);
+}
+.btn-go{
+  font-family:'Nunito Sans',system-ui,sans-serif;font-size:15px;font-weight:800;
+  padding:18px 48px;background:var(--red);color:#fff;border:none;border-radius:12px;
+  cursor:pointer;letter-spacing:1px;transition:all 0.2s;
+}
+.btn-go:hover{background:var(--red-dim);box-shadow:0 6px 28px rgba(155,84,78,0.18);}
+
+.disclaimer{
+  max-width:420px;margin-top:28px;font-size:12px;color:var(--text3);line-height:1.5;
+  border-top:1px solid var(--border);padding-top:16px;
+}
+
+/* ===== QUIZ ===== */
+#quiz{min-height:calc(100vh - 56px);align-items:center;justify-content:center;padding:24px 16px;}
+.quiz-box{max-width:620px;width:100%;}
+.prog-wrap{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.prog-num{font-family:'Playfair Display',Georgia,serif;font-size:14px;color:var(--text3);min-width:48px;}
+.prog-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--red);transition:width 0.3s;border-radius:2px;}
+
+.sit-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:12px;font-weight:700;}
+.sit-text{font-size:clamp(17px,3.8vw,22px);line-height:1.55;margin-bottom:28px;font-weight:400;color:var(--text);}
+
+.opts{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  display:flex;align-items:flex-start;gap:14px;padding:16px 20px;
+  background:#ffffff;border:1px solid var(--border);border-radius:14px;
+  cursor:pointer;transition:all 0.2s;
+}
+.opt:hover{border-color:var(--border2);background:var(--bg2);}
+.opt.sel{border-color:var(--red);background:rgba(190,126,117,.10);}
+.opt-marker{
+  min-width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;
+  flex-shrink:0;
+}
+.opt.sel .opt-marker{border-color:var(--red);background:var(--red);}
+.opt.sel .opt-marker::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%;}
+.opt-text{font-size:15px;line-height:1.5;color:var(--text2);transition:color 0.2s;}
+.opt:hover .opt-text,.opt.sel .opt-text{color:var(--text);}
+
+.nav-row{display:flex;justify-content:space-between;margin-top:28px;}
+.btn-n{
+  font-family:'Nunito Sans',system-ui,sans-serif;font-size:13px;font-weight:600;
+  padding:12px 24px;background:transparent;color:var(--text3);border:1px solid var(--border);
+  border-radius:12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;
+}
+.btn-n:hover{color:var(--text);border-color:var(--text3);}
+.btn-n.primary{background:var(--red);color:#fff;border-color:transparent;font-weight:800;}
+.btn-n.primary:hover{background:var(--red-dim);}
+.btn-n:disabled{opacity:0.3;cursor:not-allowed;}
+
+/* ===== RESULT ===== */
+#result{min-height:calc(100vh - 56px);align-items:center;padding:40px 20px;}
+.res-box{max-width:640px;width:100%;}
+.res-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);text-align:center;margin-bottom:12px;}
+.res-name{
+  font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,6.5vw,44px);font-weight:900;
+  text-align:center;line-height:1.15;margin-bottom:6px;
+}
+.res-sub{text-align:center;font-size:16px;color:var(--text2);margin-bottom:32px;}
+
+/* Meter */
+.meter-wrap{margin:0 auto 36px;max-width:400px;}
+.meter-label-row{display:flex;justify-content:space-between;margin-bottom:6px;}
+.meter-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
+.meter-track{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;position:relative;}
+.meter-fill{height:100%;border-radius:4px;transition:width 0.6s ease;}
+.meter-zones{display:flex;height:100%;position:absolute;top:0;left:0;right:0;}
+.meter-zone{flex:1;border-right:1px solid var(--bg);}
+.meter-zone:last-child{border-right:none;}
+.meter-pointer{
+  position:absolute;top:-6px;width:4px;height:20px;background:var(--red-dim);border-radius:2px;
+  transform:translateX(-50%);transition:left 0.6s ease;box-shadow:0 0 8px rgba(155,84,78,0.25);
+}
+
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px;}
+.score-item{padding:14px;background:#ffffff;border:1px solid var(--border);border-radius:14px;text-align:center;}
+.score-val{font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;}
+.score-lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:4px;}
+
+.sec{margin-bottom:24px;}
+.sec-title{
+  font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:700;
+  letter-spacing:0.3px;margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-title::before{content:'';width:20px;height:2px;border-radius:1px;background:currentColor;}
+.sec-body{font-size:15px;line-height:1.7;color:var(--text2);}
+.sec-body strong{color:var(--text);font-weight:800;}
+.sec-body em{font-style:normal;font-weight:700;}
+
+.warn-box{
+  padding:18px 22px;background:var(--bg2);border-left:3px solid;border-radius:0 14px 14px 0;
+  margin:16px 0;
+}
+.warn-box.red{border-color:var(--red);}
+.warn-box.yellow{border-color:var(--yellow);}
+.warn-box.green{border-color:var(--green);}
+.warn-head{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;margin-bottom:6px;}
+.warn-body{font-size:14px;line-height:1.6;color:var(--text2);}
+.warn-body strong{color:var(--text);font-weight:800;}
+
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;}
+.btn-share{
+  flex:1;min-width:130px;font-family:'Nunito Sans',system-ui,sans-serif;font-size:13px;font-weight:800;
+  padding:14px 20px;background:var(--red);color:#fff;border:none;border-radius:12px;
+  cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;
+}
+.btn-share:hover{background:var(--red-dim);}
+.btn-redo{
+  flex:1;min-width:130px;font-family:'Nunito Sans',system-ui,sans-serif;font-size:13px;font-weight:600;
+  padding:14px 20px;background:transparent;color:var(--text3);border:1px solid var(--border);
+  border-radius:12px;cursor:pointer;transition:all 0.2s;
+}
+.btn-redo:hover{color:var(--text);border-color:var(--text3);}
+
+.footer{text-align:center;margin-top:40px;padding:20px;font-size:11px;color:var(--text3);line-height:1.5;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 0.4s ease forwards;}
+
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  background:#ffffff;color:var(--text);padding:10px 22px;
+  border:1px solid var(--border2);border-radius:12px;font-size:13px;
+  box-shadow:0 6px 28px rgba(155,84,78,.10);
+  z-index:99;opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+.toast.show{opacity:1;}
+
+/* ===== FOOTER ===== */
+.va-foot{background:#F6EEE6;border-top:1px solid #E9DDD3;padding:36px 20px;text-align:center;font-family:'Nunito Sans',system-ui,sans-serif;margin-top:40px}
+.va-foot-h{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#9A5F57;margin:0 0 18px}
+.va-foot-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.va-btn{display:inline-block;background:#BE7E75;color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:12px;font-size:14.5px}
+.va-btn:hover{background:#9A5F57}
+.va-ghost{background:transparent;color:#9A5F57;border:1.5px solid #D7A39B}
+.va-ghost:hover{background:#FBEEE9;color:#9A5F57}
+.va-copy{margin-top:20px;font-size:12px;color:#9B8E82}
+</style>
+</head>
+<body>
+
+<header class="va-top">
+  <a href="../index.html" class="va-brand">Отношения <span>длиною в жизнь</span></a>
+  <nav class="va-nav"><a href="../tests/">Все тесты</a><a href="../free.html">Тест привязанности</a><a href="../course.html">Курс</a></nav>
+</header>
+
+<div id="intro" class="screen active">
+  <div class="intro-warning">⚠ Разговор по-честному</div>
+  <div class="intro-title">Нарцисс рядом<br>или просто <span class="red">тяжёлый характер</span>?</div>
+  <div class="intro-sub">
+    Инстаграм назовёт нарциссом любого, кто забыл купить цветы.<br><br>
+    Этот тест <em>разделяет</em>: где клиника, где незрелость, где стресс, а где ты просто начиталась блогеров.
+  </div>
+  <div class="intro-tags">
+    <span class="intro-tag">18 ситуаций</span>
+    <span class="intro-tag">5 минут</span>
+    <span class="intro-tag">5 типажей</span>
+    <span class="intro-tag">0 инстаграмщины</span>
+  </div>
+  <button class="btn-go" onclick="startQuiz()">Поехали</button>
+  <div class="disclaimer">Тест не заменяет диагноз специалиста. NPD диагностирует только психиатр. Если вы в опасности — обратитесь за помощью.</div>
+</div>
+
+<div id="quiz" class="screen">
+  <div class="quiz-box">
+    <div class="prog-wrap">
+      <div class="prog-num" id="progNum">1/18</div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+    </div>
+    <div id="qArea"></div>
+    <div class="nav-row">
+      <button class="btn-n" id="btnPrev" onclick="prev()" disabled>← Назад</button>
+      <button class="btn-n primary" id="btnNext" onclick="next()">Далее →</button>
+    </div>
+  </div>
+</div>
+
+<div id="result" class="screen">
+  <div class="res-box" id="resArea"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+// Each answer adds to one of 5 buckets: npd, immature, stressed, jerk, normal
+// Format: [text, {npd,imm,str,jrk,nrm}]
+const QS = [
+  {
+    sit: 'Ты рассказываешь ему о плохом дне на работе. Он:',
+    opts: [
+      ['Перебивает и рассказывает, как ЕМУ было хуже', {npd:3,imm:1,jrk:1}],
+      ['Слушает 2 минуты, потом переключается на телефон', {imm:2,jrk:1,str:1}],
+      ['Говорит «ну бывает» и предлагает решение, которое тебе не нужно', {imm:1,str:2,nrm:1}],
+      ['Слушает, обнимает, спрашивает «чем помочь?»', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Вы поссорились. На следующий день он:',
+    opts: [
+      ['Ведёт себя как ни в чём не бывало. Ссоры? Какой ссоры?', {npd:3,imm:1}],
+      ['Дуется 2 дня, потом оттаивает без обсуждения', {imm:2,str:1,jrk:1}],
+      ['Пишет длинное сообщение, что ты виновата, но «он прощает»', {npd:2,jrk:2}],
+      ['Приходит и говорит «давай обсудим, я тоже был неправ»', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Ты говоришь «нет» на то, что он хочет. Его реакция:',
+    opts: [
+      ['Молчание на 3 дня. Наказание холодом', {npd:3,imm:1}],
+      ['Обижается, хлопает дверью, но через час приходит', {imm:2,str:2}],
+      ['«Как хочешь» с таким тоном, что ясно — ты заплатишь', {npd:2,jrk:2}],
+      ['«Ладно, понял. Давай найдём компромисс?»', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Как он говорит о своих бывших?',
+    opts: [
+      ['Все «сумасшедшие», «истерички», «не ценили его»', {npd:4}],
+      ['Одна — нормальная, остальные «не то»', {imm:1,jrk:1,nrm:1}],
+      ['Признаёт свои ошибки в прошлых отношениях', {nrm:4}],
+      ['Не говорит о бывших вообще — закрытая тема', {imm:1,str:1,nrm:1}]
+    ]
+  },
+  {
+    sit: 'Ты добилась чего-то крутого — повышение, проект, победа. Он:',
+    opts: [
+      ['Находит способ обесценить: «ну, тебе повезло» или переключает на себя', {npd:4}],
+      ['Формально поздравляет, но видно — ему некомфортно', {imm:2,jrk:1}],
+      ['Радуется, но потом мимоходом напоминает о СВОИХ достижениях', {imm:1,npd:1,nrm:1}],
+      ['Искренне гордится. Рассказывает друзьям. Празднуете вместе', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Ты поймала его на лжи. Он:',
+    opts: [
+      ['Отрицает очевидное. «Ты всё придумала. Этого не было»', {npd:4}],
+      ['Переворачивает: «А ты тоже не идеальна! Вспомни, как ты...»', {npd:2,jrk:2}],
+      ['Мнётся, оправдывается, но в итоге признаёт', {imm:2,str:1,nrm:1}],
+      ['Говорит правду сразу: «Да, я соврал. Вот почему. Мне стыдно»', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'В начале отношений было:',
+    opts: [
+      ['Лавина: цветы, сюрпризы, «ты единственная», секс каждый день. Потом — обрыв', {npd:4}],
+      ['Быстро и интенсивно, но стабильно — просто влюблённость', {nrm:2,imm:1}],
+      ['Постепенно, с нарастанием — узнавали друг друга', {nrm:4}],
+      ['Он долго «думал», потом согласился быть вместе', {imm:1,str:1,nrm:1}]
+    ]
+  },
+  {
+    sit: 'Его эмпатия в сложные моменты:',
+    opts: [
+      ['Отсутствует. Твои слёзы его раздражают или он «не понимает, из-за чего истерика»', {npd:3,jrk:1}],
+      ['Пытается, но криво — предлагает решения вместо поддержки', {imm:1,str:1,nrm:2}],
+      ['Появляется только когда ему самому что-то нужно', {npd:2,jrk:2}],
+      ['Стабильная — чувствует, когда тебе плохо, даже если ты молчишь', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Как он ведёт себя на людях vs наедине?',
+    opts: [
+      ['На людях — душа компании, обаятельный. Наедине — холодный или жёсткий', {npd:4}],
+      ['Примерно одинаково — что видишь, то и есть', {nrm:3,jrk:1}],
+      ['На людях скромнее, наедине — раскрывается', {nrm:4}],
+      ['На людях может подшутить обидно, наедине извинится', {imm:2,jrk:1}]
+    ]
+  },
+  {
+    sit: 'Когда у НЕГО плохой период (стресс, работа, деньги):',
+    opts: [
+      ['Становится невыносим — всё о нём. Ты должна «поддерживать», а он ничего не должен', {npd:2,jrk:1,str:1}],
+      ['Замыкается, отдаляется, но не срывается на тебе', {str:2,nrm:2}],
+      ['Срывается на тебе, потом извиняется. Цикл повторяется', {str:2,imm:2}],
+      ['Говорит «мне тяжело» и принимает помощь', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Твои границы и личное пространство:',
+    opts: [
+      ['«Какие секреты? У нас не должно быть тайн» — проверяет телефон', {npd:3,jrk:1}],
+      ['Иногда нарушает, но когда ты говоришь — отступает', {imm:1,nrm:2,str:1}],
+      ['Уважает. У каждого есть своё пространство', {nrm:4}],
+      ['Его пространство священно, а твоё — «ну это другое»', {npd:2,jrk:2}]
+    ]
+  },
+  {
+    sit: 'Когда ты плачешь, его типичная реакция:',
+    opts: [
+      ['«Опять начинается. Что я опять сделал?»', {jrk:2,imm:2}],
+      ['Выходит из комнаты. Не знает, что делать', {imm:2,str:2}],
+      ['«Ты слишком эмоциональная. Успокойся и поговорим нормально»', {npd:2,imm:1,jrk:1}],
+      ['Садится рядом. Обнимает. Молчит, если нужно', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Извинения от него выглядят так:',
+    opts: [
+      ['«Извини, ЕСЛИ тебя обидело» — без признания ошибки', {npd:2,jrk:2}],
+      ['«Извини, НО ты тоже...» — встречное обвинение', {npd:2,imm:1,jrk:1}],
+      ['Извиняется искренне, но через неделю повторяет то же самое', {imm:3,str:1}],
+      ['Конкретно: что сделал, почему это было неправильно, что изменит', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'После серьёзного конфликта ты заметила, что:',
+    opts: [
+      ['Он переписал историю: «Ты сама начала», хотя начал он', {npd:4}],
+      ['Он забыл детали — искренне, не манипулятивно', {imm:1,str:2,nrm:1}],
+      ['Он помнит и готов разобрать. Не всегда приятно, но честно', {nrm:4}],
+      ['Он рассказал друзьям/маме свою версию, где он жертва', {npd:3,jrk:1}]
+    ]
+  },
+  {
+    sit: 'Ваш секс — это:',
+    opts: [
+      ['В основном когда и как ОН хочет. Твоё желание — вторично', {npd:2,jrk:2}],
+      ['Инструмент: хорошо себя ведёшь — есть секс, плохо — нет', {npd:2,jrk:2}],
+      ['Нестабильно: то горячо, то пусто. Зависит от его настроения', {imm:2,str:2}],
+      ['Взаимное желание. Обсуждаете, пробуете, уважаете границы', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Твои подруги и семья:',
+    opts: [
+      ['Он систематически настраивает тебя против них: «Они на тебя плохо влияют»', {npd:4}],
+      ['Ему не все нравятся, но он не запрещает общение', {nrm:2,imm:1,jrk:1}],
+      ['Он дружит с твоими друзьями, уважает семью', {nrm:4}],
+      ['Ему всё равно — не вмешивается, но и не участвует', {imm:1,str:1,nrm:1}]
+    ]
+  },
+  {
+    sit: 'Если ты опишешь ваши отношения одной фразой:',
+    opts: [
+      ['Американские горки: обожание → обесценивание → холод → «я изменюсь» → повтор', {npd:4}],
+      ['Стабильно, но скучновато. Он старается, но не всегда получается', {nrm:2,imm:1,str:1}],
+      ['Неплохо, но он бывает грубым и невнимательным', {jrk:2,imm:1,str:1}],
+      ['Мы команда. Бывают трудности, но мы их решаем вместе', {nrm:4}]
+    ]
+  },
+  {
+    sit: 'Честно: после общения с ним ты чаще чувствуешь:',
+    opts: [
+      ['Тревогу, вину, ощущение что ты «не такая» или «сумасшедшая»', {npd:4}],
+      ['Раздражение — он бесит, но ты не сомневаешься в себе', {jrk:3,imm:1}],
+      ['Усталость — он забирает энергию, но не разрушает', {imm:2,str:2}],
+      ['Тепло, спокойствие, энергию', {nrm:4}]
+    ]
+  }
+];
+
+let order=[], answers=[], cur=0;
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+function startQuiz(){
+  order=shuffle([...Array(QS.length).keys()]);
+  answers=new Array(QS.length).fill(-1);
+  cur=0;
+  show('quiz');render();
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function render(){
+  const qi=order[cur], q=QS[qi];
+  document.getElementById('progNum').textContent=`${cur+1}/${QS.length}`;
+  document.getElementById('progFill').style.width=((cur)/QS.length*100)+'%';
+  document.getElementById('btnPrev').disabled=cur===0;
+  document.getElementById('btnNext').textContent=cur===QS.length-1?'Результат →':'Далее →';
+
+  // Shuffle options for this question
+  let optIdxs=[0,1,2,3];
+  // Only shuffle if not already answered
+  if(answers[qi]===-1) optIdxs=shuffle(optIdxs);
+  else optIdxs=QS[qi]._order||[0,1,2,3];
+  QS[qi]._order=optIdxs;
+
+  let html=`<div class="fade-up">
+    <div class="sit-label">Ситуация ${cur+1}</div>
+    <div class="sit-text">${q.sit}</div>
+    <div class="opts">`;
+  optIdxs.forEach(oi=>{
+    const sel=answers[qi]===oi?'sel':'';
+    html+=`<div class="opt ${sel}" onclick="pick(${qi},${oi})">
+      <div class="opt-marker"></div>
+      <div class="opt-text">${q.opts[oi][0]}</div>
+    </div>`;
+  });
+  html+=`</div></div>`;
+  document.getElementById('qArea').innerHTML=html;
+}
+
+function pick(qi,oi){answers[qi]=oi;render();}
+function next(){if(cur<QS.length-1){cur++;render();}else showResult();}
+function prev(){if(cur>0){cur--;render();}}
+
+// ===== PROFILES =====
+const PROFILES={
+  npd:{
+    name:'Нарцисс',
+    color:'var(--red)',
+    emoji:'🎭',
+    sub:'Паттерн нарциссического расстройства',
+    desc:'Это не «сложный характер». Это <strong>устойчивый паттерн</strong>: идеализация → обесценивание → холод → возвращение. Газлайтинг, переписывание реальности, отсутствие эмпатии, двойные стандарты. Ты чувствуешь себя сумасшедшей — и это не случайность. Это <em>дизайн</em>.',
+    action:'<strong>NVC не работает с нарциссом.</strong> Готтман не работает. Терапия для пары не работает — нарцисс использует терапевта как нового зрителя. Что работает: терапевт <strong>для тебя</strong> (не для «нас»). Изучи тему: Дурвасула «It\'s Not You». Планируй выход. Безопасно.',
+    warn:'Если он контролирует твой телефон, деньги, общение с друзьями — это не «ревность». Это изоляция. Это опасно. Обратись за помощью.',
+    warnType:'red',
+    anti:'Нет, не каждый, кто тебя бесит — нарцисс. Но если ты узнала этот цикл (идеализация → обесценивание → холод → «я изменюсь») и сомневаешься в своей реальности — доверяй себе.'
+  },
+  immature:{
+    name:'Эмоционально незрелый',
+    color:'var(--orange)',
+    emoji:'🧒',
+    sub:'Не нарцисс. Просто не вырос',
+    desc:'Он не злой. Он <strong>не научился</strong>: справляться с эмоциями, брать ответственность, быть уязвимым, извиняться по-настоящему. Его модель отношений — из родительской семьи, где не было здоровых примеров. Он повторяет паттерн, не понимая его.',
+    action:'Хорошая новость: <strong>это лечится</strong>. Плохая: только если он сам хочет. Ты не терапевт и не мама. Предложи: «Я вижу, что нам обоим тяжело. Давай поработаем с кем-то — вместе или отдельно». Если отказ — это его выбор, не твоя вина.',
+    warn:'Не путай «он растёт» с «он обещает расти». Измерение: конкретные изменения за 3 месяца. Нет изменений = нет роста. Слова без действий — тоже паттерн.',
+    warnType:'yellow',
+    anti:'Инстаграм назвал бы его нарциссом. Но незрелость ≠ расстройство личности. Разница: нарцисс не может измениться (не хочет). Незрелый — может, если решит.'
+  },
+  stressed:{
+    name:'Нормальный под стрессом',
+    color:'var(--yellow)',
+    emoji:'💥',
+    sub:'Не злодей. Просто на пределе',
+    desc:'В обычное время он <strong>адекватный</strong>. Но сейчас: работа/деньги/здоровье/кризис — и его ресурс на нуле. Когда кортизол зашкаливает, первым страдает эмпатия. Он не стал хуже — он <strong>временно сломан</strong>.',
+    action:'Это можно починить — но не «просто поговорив». <strong>Физиология первична</strong>: сон, спорт, снижение нагрузки. Потом — разговор. Дай ему пространство восстановиться, но установи границу: «Я готова поддержать, но не готова быть грушей».',
+    warn:'Ключевое слово — ВРЕМЕННО. Если «стресс» длится 2+ года без попыток что-то менять — это уже не стресс. Это выбор. И ты имеешь право на партнёра, а не на пациента.',
+    warnType:'yellow',
+    anti:'Не каждый резкий мужчина = абьюзер. Иногда человеку просто тяжело. Но «тяжело» — не лицензия на хамство. Поддержка и границы — одновременно.'
+  },
+  jerk:{
+    name:'Просто тяжёлый характер',
+    color:'var(--blue)',
+    emoji:'🤷',
+    sub:'Не нарцисс. Не болен. Просто эгоист',
+    desc:'Он <strong>знает</strong>, что делает. У него есть эмпатия — он просто предпочитает ей не пользоваться. Он не переписывает реальность (не газлайтит), не играет в циклы. Он просто <strong>ставит себя первым</strong>. Последовательно.',
+    action:'Тут всё просто: или он решает, что ты стоишь усилий — и начинает работать над собой. Или не решает. <strong>Ты не изменишь его.</strong> Изменить можешь только свои границы: «Мне нужно X. Если ты не готов — я приму решение».',
+    warn:'Не путай «тяжёлый характер» с «нарцисс». Со сложным человеком ты не сомневаешься в реальности. Ты не чувствуешь себя сумасшедшей. Тебе просто обидно и злит. Это БОЛЬШАЯ разница.',
+    warnType:'yellow',
+    anti:'Инстаграм скажет «ты заслуживаешь лучшего, уходи». Мы скажем: решай сама. Но решай с открытыми глазами, а не с надеждой, что он «вдруг» изменится.'
+  },
+  normal:{
+    name:'Нормальный мужчина',
+    color:'var(--green)',
+    emoji:'✅',
+    sub:'Не идеальный. Но адекватный',
+    desc:'Он <strong>слышит</strong> тебя. Берёт ответственность. Извиняется по-настоящему. Уважает твои границы. Радуется твоим победам. Не переписывает реальность. Не наказывает за «нет». Он не идеальный — но он <strong>безопасный</strong>.',
+    action:'Если тебе кажется, что «что-то не так», а тест показывает норму — проверь: не отравлена ли твоя оптика Инстаграмом? Блогеры приучили видеть «ред флаги» в нормальном поведении. «Он не покупает цветы» ≠ нарцисс. «Он устал после работы» ≠ эмоциональная недоступность.',
+    warn:'Если он нормальный, а тебе всё равно плохо — возможно, дело не в нём. Проверь: твой стиль привязанности? Тревожная привязанность заставляет видеть угрозу там, где её нет.',
+    warnType:'green',
+    anti:'Нормальный мужчина в 2026 году — это не «низкая планка». Это человек, который работает над собой. Цени это. Не каждый «неидеальный» = плохой.'
+  }
+};
+
+function showResult(){
+  const sc={npd:0,imm:0,str:0,jrk:0,nrm:0};
+  for(let i=0;i<QS.length;i++){
+    if(answers[i]===-1) continue;
+    const w=QS[i].opts[answers[i]][1];
+    Object.keys(w).forEach(k=>{sc[k]=(sc[k]||0)+w[k];});
+  }
+  const total=Object.values(sc).reduce((a,b)=>a+b,1);
+  const pcts={};
+  Object.keys(sc).forEach(k=>{pcts[k]=Math.round(sc[k]/total*100);});
+
+  // Determine winner
+  let winner='normal', maxV=0;
+  Object.keys(sc).forEach(k=>{if(sc[k]>maxV){maxV=sc[k];winner=k;}});
+  // Map keys
+  const keyMap={npd:'npd',imm:'immature',str:'stressed',jrk:'jerk',nrm:'normal'};
+  const profileKey=keyMap[winner];
+  const p=PROFILES[profileKey];
+
+  // Danger meter: 0=safe, 100=danger
+  const danger=Math.round((sc.npd*4+sc.jrk*2+sc.imm*1)/(total)*100);
+  const dangerClamped=Math.min(100,Math.max(0,danger));
+
+  const a=document.getElementById('resArea');
+  a.innerHTML=`<div class="fade-up">
+    <div class="res-label">Результат</div>
+    <div class="res-name" style="color:${p.color}">${p.emoji} ${p.name}</div>
+    <div class="res-sub">${p.sub}</div>
+
+    <div class="meter-wrap">
+      <div class="meter-label-row">
+        <div class="meter-label">Безопасно</div>
+        <div class="meter-label">Опасно</div>
+      </div>
+      <div class="meter-track">
+        <div class="meter-zones">
+          <div class="meter-zone" style="background:rgba(91,154,120,0.15)"></div>
+          <div class="meter-zone" style="background:rgba(200,162,74,0.12)"></div>
+          <div class="meter-zone" style="background:rgba(195,154,106,0.14)"></div>
+          <div class="meter-zone" style="background:rgba(200,118,94,0.16)"></div>
+        </div>
+        <div class="meter-pointer" style="left:${dangerClamped}%"></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-item"><div class="score-val" style="color:var(--red)">${pcts.npd||0}%</div><div class="score-lbl">Нарцисс</div></div>
+      <div class="score-item"><div class="score-val" style="color:var(--orange)">${pcts.imm||0}%</div><div class="score-lbl">Незрелый</div></div>
+      <div class="score-item"><div class="score-val" style="color:var(--yellow)">${pcts.str||0}%</div><div class="score-lbl">Под стрессом</div></div>
+      <div class="score-item"><div class="score-val" style="color:var(--green)">${pcts.nrm||0}%</div><div class="score-lbl">Нормальный</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title" style="color:${p.color}"><span>Кто он</span></div>
+      <div class="sec-body">${p.desc}</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title" style="color:${p.color}"><span>Что делать</span></div>
+      <div class="sec-body">${p.action}</div>
+    </div>
+
+    <div class="warn-box ${p.warnType}">
+      <div class="warn-head" style="color:${p.color}">⚠ Важно</div>
+      <div class="warn-body">${p.warn}</div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title" style="color:var(--text3)"><span>Антиинстаграм</span></div>
+      <div class="sec-body">${p.anti}</div>
+    </div>
+
+    <div class="warn-box red" style="margin-top:24px">
+      <div class="warn-head" style="color:var(--red)">Красная линия</div>
+      <div class="warn-body">Физическое или сексуальное насилие — это не «сложный характер», не «стресс» и не «незрелость». Это <strong>вопрос безопасности</strong>. Если это про тебя — тест не нужен. Нужна помощь. Телефон доверия: <strong>8-800-2000-122</strong> (бесплатно, анонимно).</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-share" onclick="shareRes('${profileKey}',${pcts.npd||0},${pcts.imm||0},${pcts.str||0},${pcts.nrm||0})">Поделиться</button>
+      <button class="btn-redo" onclick="location.reload()">Пройти заново</button>
+    </div>
+
+    <div class="footer">Источники: Дурвасула, Готтман, Джонсон, Cloud/Townsend, Битти, Рил<br>Тест не заменяет диагноз специалиста</div>
+  </div>`;
+  show('result');
+}
+
+function shareRes(key,npd,imm,str,nrm){
+  const p=PROFILES[key];
+  const t=`${p.emoji} Мой результат: ${p.name}\n${p.sub}\n\nНарцисс ${npd}% | Незрелый ${imm}% | Под стрессом ${str}% | Нормальный ${nrm}%\n\nТест «Нарцисс рядом или просто тяжёлый характер?»`;
+  if(navigator.share){navigator.share({title:'Нарцисс рядом или просто тяжёлый характер?',text:t}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>toast('Скопировано!')).catch(()=>fb(t));}
+  else fb(t);
+}
+function fb(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);toast('Скопировано!');}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+</script>
+
+<footer class="va-foot">
+  <p class="va-foot-h">Понравился тест? Пройди главный — на тип привязанности.</p>
+  <div class="va-foot-btns">
+    <a href="../free.html" class="va-btn" data-goal="quiz_to_test">Пройти тест привязанности →</a>
+    <a href="../course.html" class="va-btn va-ghost" data-goal="quiz_to_course">Курс «Отношения длиною в жизнь»</a>
+  </div>
+  <div class="va-copy">© Отношения длиною в жизнь · ageeva.win</div>
+</footer>
+
+</body>
+</html>

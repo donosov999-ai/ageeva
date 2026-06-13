@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест: привязанность, выбор и роль в отношениях — Валентина Агеева</title>
+<meta name="description" content="Как связаны твой тип привязанности, выбор партнёра и роль, в которую ты попадаешь. Тест за несколько минут.">
+<meta name="keywords" content="тип привязанности, выбор партнёра, роль в отношениях, тест на привязанность, психология отношений">
+<meta name="author" content="Валентина Агеева">
+<link rel="canonical" href="https://ageeva.win/tests/attachment-triangle-test.html">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta property="og:title" content="Тест: привязанность, выбор и роль в отношениях — Валентина Агеева">
+<meta property="og:description" content="Как связаны твой тип привязанности, выбор партнёра и роль, в которую ты попадаешь. Тест за несколько минут.">
+<meta property="og:url" content="https://ageeva.win/tests/attachment-triangle-test.html">
+<meta property="og:image" content="https://ageeva.win/assets/og-cover.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109819083', 'ym');
+    ym(109819083, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<style>
+:root{
+  --bg:#FCF8F3;--card:#ffffff;--warm:#F6EEE6;--warm2:#FBEEE9;
+  --rose:#BE7E75;--rose-l:rgba(190,126,117,.10);--rose-m:rgba(190,126,117,.18);
+  --amber:#C39A6A;--amber-l:rgba(195,154,106,.12);
+  --teal:#5B9A78;--teal-l:rgba(91,154,120,.10);
+  --violet:#9488B4;--violet-l:rgba(148,136,180,.12);
+  --txt:#4A403A;--dim:#6B5E54;--muted:#9B8E82;--border:#E9DDD3;--border2:#E2CFC4;
+  --sh:0 4px 18px rgba(155,84,78,.05);--sh2:0 6px 28px rgba(155,84,78,.06);
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Nunito Sans',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* TOPBAR */
+.va-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 20px;background:#FCF8F3;border-bottom:1px solid #E9DDD3;font-family:'Nunito Sans',system-ui,sans-serif;position:sticky;top:0;z-index:60}
+.va-brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;color:#9A5F57;text-decoration:none;font-size:18px}
+.va-brand span{font-style:italic;font-weight:600}
+.va-nav{display:flex;gap:16px}
+.va-nav a{color:#BE7E75;text-decoration:none;font-weight:700;font-size:13.5px}
+.va-nav a:hover{color:#9A5F57}
+
+/* HERO */
+.hero{padding:56px 0 40px;text-align:center}
+.hero-ey{font-family:'Nunito Sans',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--rose);margin-bottom:14px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5.5vw,48px);font-weight:700;line-height:1.15;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--rose)}
+.hero-sub{font-size:15px;color:var(--dim);max-width:500px;margin:0 auto;font-weight:400}
+
+/* ════ CSS TABS ════ */
+.tabs{display:flex;border-bottom:2px solid var(--border);gap:0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{position:relative;padding:13px 22px;font-size:13px;font-weight:700;color:var(--muted);background:none;border:none;cursor:pointer;white-space:nowrap;font-family:'Nunito Sans',sans-serif;transition:color .25s}
+.tab-btn::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .25s}
+.tab-btn:hover{color:var(--dim)}
+.tab-btn.on{color:var(--rose)}
+.tab-btn.on::after{background:var(--rose)}
+.pane{display:none;padding:28px 0 56px;animation:fadeUp .35s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec-t{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:6px}
+.sec-d{color:var(--dim);font-size:14px;margin-bottom:24px;max-width:560px}
+
+/* ════ TEST ENGINE ════ */
+.test-note{background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:24px;font-size:13px;color:var(--dim);line-height:1.7}
+.test-note strong{color:var(--txt)}
+.prog{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.prog-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--rose);border-radius:2px;transition:width .4s;width:0%}
+.prog-txt{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:11px;color:var(--muted);white-space:nowrap}
+
+.qc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:10px;box-shadow:var(--sh)}
+.qc-cat{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;padding:2px 8px;border-radius:4px;display:inline-block}
+.qc-cat.att{color:var(--violet);background:var(--violet-l)}
+.qc-cat.tri{color:var(--amber);background:var(--amber-l)}
+.qc-cat.cho{color:var(--teal);background:var(--teal-l)}
+.qc-q{font-size:15px;font-weight:700;margin-bottom:12px;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:5px}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;font-size:13px;color:var(--dim);line-height:1.5}
+.opt:hover{border-color:var(--border2);background:var(--warm)}
+.opt.sel{border-color:var(--rose);background:var(--rose-l);color:var(--txt)}
+.orad{width:16px;height:16px;border:2px solid var(--border2);border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.opt.sel .orad{border-color:var(--rose);background:var(--rose)}
+.opt.sel .orad::after{content:'';width:5px;height:5px;background:#fff;border-radius:50%}
+
+/* RESULT */
+.res{display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:var(--sh2);margin-top:20px}
+.res.vis{display:block;animation:fadeUp .5s ease}
+.res-block{margin-bottom:28px}
+.res-label{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.res-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
+.res-desc{font-size:14px;color:var(--dim);line-height:1.7}
+.res-bars{margin:16px 0}
+.rb-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rb-lbl{font-size:11px;font-weight:700;width:100px;text-align:right}
+.rb-track{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden}
+.rb-fill{height:100%;border-radius:4px;transition:width .8s ease}
+.rb-pct{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:11px;color:var(--muted);width:32px}
+.res-tip{background:var(--warm);border-left:3px solid var(--rose);padding:14px 18px;border-radius:0 10px 10px 0;font-size:13px;color:var(--dim);line-height:1.7;margin-top:12px}
+.res-tip strong{color:var(--txt)}
+
+.res-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.btn-again,.btn-share{padding:12px 28px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .25s;border:none}
+.btn-again{background:var(--bg);border:1px solid var(--border);color:var(--dim)}
+.btn-again:hover{border-color:var(--rose);color:var(--rose)}
+.btn-share{background:var(--rose);color:#fff;display:flex;align-items:center;gap:8px;box-shadow:0 2px 12px rgba(190,126,117,.25)}
+.btn-share:hover{background:#9A5F57;box-shadow:0 4px 20px rgba(190,126,117,.35);transform:translateY(-1px)}
+.btn-share svg{width:16px;height:16px;fill:currentColor}
+.share-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--txt);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .35s ease;z-index:999;box-shadow:0 4px 20px rgba(155,84,78,.2)}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ════ INFO TABS ════ */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:24px}
+.icard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.icard::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+.icard.ic-sec::before{background:var(--teal)}.icard.ic-anx::before{background:var(--rose)}.icard.ic-avo::before{background:var(--amber)}.icard.ic-dis::before{background:var(--violet)}
+.icard.ic-vic::before{background:var(--amber)}.icard.ic-res::before{background:var(--teal)}.icard.ic-per::before{background:var(--rose)}
+.icard-icon{font-size:24px;margin-bottom:8px}
+.icard-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:4px}
+.icard-tag{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:8px}
+.icard p{font-size:12px;color:var(--dim);line-height:1.55}
+
+.link-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh);margin-bottom:24px}
+.link-table th{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:1px;padding:12px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--warm);color:var(--muted)}
+.link-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--dim);vertical-align:top}
+.link-table tr:last-child td{border-bottom:none}
+
+.tri-svg{text-align:center;margin:20px 0 28px}
+
+/* FOOTER */
+.va-foot{background:#F6EEE6;border-top:1px solid #E9DDD3;padding:36px 20px;text-align:center;font-family:'Nunito Sans',system-ui,sans-serif;margin-top:40px}
+.va-foot-h{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#9A5F57;margin:0 0 18px}
+.va-foot-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.va-btn{display:inline-block;background:#BE7E75;color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:12px;font-size:14.5px}
+.va-btn:hover{background:#9A5F57}
+.va-ghost{background:transparent;color:#9A5F57;border:1.5px solid #D7A39B}
+.va-ghost:hover{background:#FBEEE9;color:#9A5F57}
+.va-copy{margin-top:20px;font-size:12px;color:#9B8E82}
+
+@media(max-width:600px){
+  .tab-btn{padding:11px 14px;font-size:12px}
+  .info-grid{grid-template-columns:1fr}
+  .link-table{font-size:11px}
+  .link-table th,.link-table td{padding:8px}
+}
+</style>
+</head>
+<body>
+<header class="va-top">
+  <a href="../index.html" class="va-brand">Отношения <span>длиною в жизнь</span></a>
+  <nav class="va-nav"><a href="../tests/">Все тесты</a><a href="../free.html">Тест привязанности</a><a href="../course.html">Курс</a></nav>
+</header>
+<div class="wrap">
+
+<header class="hero">
+<div class="hero-ey">Интерактивный тест</div>
+<h1>Твой стиль привязанности,<br><em>выбор мужчин</em> и роль в треугольнике</h1>
+<p class="hero-sub">30 вопросов — включая детство и тело. Три результата. Без воды — только психология. Для женщин 20–40.</p>
+</header>
+
+<div class="tabs" id="tabs">
+<button class="tab-btn on" data-t="test">Тест</button>
+<button class="tab-btn" data-t="attachment">Привязанность</button>
+<button class="tab-btn" data-t="triangle">Треугольник</button>
+<button class="tab-btn" data-t="links">Связки</button>
+</div>
+
+<!-- ═══ TEST ═══ -->
+<div class="pane on" id="test">
+<div class="test-note"><strong>Отвечай честно,</strong> не «как хочется» или «как правильно». Вспомни последние отношения — или текущие. Если не было — представь ситуацию максимально реально. Тест определит три вещи: <strong>стиль привязанности</strong>, <strong>каких мужчин ты выбираешь</strong> и <strong>твою роль в треугольнике Карпмана</strong>.</div>
+<div class="prog"><div class="prog-bar"><div class="prog-fill" id="pf"></div></div><div class="prog-txt" id="pt">0 / 30</div></div>
+<div id="qbox"></div>
+<div class="res" id="res"></div>
+</div>
+
+<!-- ═══ ATTACHMENT ═══ -->
+<div class="pane" id="attachment">
+<h2 class="sec-t">Четыре стиля привязанности</h2>
+<p class="sec-d">Теория привязанности (Боулби, Эйнсворт, Левин/Хеллер) — самая доказательная модель отношений. Формируется в детстве, но меняется в течение жизни.</p>
+<div class="info-grid">
+<div class="icard ic-sec"><div class="icard-icon">🌿</div><div class="icard-name">Надёжная</div><div class="icard-tag">~50% людей</div><p>Тебе комфортно с близостью и с автономией. Ты не боишься быть покинутой и не боишься быть поглощённой. Можешь просить о помощи и давать пространство. В конфликте — обсуждаешь, не убегаешь.</p></div>
+<div class="icard ic-anx"><div class="icard-icon">🔥</div><div class="icard-name">Тревожная</div><div class="icard-tag">~20% людей</div><p>Страх покинутости. Постоянно ищешь подтверждение: «он меня любит?». Если не отвечает 2 часа — паника. Готова на всё, чтобы удержать. Притягиваешь избегающих — и попадаешь в бесконечную погоню.</p></div>
+<div class="icard ic-avo"><div class="icard-icon">🧊</div><div class="icard-name">Избегающая</div><div class="icard-tag">~25% людей</div><p>Страх поглощения. «Мне никто не нужен». Дистанция = безопасность. Когда партнёр подходит ближе — ты отступаешь. Связь = потеря свободы. Притягиваешь тревожных — и давишь их холодом.</p></div>
+<div class="icard ic-dis"><div class="icard-icon">🌀</div><div class="icard-name">Дезорганизованная</div><div class="icard-tag">~5% людей</div><p>И хочу близости, и боюсь. «Иди сюда — уходи». Часто = детская травма. Хаотичные отношения: от страсти к панике за одну ночь. Самый сложный тип для изменений — но возможный с терапией.</p></div>
+</div>
+</div>
+
+<!-- ═══ TRIANGLE ═══ -->
+<div class="pane" id="triangle">
+<h2 class="sec-t">Треугольник Карпмана</h2>
+<p class="sec-d">Три роли в дисфункциональных отношениях. Ты постоянно переключаешься между ними — как в карусели, только без веселья.</p>
+
+<div class="tri-svg">
+<svg viewBox="0 0 400 320" width="360" xmlns="http://www.w3.org/2000/svg">
+<path d="M200 30 L50 280 L350 280 Z" fill="none" stroke="#E2CFC4" stroke-width="2"/>
+<circle cx="200" cy="30" r="24" fill="#BE7E75" opacity=".16"/><text x="200" y="35" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="12" font-weight="700" fill="#BE7E75">П</text>
+<circle cx="50" cy="280" r="24" fill="#C39A6A" opacity=".16"/><text x="50" y="285" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="12" font-weight="700" fill="#C39A6A">Ж</text>
+<circle cx="350" cy="280" r="24" fill="#5B9A78" opacity=".16"/><text x="350" y="285" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="12" font-weight="700" fill="#5B9A78">С</text>
+<text x="200" y="12" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="10" fill="#6B5E54">Преследователь</text>
+<text x="50" y="310" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="10" fill="#6B5E54">Жертва</text>
+<text x="350" y="310" text-anchor="middle" font-family="'Nunito Sans',sans-serif" font-size="10" fill="#6B5E54">Спасатель</text>
+</svg>
+</div>
+
+<div class="info-grid">
+<div class="icard ic-vic"><div class="icard-icon">😢</div><div class="icard-name">Жертва</div><div class="icard-tag">«Почему со мной всё так плохо?»</div><p>Чувствуешь себя беспомощной. Ждёшь, когда тебя спасут. Растворяешься в его проблемах. Виноватишься. Притягиваешь Спасателей и Преследователей.</p></div>
+<div class="icard ic-res"><div class="icard-icon">🦸‍♀️</div><div class="icard-name">Спасатель</div><div class="icard-tag">«Я его изменю / спасу / вылечу»</div><p>Берёшь на себя его проблемы. «Если я буду достаточно хорошей — он бросит пить / изменится». Ощущение нужности = смысл жизни. Но устаёшь → злишься → становишься Преследователем.</p></div>
+<div class="icard ic-per"><div class="icard-icon">⚡</div><div class="icard-name">Преследователь</div><div class="icard-tag">«Это ты виноват! Ты неправильный!»</div><p>Критикуешь, контролируешь, обвиняешь. Часто — не с самого начала, а после фазы Спасателя (когда устала спасать). «Я столько для тебя сделала, а ты…»</p></div>
+</div>
+
+<div style="background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:20px;font-size:13px;color:var(--dim);line-height:1.7">
+<strong style="color:var(--txt)">Выход из треугольника:</strong> Здоровая позиция — <em>ни одна из трёх ролей</em>. Это позиция <strong>взрослого партнёра</strong>: «Я люблю тебя. Я рядом. Но ты отвечаешь за себя. Я не твоя мама, не твой психолог и не твой спасатель. Я твой партнёр.»
+</div>
+</div>
+
+<!-- ═══ LINKS ═══ -->
+<div class="pane" id="links">
+<h2 class="sec-t">Как привязанность → выбор мужчин → роль</h2>
+<p class="sec-d">Три системы связаны: твой стиль привязанности определяет, каких мужчин ты выбираешь, а это определяет роль в треугольнике.</p>
+
+<table class="link-table">
+<tr><th>Твоя привязанность</th><th>Каких мужчин выбираешь</th><th>Роль в треугольнике</th><th>Что происходит</th></tr>
+<tr><td style="color:var(--rose);font-weight:700">Тревожная</td><td>Избегающих, холодных, «альфа»</td><td>Жертва → Спасатель</td><td>Бесконечная погоня. Он отдаляется — ты приближаешься. Чем холоднее он — тем горячее ты</td></tr>
+<tr><td style="color:var(--amber);font-weight:700">Избегающая</td><td>Тревожных, «бета», зависимых</td><td>Преследователь</td><td>Он «душит» — ты бежишь. Ты контролируешь дистанцию. Когда он уходит — вдруг хочется назад</td></tr>
+<tr><td style="color:var(--violet);font-weight:700">Дезорганизованная</td><td>Хаотичных, нестабильных, абьюзивных</td><td>Все три роли попеременно</td><td>Карусель: страсть → паника → бегство → возвращение. «Иди сюда — уходи»</td></tr>
+<tr><td style="color:var(--teal);font-weight:700">Надёжная</td><td>Надёжных (или помогает ненадёжным стать)</td><td>Вне треугольника</td><td>Спокойная близость. Конфликты решаются. Нет драмы ≠ скучно</td></tr>
+</table>
+
+<div style="background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:20px;font-size:13px;color:var(--dim);line-height:1.7">
+<strong style="color:var(--rose)">Ключевой паттерн:</strong> тревожная + избегающий = самая частая и самая мучительная комбинация. Она гонится — он бежит. Она интерпретирует «бабочки в животе» как любовь — на самом деле это стресс-реакция. С надёжным партнёром нет «бабочек» — есть <strong style="color:var(--teal)">спокойствие + тепло + энергия</strong>.
+</div>
+</div>
+
+</div>
+
+<script>
+// ═══ TABS ═══
+document.querySelectorAll('.tab-btn').forEach(b=>{b.addEventListener('click',()=>{
+document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('on'));
+document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
+b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');})});
+
+// ═══ QUESTIONS ═══
+// Categories: att=attachment, tri=triangle, cho=choice
+// Scores: sec/anx/avo/dis (attachment), vic/res/per (triangle)
+const Q=[
+// ── ATTACHMENT (15) ──
+{cat:"att",q:"Он не отвечает на сообщение 3 часа. Ты:",o:[
+{t:"Спокойно — у него свои дела",s:{sec:1}},
+{t:"Проверяешь телефон каждые 5 минут, придумываешь худшее",s:{anx:1}},
+{t:"Даже не заметила — у тебя своя жизнь",s:{avo:1}},
+{t:"Паника, но когда ответит — изобразишь равнодушие",s:{dis:1}}
+]},
+{cat:"att",q:"Он говорит «я тебя люблю». Внутри ты чувствуешь:",o:[
+{t:"Тепло и радость, отвечаешь искренне",s:{sec:1}},
+{t:"«Правда? А точно? А надолго?»",s:{anx:1}},
+{t:"Дискомфорт — слишком близко",s:{avo:1}},
+{t:"Хочется и верить, и бежать одновременно",s:{dis:1}}
+]},
+{cat:"att",q:"После серьёзной ссоры ты:",o:[
+{t:"Остываешь, потом инициируешь разговор",s:{sec:1}},
+{t:"Пишешь 10 сообщений, извиняешься, даже если не виновата",s:{anx:1}},
+{t:"Уходишь в молчание на дни — «пусть подумает»",s:{avo:1}},
+{t:"То звонишь, то блокируешь, то плачешь, то злишься",s:{dis:1}}
+]},
+{cat:"att",q:"Как ты себя чувствуешь в первые месяцы отношений?",o:[
+{t:"Приятное волнение, постепенное сближение",s:{sec:1}},
+{t:"Всё или ничего: мгновенная привязанность, страх потерять",s:{anx:1}},
+{t:"Держишь дистанцию, не торопишься с «мы»",s:{avo:1}},
+{t:"Качели: от «это ОН!» до «надо бежать» за один день",s:{dis:1}}
+]},
+{cat:"att",q:"Твой партнёр проводит вечер с друзьями без тебя. Ты:",o:[
+{t:"Рада за него, проведёшь время для себя",s:{sec:1}},
+{t:"Тревожишься: «а вдруг там другие женщины?»",s:{anx:1}},
+{t:"Наконец-то свободный вечер",s:{avo:1}},
+{t:"Сначала «ок», потом паника, потом злость",s:{dis:1}}
+]},
+{cat:"att",q:"Тебе грустно. Ты можешь попросить его о поддержке?",o:[
+{t:"Да, прямо и спокойно",s:{sec:1}},
+{t:"Намекаешь, обижаешься, если не догадался",s:{anx:1}},
+{t:"Нет — справлюсь сама, зачем грузить",s:{avo:1}},
+{t:"Хочется, но боишься — вдруг оттолкнёт",s:{dis:1}}
+]},
+{cat:"att",q:"Он предлагает жить вместе. Первая мысль:",o:[
+{t:"Радость — логичный следующий шаг",s:{sec:1}},
+{t:"«Наконец-то! Теперь он точно не уйдёт»",s:{anx:1}},
+{t:"«Мне нужно подумать… а моё пространство?»",s:{avo:1}},
+{t:"Хочу и боюсь одновременно",s:{dis:1}}
+]},
+{cat:"att",q:"Как часто ты проверяешь его соцсети?",o:[
+{t:"Изредка, без навязчивости",s:{sec:1}},
+{t:"Регулярно — кто лайкает, кто пишет, кто подписался",s:{anx:1}},
+{t:"Практически никогда — не моё дело",s:{avo:1}},
+{t:"Периодами: то не смотришь неделю, то мониторишь часами",s:{dis:1}}
+]},
+{cat:"att",q:"Он плачет при тебе. Ты:",o:[
+{t:"Обнимаешь, молчишь, даёшь пространство",s:{sec:1}},
+{t:"Паника: «Что случилось?! Что я сделала?!»",s:{anx:1}},
+{t:"Неловко — не знаешь, как реагировать на чужие слёзы",s:{avo:1}},
+{t:"Хочешь помочь, но внутри поднимается что-то тёмное",s:{dis:1}}
+]},
+{cat:"att",q:"Ты думаешь о расставании. Почему?",o:[
+{t:"Мы выросли в разных направлениях",s:{sec:1}},
+{t:"Он недостаточно меня любит / внимания мало",s:{anx:1}},
+{t:"Мне нужно больше свободы / он слишком близко",s:{avo:1}},
+{t:"Всё хорошо — и именно поэтому страшно",s:{dis:1}}
+]},
+// ── TRIANGLE (10) ──
+{cat:"tri",q:"Подруга жалуется на мужа уже третий год. Ты:",o:[
+{t:"Слушаешь, но не берёшь на себя её проблему",s:{sec:1}},
+{t:"«Бедная! Давай я поговорю с ним / найду тебе юриста»",s:{res:1}},
+{t:"Вспоминаешь, как тебе тоже плохо — «у меня хуже»",s:{vic:1}},
+{t:"«Сколько можно терпеть? Ты сама виновата, что не ушла»",s:{per:1}}
+]},
+{cat:"tri",q:"Он потерял работу. Ты:",o:[
+{t:"Поддерживаешь, но не решаешь за него",s:{sec:1}},
+{t:"Берёшь на себя всё: ищешь вакансии, пишешь резюме, звонишь",s:{res:1}},
+{t:"«И что мне теперь делать? А кредиты?»",s:{vic:1}},
+{t:"«Я же говорила, что эта работа — тупик!»",s:{per:1}}
+]},
+{cat:"tri",q:"Он пьёт больше, чем хотелось бы. Ты:",o:[
+{t:"Говоришь прямо: «Это проблема. Что будем делать?»",s:{sec:1}},
+{t:"Прячешь бутылки, контролируешь, плачешь — «ради меня, пожалуйста»",s:{res:1}},
+{t:"Терпишь молча — «он же устал, ему нужна разрядка»",s:{vic:1}},
+{t:"Скандалишь, угрожаешь уходом (но не уходишь)",s:{per:1}}
+]},
+{cat:"tri",q:"После ссоры ты чаще всего чувствуешь:",o:[
+{t:"«Мы оба были неправы. Надо обсудить»",s:{sec:1}},
+{t:"Вину: «Я должна была промолчать / быть мягче»",s:{vic:1}},
+{t:"«Он невозможный! Сколько можно!»",s:{per:1}},
+{t:"Потребность «починить» его настроение",s:{res:1}}
+]},
+{cat:"tri",q:"Как часто ты делаешь для него то, о чём он НЕ просил?",o:[
+{t:"Иногда — по желанию, не по долгу",s:{sec:1}},
+{t:"Постоянно — и потом обижаюсь, что не оценил",s:{res:1}},
+{t:"Часто — потому что если я не сделаю, никто не сделает",s:{vic:1}},
+{t:"Делаю, а потом предъявляю: «Я столько для тебя…»",s:{per:1}}
+]},
+{cat:"tri",q:"Ты можешь сказать «нет» без чувства вины?",o:[
+{t:"Да, спокойно",s:{sec:1}},
+{t:"Нет — если скажу «нет», он обидится / уйдёт",s:{vic:1}},
+{t:"Говорю «нет», но потом контролирую: «сделал ли он сам?»",s:{per:1}},
+{t:"Говорю «да», хотя хочу «нет» — а потом злюсь",s:{res:1}}
+]},
+{cat:"tri",q:"Его проблемы — это:",o:[
+{t:"Его ответственность, я могу поддержать",s:{sec:1}},
+{t:"Мои проблемы тоже — если ему плохо, мне плохо",s:{vic:1}},
+{t:"То, что я могу решить (и должна)",s:{res:1}},
+{t:"Результат его глупости — «я же предупреждала»",s:{per:1}}
+]},
+// ── CHOICE (5) ──
+{cat:"cho",q:"Какого мужчину ты считаешь «интересным»?",o:[
+{t:"Спокойного, стабильного, с чувством юмора",s:{sec:1}},
+{t:"Загадочного, немного холодного — хочется «разгадать»",s:{anx:1}},
+{t:"Того, кому я нужна — с проблемами, которые я могу решить",s:{res:1}},
+{t:"Непредсказуемого — от «обожаю» до «исчезаю»",s:{dis:1}}
+]},
+{cat:"cho",q:"Твои бывшие — в основном:",o:[
+{t:"Разные, но в целом адекватные — не сложилось по причинам",s:{sec:1}},
+{t:"«Холодные», которые не давали достаточно внимания",s:{anx:1}},
+{t:"«Проекты» — с проблемами, которые ты пыталась решить",s:{res:1}},
+{t:"Яркие, страстные — но нестабильные и разрушительные",s:{dis:1}}
+]},
+{cat:"cho",q:"Что тебя «зажигает» больше всего?",o:[
+{t:"Надёжность + искренний интерес к моей жизни",s:{sec:1}},
+{t:"Когда он немного недоступен — хочется добиться",s:{anx:1}},
+{t:"Когда он уязвим и нуждается во мне",s:{res:1}},
+{t:"Интенсивность: страсть, конфликт, примирение",s:{dis:1}}
+]},
+{cat:"cho",q:"Когда с партнёром всё спокойно и стабильно, ты:",o:[
+{t:"Наслаждаешься — это то, что нужно",s:{sec:1}},
+{t:"Начинаешь сомневаться: «а он точно меня любит?»",s:{anx:1}},
+{t:"Чувствуешь скуку — «чего-то не хватает»",s:{avo:1}},
+{t:"Ждёшь подвоха: «слишком хорошо, чтобы быть правдой»",s:{dis:1}}
+]},
+{cat:"cho",q:"Что бы ты изменила в своём выборе мужчин?",o:[
+{t:"В целом довольна — учусь на опыте",s:{sec:1}},
+{t:"Хватит гоняться за теми, кто не выбирает меня",s:{anx:1}},
+{t:"Хватит «спасать» — мне нужен партнёр, не проект",s:{res:1}},
+{t:"Хватит путать драму с любовью",s:{dis:1}}
+]},
+// ── ATTACHMENT extras (3 more to round to 30) ──
+{cat:"att",q:"Как ты переживаешь расставание?",o:[
+{t:"Больно, но восстанавливаюсь за несколько месяцев",s:{sec:1}},
+{t:"Разрушительно — не могу есть, спать, думать ни о чём другом",s:{anx:1}},
+{t:"Быстро «отрезаю» — как будто ничего не было",s:{avo:1}},
+{t:"Уходишь — возвращаешься — уходишь. Месяцами",s:{dis:1}}
+]},
+{cat:"att",q:"Ты можешь быть счастлива без отношений?",o:[
+{t:"Да — отношения дополняют жизнь, не определяют",s:{sec:1}},
+{t:"В теории да, на практике — мне плохо одной",s:{anx:1}},
+{t:"Мне лучше одной — спокойнее",s:{avo:1}},
+{t:"То отлично одной, то невыносимо — зависит от дня",s:{dis:1}}
+]},
+{cat:"tri",q:"Подруга переживает развод. Через месяц ты понимаешь, что думаешь о её проблеме больше, чем она сама. Ты:",o:[
+{t:"Замечаешь это и отпускаешь — это её процесс",s:{sec:1}},
+{t:"Продолжаешь — если не я, то кто ей поможет?",s:{res:1}},
+{t:"Чувствуешь, что и твоя жизнь рушится вместе с её",s:{vic:1}},
+{t:"Злишься: «Я столько для неё делаю, а она не ценит»",s:{per:1}}
+]},
+// ── CHILDHOOD (2) ──
+{cat:"att",q:"В детстве, когда тебе было грустно или страшно, мама:",o:[
+{t:"Обнимала, выслушивала, давала пространство",s:{sec:1}},
+{t:"То утешала, то была недоступна — зависело от её настроения",s:{anx:1}},
+{t:"«Не плачь, ничего страшного, ты же сильная»",s:{avo:1}},
+{t:"Пугала ещё больше — или сама была источником страха",s:{dis:1}}
+]},
+{cat:"att",q:"Папа в твоём детстве был:",o:[
+{t:"Присутствующий — не идеальный, но доступный эмоционально",s:{sec:1}},
+{t:"Физически рядом, но эмоционально далёкий — «газету читает»",s:{avo:1}},
+{t:"Непредсказуемый — то ласковый, то жёсткий",s:{dis:1}},
+{t:"Отсутствующий или ушёл — и ты всё ещё ищешь «того самого»",s:{anx:1}}
+]},
+// ── BODY (2) ──
+{cat:"att",q:"Когда он не отвечает или отдаляется, что ты чувствуешь В ТЕЛЕ?",o:[
+{t:"Лёгкий дискомфорт, который быстро проходит",s:{sec:1}},
+{t:"Ком в горле, сердцебиение, стянутость в груди — не могу дышать",s:{anx:1}},
+{t:"Ничего особенного — скорее в голове, чем в теле",s:{avo:1}},
+{t:"Всё сразу: дрожь, жар, тошнота — как будто земля уходит",s:{dis:1}}
+]},
+{cat:"att",q:"После близости (секс, откровенный разговор) ты чувствуешь в теле:",o:[
+{t:"Тепло, расслабление, мягкость",s:{sec:1}},
+{t:"Кратковременное облегчение, потом тревога — «а что теперь будет?»",s:{anx:1}},
+{t:"Желание отодвинуться — стало слишком близко",s:{avo:1}},
+{t:"Путаницу: хочу ещё и хочу спрятаться одновременно",s:{dis:1}}
+]},
+{cat:"tri",q:"Ты узнала, что он соврал по мелочи. Первая реакция:",o:[
+{t:"Спокойно спрашиваешь: «Зачем соврал? Мне важна честность»",s:{sec:1}},
+{t:"Молчишь, глотаешь — «наверное, у него были причины»",s:{vic:1}},
+{t:"Начинаешь расследование: проверяешь всё остальное",s:{per:1}},
+{t:"Оправдываешь его и придумываешь, как ему «помочь» быть честнее",s:{res:1}}
+]},
+];
+
+const catLabels={att:'привязанность',tri:'треугольник',cho:'выбор'};
+const catCls={att:'att',tri:'tri',cho:'cho'};
+
+// Shuffle options so "healthy" answer isn't always first
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+Q.forEach(q=>shuffle(q.o));
+
+let ans=new Array(Q.length).fill(null);
+
+function renderQ(){
+const box=document.getElementById('qbox');
+box.innerHTML=Q.map((q,i)=>`<div class="qc"><div class="qc-cat ${catCls[q.cat]}">${catLabels[q.cat]}</div><div class="qc-q">${i+1}. ${q.q}</div><div class="opts">${q.o.map((o,j)=>`<div class="opt ${ans[i]===j?'sel':''}" onclick="pick(${i},${j})"><div class="orad"></div><div>${o.t}</div></div>`).join('')}</div></div>`).join('');
+}
+
+function pick(qi,oi){
+ans[qi]=oi;
+const card=document.getElementById('qbox').children[qi];
+card.querySelectorAll('.opt').forEach((o,j)=>o.classList.toggle('sel',j===oi));
+upProg();
+if(ans.every(a=>a!==null))showRes();
+}
+
+function upProg(){
+const n=ans.filter(a=>a!==null).length;
+document.getElementById('pf').style.width=(n/Q.length*100)+'%';
+document.getElementById('pt').textContent=n+' / '+Q.length;
+}
+
+function showRes(){
+let sc={sec:0,anx:0,avo:0,dis:0,vic:0,res:0,per:0};
+ans.forEach((a,i)=>{if(a===null)return;const s=Q[i].o[a].s;for(let k in s)sc[k]=(sc[k]||0)+s[k]});
+
+// Attachment
+const attTotal=sc.sec+sc.anx+sc.avo+sc.dis||1;
+const attPcts={sec:Math.round(sc.sec/attTotal*100),anx:Math.round(sc.anx/attTotal*100),avo:Math.round(sc.avo/attTotal*100),dis:Math.round(sc.dis/attTotal*100)};
+const attMax=Object.entries(attPcts).sort((a,b)=>b[1]-a[1])[0][0];
+const attNames={sec:'Надёжная',anx:'Тревожная',avo:'Избегающая',dis:'Дезорганизованная'};
+const attColors={sec:'var(--teal)',anx:'var(--rose)',avo:'var(--amber)',dis:'var(--violet)'};
+const attDescs={
+sec:'Ты способна на здоровую близость. Можешь просить и давать. В конфликте — обсуждаешь, не убегаешь. Это не значит «идеальная» — это значит, что у тебя есть ресурс для отношений.',
+anx:'Твой базовый страх — «меня бросят». Ты ищешь подтверждение постоянно. Это не слабость — это адаптация к детскому опыту. Но она приводит к выбору избегающих мужчин, которые подтверждают страх.',
+avo:'Твой базовый страх — «меня поглотят». Близость = потеря свободы. Ты притягиваешь тревожных, которых потом отталкиваешь. Под бронёй — тот же страх быть покинутой, только спрятанный глубже.',
+dis:'И хочешь близости, и боишься. Это самый сложный паттерн — и часто связан с детской травмой. Хаотичные отношения, интенсивные чувства. Терапия — не рекомендация, а необходимость.'
+};
+
+// Triangle
+const triTotal=sc.vic+sc.res+sc.per||1;
+const secTri=sc.sec; // sec answers in triangle questions count as "outside triangle"
+const triPcts={vic:Math.round(sc.vic/(triTotal+secTri)*100),res:Math.round(sc.res/(triTotal+secTri)*100),per:Math.round(sc.per/(triTotal+secTri)*100),out:Math.round(secTri/(triTotal+secTri)*100)};
+const triMax=sc.vic>=sc.res&&sc.vic>=sc.per?'vic':sc.res>=sc.per?'res':'per';
+const triNames={vic:'Жертва',res:'Спасатель',per:'Преследователь'};
+const triColors={vic:'var(--amber)',res:'var(--teal)',per:'var(--rose)'};
+const triDescs={
+vic:'Ты чаще занимаешь позицию жертвы: терпишь, страдаешь, ждёшь спасения. Это не слабость характера — это выученная адаптация. Выход: взять ответственность за свои решения и перестать ждать, что кто-то решит за тебя.',
+res:'Ты Спасатель: берёшь на себя чужие проблемы, «чиню» всех вокруг. Ощущение нужности = смысл. Но это ведёт к выгоранию и ресентименту. Выход: помогать, но не спасать. Его проблемы — его ответственность.',
+per:'Ты Преследователь: критикуешь, контролируешь, «знаешь лучше». Часто это эволюция Спасателя — устала спасать и злишься. Выход: заменить контроль на запросы (NVC) и работать со своим гневом.'
+};
+
+// Choice pattern
+const choMax=sc.anx>sc.res&&sc.anx>sc.dis?'anx':sc.res>sc.dis?'res':sc.dis>0?'dis':'sec';
+const choNames={sec:'Надёжных мужчин',anx:'Недоступных / избегающих',res:'«Проекты» (спасать/чинить)',dis:'Хаотичных / интенсивных'};
+const choDescs={
+sec:'Ты выбираешь партнёров, с которыми можно строить. Не идеальных — но стабильных и готовых работать над отношениями.',
+anx:'Тебя тянет к тем, кто не выбирает тебя в ответ. «Бабочки» = стресс-реакция, не любовь. Надёжный мужчина кажется «скучным» — но это нейрохимический обман.',
+res:'Ты выбираешь мужчин с проблемами, которые можно «решить». Это даёт ощущение контроля и нужности. Но ты партнёр, не психолог.',
+dis:'Тебя тянет к интенсивности: страсть, драма, примирение. Стабильность пугает. За этим часто стоит детская травма.'
+};
+
+// Formula: attachment + triangle combo
+const formulas={
+'anx+vic':'Ты гонишься за холодными мужчинами и терпишь, надеясь, что однажды они оценят. Спойлер: не оценят — пока ты не оценишь себя.',
+'anx+res':'Ты гонишься за «сломанными» мужчинами и пытаешься их починить. Чем больше вкладываешь — тем меньше получаешь.',
+'anx+per':'Ты гонишься за недоступными, потом злишься, что они недоступны. Круг замкнулся.',
+'avo+vic':'Ты держишь дистанцию, но внутри чувствуешь себя жертвой — «никто не понимает, почему мне нужно пространство».',
+'avo+res':'Ты помогаешь другим, но не подпускаешь к себе. Спасаешь — чтобы не быть спасённой.',
+'avo+per':'Ты контролируешь дистанцию и критикуешь тех, кто подходит слишком близко. Под бронёй — страх.',
+'dis+vic':'Хаос = дом. Ты притягиваешь нестабильных и страдаешь, но стабильность пугает ещё больше.',
+'dis+res':'Ты бросаешься спасать хаотичных мужчин, но сама тонешь. «Иди сюда — уходи» работает в обе стороны.',
+'dis+per':'Качели: то обожаешь, то уничтожаешь. Интенсивность заменяет близость.',
+'sec+vic':'Фундамент крепкий, но в стрессе сползаешь в жертву. Следи за этим — у тебя есть ресурс выйти.',
+'sec+res':'Надёжная база + привычка спасать. Ты можешь любить без починки — просто ещё не веришь в это.',
+'sec+per':'Надёжная, но под стрессом включаешь контроль. Обычно — когда устала от неравного вклада.',
+};
+const fKey=attMax+'+'+triMax;
+const formula=formulas[fKey]||'Твоя комбинация уникальна. Разбери её с психологом — это даст больше, чем любой тест.';
+window._share={att:attNames[attMax],tri:triNames[triMax],f:formula};
+
+// Books
+const attBooks={
+sec:'📗 Сью Джонсон «Обними меня крепче» — углубить то, что уже работает.',
+anx:'📕 Левин/Хеллер «Attached» (Привязанность) — как тревожный стиль управляет твоим выбором. Обязательно.',
+avo:'📙 Сью Джонсон «Hold Me Tight» — почему близость не враг, а лекарство. Будет некомфортно — и это правильно.',
+dis:'📓 Терренс Рил «Us» — адаптивное дитя vs мудрый взрослый. + Терапия (EMDR или схема-терапия).'
+};
+const triBooks={
+vic:'📕 Мелоди Битти «Преодоление созависимости» — как перестать быть жертвой и взять ответственность.',
+res:'📕 Битти «Codependent No More» — спасатель = созависимый. Главная книга для тебя.',
+per:'📙 Розенберг «Ненасильственное общение» — как заменить контроль и критику на запросы.'
+};
+
+const rc=document.getElementById('res');
+rc.innerHTML=`
+<div style="background:var(--warm2);border:1px solid var(--rose);border-radius:var(--radius);padding:24px;margin-bottom:24px;text-align:center">
+<div style="font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);margin-bottom:8px">Твоя формула</div>
+<div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:4px">${attNames[attMax]} + ${triNames[triMax]}</div>
+<div style="font-size:14px;color:var(--dim);line-height:1.6;max-width:500px;margin:0 auto">${formula}</div>
+</div>
+
+<div class="res-block">
+<div class="res-label" style="color:${attColors[attMax]}">Привязанность</div>
+<div class="res-title" style="color:${attColors[attMax]}">${attNames[attMax]}</div>
+<div class="res-bars">
+<div class="rb-row"><div class="rb-lbl" style="color:var(--teal)">Надёжная</div><div class="rb-track"><div class="rb-fill" style="width:${attPcts.sec}%;background:var(--teal)"></div></div><div class="rb-pct">${attPcts.sec}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--rose)">Тревожная</div><div class="rb-track"><div class="rb-fill" style="width:${attPcts.anx}%;background:var(--rose)"></div></div><div class="rb-pct">${attPcts.anx}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--amber)">Избегающая</div><div class="rb-track"><div class="rb-fill" style="width:${attPcts.avo}%;background:var(--amber)"></div></div><div class="rb-pct">${attPcts.avo}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--violet)">Дезорганиз.</div><div class="rb-track"><div class="rb-fill" style="width:${attPcts.dis}%;background:var(--violet)"></div></div><div class="rb-pct">${attPcts.dis}%</div></div>
+</div>
+<div class="res-desc">${attDescs[attMax]}</div>
+<div class="res-tip">${attBooks[attMax]}</div>
+</div>
+
+<div class="res-block">
+<div class="res-label" style="color:${triColors[triMax]}">Роль в треугольнике</div>
+<div class="res-title" style="color:${triColors[triMax]}">${triNames[triMax]}</div>
+<div class="res-bars">
+<div class="rb-row"><div class="rb-lbl" style="color:var(--amber)">Жертва</div><div class="rb-track"><div class="rb-fill" style="width:${triPcts.vic}%;background:var(--amber)"></div></div><div class="rb-pct">${triPcts.vic}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--teal)">Спасатель</div><div class="rb-track"><div class="rb-fill" style="width:${triPcts.res}%;background:var(--teal)"></div></div><div class="rb-pct">${triPcts.res}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--rose)">Преследов.</div><div class="rb-track"><div class="rb-fill" style="width:${triPcts.per}%;background:var(--rose)"></div></div><div class="rb-pct">${triPcts.per}%</div></div>
+<div class="rb-row"><div class="rb-lbl" style="color:var(--dim)">Вне треуг.</div><div class="rb-track"><div class="rb-fill" style="width:${triPcts.out}%;background:var(--dim)"></div></div><div class="rb-pct">${triPcts.out}%</div></div>
+</div>
+<div class="res-desc">${triDescs[triMax]}</div>
+<div class="res-tip">${triBooks[triMax]}</div>
+</div>
+
+<div class="res-block">
+<div class="res-label" style="color:var(--violet)">Каких мужчин выбираешь</div>
+<div class="res-title">${choNames[choMax]}</div>
+<div class="res-desc">${choDescs[choMax]}</div>
+</div>
+
+<div class="res-tip">
+<strong>Это не приговор — это карта.</strong> Осознание паттерна = первый шаг. Второй — терапия или осознанная работа. Привязанность меняется в течение жизни — и ты можешь двигаться к надёжному стилю.
+</div>
+
+<div class="res-actions">
+<button class="btn-share" onclick="doShare()">
+<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+Поделиться результатом
+</button>
+<button class="btn-again" onclick="reset()">Пройти заново</button>
+</div>
+`;
+rc.classList.add('vis');
+rc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function reset(){
+ans=new Array(Q.length).fill(null);
+Q.forEach(q=>shuffle(q.o));
+renderQ();upProg();
+document.getElementById('res').classList.remove('vis');
+document.getElementById('res').innerHTML='';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function doShare(){
+var d=window._share||{att:'?',tri:'?',f:''};
+var text='Мой результат теста:\n\u{1F52E} Привязанность: '+d.att+'\n\u{1F53A} Роль: '+d.tri+'\n\n\u{1F4A5} '+d.f+'\n\nА ты знаешь свой тип? Пройди тест \u{1F447}';
+if(navigator.share){navigator.share({title:'Узнай свой тип привязанности',text:text}).catch(function(){});}
+else{navigator.clipboard.writeText(text).then(function(){toast('Скопировано! Вставь в сторис ✨');}).catch(function(){
+var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+toast('Скопировано! Вставь в сторис ✨');});}
+}
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2800);}
+
+renderQ();
+</script>
+<div class="share-toast" id="toast"></div>
+
+<footer class="va-foot">
+  <p class="va-foot-h">Понравился тест? Пройди главный — на тип привязанности.</p>
+  <div class="va-foot-btns">
+    <a href="../free.html" class="va-btn" data-goal="quiz_to_test">Пройти тест привязанности →</a>
+    <a href="../course.html" class="va-btn va-ghost" data-goal="quiz_to_course">Курс «Отношения длиною в жизнь»</a>
+  </div>
+  <div class="va-copy">© Отношения длиною в жизнь · ageeva.win</div>
+</footer>
+</body>
+</html>
