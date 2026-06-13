@@ -1,0 +1,92 @@
+/* Supabase CMS bridge for ageeva.win
+   Публичное чтение (отзывы, блог) + RPC для админки. Без SDK, чистый fetch.
+   anon-ключ публичный и защищён RLS — записи только через SECURITY DEFINER функции с проверкой пароля. */
+(function () {
+  var SB = {
+    URL: "https://iuvvheeocobhiothfgei.supabase.co",
+    KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dnZoZWVvY29iaGlvdGhmZ2VpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTQ1ODcsImV4cCI6MjA5MjA5MDU4N30.IJ5i3UkC0GoIWGFnLKmc1UeX2iqn8LzNYfvEfj-3hIY"
+  };
+
+  SB.headers = function (extra) {
+    var h = { apikey: SB.KEY, Authorization: "Bearer " + SB.KEY };
+    if (extra) for (var k in extra) h[k] = extra[k];
+    return h;
+  };
+
+  function parse(r) {
+    return r.text().then(function (t) {
+      var j = t ? JSON.parse(t) : null;
+      if (!r.ok) throw (j && (j.message || j.error)) || "HTTP " + r.status;
+      return j;
+    });
+  }
+
+  SB.rpc = function (fn, args) {
+    return fetch(SB.URL + "/rest/v1/rpc/" + fn, {
+      method: "POST",
+      headers: SB.headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify(args || {})
+    }).then(parse);
+  };
+
+  SB.select = function (path) {
+    return fetch(SB.URL + "/rest/v1/" + path, { headers: SB.headers() }).then(parse);
+  };
+
+  SB.esc = function (s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  };
+
+  SB.paras = function (t) {
+    return String(t || "").split(/\n{2,}/).map(function (p) {
+      return "<p>" + SB.esc(p).replace(/\n/g, "<br>") + "</p>";
+    }).join("");
+  };
+
+  /* ---------- Публичный рендер ---------- */
+
+  // Отзывы на главной → #reviewsBox. При ошибке/пустоте — оставляем статичную рыбу в HTML.
+  function renderReviews() {
+    var box = document.getElementById("reviewsBox");
+    if (!box) return;
+    SB.select("valya_reviews?select=body,author,sort&published=eq.true&order=sort.asc,created_at.asc")
+      .then(function (rows) {
+        if (!rows || !rows.length) return;
+        box.innerHTML = rows.map(function (r) {
+          return '<div class="quote"><p>«' + SB.esc(r.body) + '»</p><div class="who">— ' +
+            SB.esc(r.author || "участница первого потока") + "</div></div>";
+        }).join("");
+      })
+      .catch(function () { /* оставляем фолбэк */ });
+  }
+
+  // Блог → #blogList
+  function renderPosts() {
+    var box = document.getElementById("blogList");
+    if (!box) return;
+    var empty = '<p class="blog-empty">Первые материалы уже готовятся. А пока — загляни в Instagram или пройди тест.</p>';
+    SB.select("valya_posts?select=title,cover_url,excerpt,body,published_at&published=eq.true&order=published_at.desc")
+      .then(function (rows) {
+        if (!rows || !rows.length) { box.innerHTML = empty; return; }
+        box.innerHTML = rows.map(function (p) {
+          var cover = p.cover_url
+            ? '<div class="bcard-img"><img src="' + SB.esc(p.cover_url) + '" alt="" loading="lazy"></div>' : "";
+          var date = p.published_at
+            ? new Date(p.published_at).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }) : "";
+          return '<article class="bcard">' + cover +
+            '<div class="bcard-body">' +
+            (date ? '<div class="bcard-date">' + date + "</div>" : "") +
+            "<h2>" + SB.esc(p.title) + "</h2>" +
+            (p.excerpt ? '<p class="bcard-lead">' + SB.esc(p.excerpt) + "</p>" : "") +
+            '<div class="bcard-text">' + SB.paras(p.body) + "</div>" +
+            "</div></article>";
+        }).join("");
+      })
+      .catch(function () { box.innerHTML = empty; });
+  }
+
+  window.SB = SB;
+  if (document.readyState !== "loading") { renderReviews(); renderPosts(); }
+  else document.addEventListener("DOMContentLoaded", function () { renderReviews(); renderPosts(); });
+})();
