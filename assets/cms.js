@@ -86,7 +86,25 @@
       .catch(function () { box.innerHTML = empty; });
   }
 
+  // Блоки «Обо мне» → #aboutBlocks. При ошибке/пустоте — оставляем статичный текст в HTML.
+  function renderAbout() {
+    var box = document.getElementById("aboutBlocks");
+    if (!box) return;
+    SB.select("valya_about?select=heading,body,sort&published=eq.true&order=sort.asc,created_at.asc")
+      .then(function (rows) {
+        if (!rows || !rows.length) return;
+        box.innerHTML = rows.map(function (b) {
+          var h = (b.heading && b.heading.trim())
+            ? "<h2>" + SB.esc(b.heading) + '</h2><hr class="rule">' : "";
+          return h + SB.paras(b.body);
+        }).join("");
+      })
+      .catch(function () { /* оставляем фолбэк */ });
+  }
+
+  function renderAll() { renderReviews(); renderPosts(); renderAbout(); }
+
   window.SB = SB;
-  if (document.readyState !== "loading") { renderReviews(); renderPosts(); }
-  else document.addEventListener("DOMContentLoaded", function () { renderReviews(); renderPosts(); });
+  if (document.readyState !== "loading") renderAll();
+  else document.addEventListener("DOMContentLoaded", renderAll);
 })();

@@ -99,6 +99,7 @@
 
   <div class="tabs">
     <button class="tab active" data-tab="reviews" onclick="switchTab('reviews')">Отзывы</button>
+    <button class="tab" data-tab="about" onclick="switchTab('about')">Обо мне</button>
     <button class="tab" data-tab="posts" onclick="switchTab('posts')">Блог</button>
   </div>
 
@@ -107,6 +108,13 @@
     <p class="hint">Отзывы с галочкой «Показывать» появляются на главной странице. Порядок — по числу «Порядок» (меньше = выше).</p>
     <button class="btn btn-g btn-sm" style="margin-bottom:16px" onclick="addReview()">+ Добавить отзыв</button>
     <div id="reviewsList"><div class="empty">Загружаю…</div></div>
+  </div>
+
+  <!-- ОБО МНЕ -->
+  <div class="pane" id="paneAbout">
+    <p class="hint">Это текст страницы «Обо мне». Каждый блок — необязательный подзаголовок и текст под ним. Пустая строка между абзацами = новый абзац. Порядок — по числу «Порядок» (меньше = выше).</p>
+    <button class="btn btn-g btn-sm" style="margin-bottom:16px" onclick="addAbout()">+ Добавить блок</button>
+    <div id="aboutList"><div class="empty">Загружаю…</div></div>
   </div>
 
   <!-- БЛОГ -->
@@ -153,11 +161,12 @@ function logout(){ clearCreds(); document.getElementById("appView").style.displa
 function showApp(){
   document.getElementById("loginView").style.display="none";
   document.getElementById("appView").style.display="block";
-  loadReviews(); loadPosts();
+  loadReviews(); loadAbout(); loadPosts();
 }
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.tab===name); });
   document.getElementById("paneReviews").classList.toggle("active", name==="reviews");
+  document.getElementById("paneAbout").classList.toggle("active", name==="about");
   document.getElementById("panePosts").classList.toggle("active", name==="posts");
 }
 
@@ -214,6 +223,53 @@ function delReview(btn){
   if(!confirm("Удалить этот отзыв?")) return;
   if(!id){ card.remove(); return; }
   call("valya_review_delete",{p_id:id}).then(function(){ card.remove(); toast("Отзыв удалён","ok"); })
+    .catch(function(){ toast("Не удалось удалить","bad"); });
+}
+
+/* ---------- ОБО МНЕ ---------- */
+function aboutCard(b){
+  b=b||{};
+  var el=document.createElement("div");
+  el.className="card"+((b.published===false)?" unpub":"");
+  el.dataset.id=b.id||"";
+  el.innerHTML=
+    '<div class="field"><label>Подзаголовок (необязательно)</label><input data-f="heading" value="'+SB.esc(b.heading||"")+'"></div>'+
+    '<div class="field"><label>Текст (пустая строка = новый абзац)</label><textarea rows="7" data-f="body">'+SB.esc(b.body||"")+'</textarea></div>'+
+    '<div class="row"><div class="field" style="max-width:130px;flex:0 0 120px"><label>Порядок</label><input data-f="sort" type="number" value="'+(b.sort==null?0:b.sort)+'"></div></div>'+
+    '<div class="card-foot">'+
+      '<label class="chk"><input type="checkbox" data-f="published" '+((b.published===false)?"":"checked")+'> Показывать на сайте</label>'+
+      '<span class="spacer"></span>'+
+      '<button class="btn btn-d btn-sm" onclick="delAbout(this)">Удалить</button>'+
+      '<button class="btn btn-p btn-sm" onclick="saveAbout(this)">Сохранить</button>'+
+    '</div>';
+  return el;
+}
+function loadAbout(){
+  var box=document.getElementById("aboutList");
+  call("valya_about_all").then(function(rows){
+    box.innerHTML="";
+    if(!rows||!rows.length){ box.innerHTML='<div class="empty">Пока нет блоков. Нажми «Добавить блок».</div>'; return; }
+    rows.forEach(function(b){ box.appendChild(aboutCard(b)); });
+  }).catch(authFail);
+}
+function addAbout(){
+  var box=document.getElementById("aboutList");
+  var e=box.querySelector(".empty"); if(e) box.innerHTML="";
+  box.appendChild(aboutCard({sort:(box.children.length+1),published:true}));
+}
+function saveAbout(btn){
+  var card=btn.closest(".card"), o=readCard(card);
+  if(!o.body || !o.body.trim()){ toast("Текст пустой","bad"); return; }
+  btn.disabled=true;
+  call("valya_about_save",{p_id:card.dataset.id||null,p_heading:o.heading,p_body:o.body,p_sort:o.sort,p_published:o.published})
+    .then(function(id){ card.dataset.id=id||card.dataset.id; card.classList.toggle("unpub",!o.published); btn.disabled=false; toast("Сохранено","ok"); })
+    .catch(function(){ btn.disabled=false; toast("Не удалось сохранить","bad"); });
+}
+function delAbout(btn){
+  var card=btn.closest(".card"), id=card.dataset.id;
+  if(!confirm("Удалить этот блок?")) return;
+  if(!id){ card.remove(); return; }
+  call("valya_about_delete",{p_id:id}).then(function(){ card.remove(); toast("Блок удалён","ok"); })
     .catch(function(){ toast("Не удалось удалить","bad"); });
 }
 
