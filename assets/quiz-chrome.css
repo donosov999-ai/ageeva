@@ -1,0 +1,51 @@
+/* Стандартная шапка и футер сайта для самодостаточных страниц тестов.
+   Всё scoped под .site-header / .site-footer — НЕ конфликтует с внутренними стилями квизов.
+   Цвета захардкожены (у квизов своя :root). © Отношения длиною в жизнь · ageeva.win */
+
+.site-header{position:sticky;top:0;z-index:50;background:rgba(252,248,243,.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #EADFD6;font-family:'Nunito Sans',-apple-system,sans-serif}
+.site-header .container{max-width:1080px;margin:0 auto;padding:0 24px}
+.site-header .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.site-header .brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.4rem;color:#4A403A;text-decoration:none}
+.site-header .brand span{color:#9A5F57}
+.site-header .nav-links{display:flex;align-items:center;gap:30px}
+.site-header .nav-links a{font-weight:600;font-size:.97rem;color:#4A403A;opacity:.85;text-decoration:none;transition:opacity .15s,color .15s}
+.site-header .nav-links a:hover{opacity:1;color:#9A5F57}
+.site-header .btn{display:inline-flex;align-items:center;font-family:'Nunito Sans',sans-serif;font-weight:700;border-radius:999px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
+.site-header .btn-primary{background:#BE7E75;color:#fff;box-shadow:0 10px 26px rgba(190,126,117,.35)}
+.site-header .btn-primary:hover{background:#9A5F57}
+.site-header .btn-sm{padding:11px 22px;font-size:.92rem}
+.site-header .nav-cta{margin-left:6px}
+.site-header .nav-toggle{display:none;background:none;border:0;cursor:pointer;font-size:1.6rem;color:#9A5F57;line-height:1}
+
+.site-footer{background:#F7ECE4;border-top:1px solid #EADFD6;padding:54px 0 30px;font-family:'Nunito Sans',-apple-system,sans-serif;color:#4A403A;margin-top:48px}
+.site-footer .container{max-width:1080px;margin:0 auto;padding:0 24px}
+.site-footer .foot-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:#FBEEE9;border:1px solid #EADFD6;border-radius:18px;padding:26px 32px;margin-bottom:42px}
+.site-footer .foot-cta h3{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.45rem;margin:0 0 6px;color:#9A5F57}
+.site-footer .foot-cta p{margin:0;color:#4A403A;opacity:.82;font-size:.97rem;max-width:48ch}
+.site-footer .btn{display:inline-flex;align-items:center;font-family:'Nunito Sans',sans-serif;font-weight:700;border-radius:999px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
+.site-footer .btn-primary{background:#BE7E75;color:#fff;box-shadow:0 10px 26px rgba(190,126,117,.35)}
+.site-footer .btn-primary:hover{background:#9A5F57}
+.site-footer .btn-lg{padding:18px 38px;font-size:1.08rem}
+.site-footer .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+.site-footer .foot .brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.3rem;color:#4A403A;text-decoration:none;margin-bottom:10px;display:inline-block}
+.site-footer .foot .brand span{color:#9A5F57}
+.site-footer .foot p{color:#8B7C73;font-size:.93rem}
+.site-footer .foot h4{font-family:'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:#9A5F57;margin-bottom:14px}
+.site-footer .foot a{display:block;color:#8B7C73;font-size:.93rem;margin-bottom:9px;text-decoration:none}
+.site-footer .foot a:hover{color:#9A5F57}
+.site-footer .foot-social{display:flex;gap:14px;margin-top:14px}
+.site-footer .foot-social a{display:inline-block;margin:0;font-weight:700;color:#9A5F57}
+.site-footer .foot-bottom{margin-top:36px;padding-top:20px;border-top:1px solid #EADFD6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#8B7C73;font-size:.84rem}
+.site-footer .foot-bottom a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.site-footer .foot-bottom a:hover{color:#9A5F57}
+
+@media(max-width:860px){
+  .site-footer .foot{grid-template-columns:1fr 1fr}
+  .site-header .nav-links{position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;background:#FCF8F3;border-bottom:1px solid #EADFD6;max-height:0;overflow:hidden;transition:max-height .3s ease;align-items:stretch}
+  .site-header .nav-links.open{max-height:440px}
+  .site-header .nav-links a{padding:15px 24px;border-top:1px solid #EADFD6;opacity:1}
+  .site-header .nav-links .nav-cta{margin:14px 24px}
+  .site-header .nav-toggle{display:block}
+}
+@media(max-width:640px){.site-footer .foot-cta{flex-direction:column;align-items:flex-start;padding:22px}}
+@media(max-width:520px){.site-footer .foot{grid-template-columns:1fr}}

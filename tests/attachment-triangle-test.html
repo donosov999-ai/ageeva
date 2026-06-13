@@ -155,11 +155,21 @@ body{background:var(--bg);color:var(--txt);font-family:'Nunito Sans',system-ui,s
   .link-table th,.link-table td{padding:8px}
 }
 </style>
+  <link rel="stylesheet" href="../assets/quiz-chrome.css">
 </head>
 <body>
-<header class="va-top">
-  <a href="../index.html" class="va-brand">Отношения <span>длиною в жизнь</span></a>
-  <nav class="va-nav"><a href="../tests/">Все тесты</a><a href="../free.html">Тест привязанности</a><a href="../course.html">Курс</a></nav>
+<header class="site-header">
+  <div class="container nav">
+    <a href="../index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../about.html">Обо мне</a>
+      <a href="../course.html">Курс</a>
+      <a href="index.html">Тесты</a>
+      <a href="../free.html">Бесплатное</a>
+      <a href="../free.html" class="btn btn-primary btn-sm nav-cta">Бесплатный тест</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
 </header>
 <div class="wrap">
 
@@ -622,13 +632,44 @@ renderQ();
 </script>
 <div class="share-toast" id="toast"></div>
 
-<footer class="va-foot">
-  <p class="va-foot-h">Понравился тест? Пройди главный — на тип привязанности.</p>
-  <div class="va-foot-btns">
-    <a href="../free.html" class="va-btn" data-goal="quiz_to_test">Пройти тест привязанности →</a>
-    <a href="../course.html" class="va-btn va-ghost" data-goal="quiz_to_course">Курс «Отношения длиною в жизнь»</a>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-cta">
+      <div>
+        <h3>Не знаешь, с чего начать?</h3>
+        <p>Начни с бесплатного теста — 5 минут, и станет понятнее, что с тобой происходит.</p>
+      </div>
+      <a href="../free.html" class="btn btn-primary btn-lg" data-goal="footer_cta">Пройти бесплатный тест →</a>
+    </div>
+    <div class="foot">
+      <div>
+        <a href="../index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
+        <p>Живая реальность вместо красивой обёртки из соцсетей. И живая ты.</p>
+        <div class="foot-social">
+          <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Telegram</a>
+          <a href="https://instagram.com/ageeva_valya" target="_blank" rel="noopener" data-goal="ig_click">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <a href="../about.html">Обо мне — моя история</a>
+        <a href="../course.html">Курс «Отношения длиною в жизнь»</a>
+        <a href="index.html">Тесты об отношениях</a>
+        <a href="../blog.html">Блог про отношения</a>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Написать в Telegram</a>
+        <a href="https://instagram.com/ageeva_valya" target="_blank" rel="noopener" data-goal="ig_click">Instagram @ageeva_valya</a>
+        <a href="../free.html">Бесплатный тест</a>
+        <a href="../course.html#tarify">Тарифы курса</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Валентина Агеева, 2026 · <a href="https://ageeva.win/">ageeva.win</a></span>
+      <span><a href="#">Оферта</a> · <a href="#">Политика конфиденциальности</a></span>
+    </div>
   </div>
-  <div class="va-copy">© Отношения длиною в жизнь · ageeva.win</div>
 </footer>
 </body>
 </html>
