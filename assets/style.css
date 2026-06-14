@@ -284,3 +284,7 @@ strong{font-weight:700}
   .btn{white-space:normal}
   .btn-row .btn{width:100%;justify-content:center;text-align:center}
 }
+@media(max-width:600px){
+  table{width:100%;table-layout:fixed}
+  td,th{overflow-wrap:anywhere;word-break:break-word}
+}
