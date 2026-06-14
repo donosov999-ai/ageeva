@@ -101,6 +101,7 @@
     <button class="tab active" data-tab="reviews" onclick="switchTab('reviews')">Отзывы</button>
     <button class="tab" data-tab="about" onclick="switchTab('about')">Обо мне</button>
     <button class="tab" data-tab="posts" onclick="switchTab('posts')">Блог</button>
+    <button class="tab" data-tab="leads" onclick="switchTab('leads')">Заявки</button>
   </div>
 
   <!-- ОТЗЫВЫ -->
@@ -122,6 +123,12 @@
     <p class="hint">Записи с галочкой «Опубликовать» появляются в разделе «Блог». Обложка — ссылка на картинку (необязательно).</p>
     <button class="btn btn-g btn-sm" style="margin-bottom:16px" onclick="addPost()">+ Добавить запись</button>
     <div id="postsList"><div class="empty">Загружаю…</div></div>
+  </div>
+
+  <!-- ЗАЯВКИ -->
+  <div class="pane" id="paneLeads">
+    <p class="hint">Заявки с формы на странице «Бесплатное» (тест): имя, контакт и тип привязанности. Можно удалить спам. Отвечай людям в Telegram/на почту.</p>
+    <div id="leadsList"><div class="empty">Загружаю…</div></div>
   </div>
 
   <div class="muted-note">Изменения видны на сайте сразу после «Сохранить» (обнови вкладку с сайтом).</div>
@@ -161,13 +168,14 @@ function logout(){ clearCreds(); document.getElementById("appView").style.displa
 function showApp(){
   document.getElementById("loginView").style.display="none";
   document.getElementById("appView").style.display="block";
-  loadReviews(); loadAbout(); loadPosts();
+  loadReviews(); loadAbout(); loadPosts(); loadLeads();
 }
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.tab===name); });
   document.getElementById("paneReviews").classList.toggle("active", name==="reviews");
   document.getElementById("paneAbout").classList.toggle("active", name==="about");
   document.getElementById("panePosts").classList.toggle("active", name==="posts");
+  document.getElementById("paneLeads").classList.toggle("active", name==="leads");
 }
 
 /* ---------- ОТЗЫВЫ ---------- */
@@ -318,6 +326,36 @@ function delPost(btn){
   if(!confirm("Удалить эту запись?")) return;
   if(!id){ card.remove(); return; }
   call("valya_post_delete",{p_id:id}).then(function(){ card.remove(); toast("Запись удалена","ok"); })
+    .catch(function(){ toast("Не удалось удалить","bad"); });
+}
+
+/* ---------- ЗАЯВКИ ---------- */
+function leadCard(l){
+  var el=document.createElement("div");
+  el.className="card";
+  el.dataset.id=l.id||"";
+  var dt=l.created_at?new Date(l.created_at).toLocaleString("ru-RU",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):"";
+  el.innerHTML=
+    '<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">'+
+      '<div><b style="font-size:15px">'+SB.esc(l.name||"(без имени)")+'</b> · <span style="color:var(--rose-deep);font-weight:700">'+SB.esc(l.contact||"")+'</span></div>'+
+      '<span style="color:var(--muted);font-size:12px">'+dt+'</span>'+
+    '</div>'+
+    '<div style="color:var(--muted);font-size:13px;margin-top:6px">Тип: '+SB.esc(l.test_result||"—")+' · источник: '+SB.esc(l.source||"—")+'</div>'+
+    '<div class="card-foot"><span class="spacer"></span><button class="btn btn-d btn-sm" onclick="delLead(this)">Удалить</button></div>';
+  return el;
+}
+function loadLeads(){
+  var box=document.getElementById("leadsList");
+  call("valya_leads_all").then(function(rows){
+    box.innerHTML="";
+    if(!rows||!rows.length){ box.innerHTML='<div class="empty">Пока нет заявок. Появятся, когда кто-то оставит контакт в тесте.</div>'; return; }
+    rows.forEach(function(l){ box.appendChild(leadCard(l)); });
+  }).catch(authFail);
+}
+function delLead(btn){
+  var card=btn.closest(".card"), id=card.dataset.id;
+  if(!confirm("Удалить эту заявку?")) return;
+  call("valya_lead_delete",{p_id:id}).then(function(){ card.remove(); toast("Заявка удалена","ok"); })
     .catch(function(){ toast("Не удалось удалить","bad"); });
 }
 
