@@ -133,7 +133,8 @@
       <hr class="rule center">
       <p class="lead narrow">Оставь имя и контакт — пришлю развёрнутый разбор твоего типа и <strong>PDF-гайд «Какой у тебя тип привязанности и что с этим делать»</strong> в подарок.</p>
     </div>
-    <form class="form" style="margin-top:28px" onsubmit="return false">
+    <form class="form" id="leadForm" style="margin-top:28px">
+      <input type="text" name="website" id="lf_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
       <div>
         <label for="name">Как тебя зовут</label>
         <input id="name" type="text" placeholder="Имя">
@@ -142,8 +143,8 @@
         <label for="contact">Email или Telegram</label>
         <input id="contact" type="text" placeholder="email@почта.ру или @username">
       </div>
-      <button class="btn btn-primary btn-lg" type="submit">Получить результат + PDF →</button>
-      <p class="note">⟡ форма-макет: подключим к Tilda-форме → Telegram-бот (выдача результата, PDF и прогрев)</p>
+      <button class="btn btn-primary btn-lg" type="submit" id="leadBtn">Получить результат + PDF →</button>
+      <p class="note" id="leadMsg" style="display:none"></p>
     </form>
   </div>
 </section>
@@ -250,6 +251,7 @@
     var max='anchor',maxV=avgs.anchor;
     if(avgs.wave>maxV){max='wave';maxV=avgs.wave;}
     if(avgs.island>maxV){max='island';maxV=avgs.island;}
+    window.__attachResult=LABELS[max];
     var html='<div class="result-box"><h3>Твой тип:</h3><div class="stat">'+LABELS[max]+'</div>';
     ['anchor','wave','island'].forEach(function(k){
       var pct=Math.round((avgs[k]-1)/4*100);
@@ -271,6 +273,32 @@
     document.querySelectorAll('#testForm input[type=range]').forEach(function(r){ r.value=3; r.dataset.touched='0'; });
     document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='·'; v.classList.add('unset'); });
     document.getElementById('result').innerHTML='';
+  });
+})();
+</script>
+<script src="assets/cms.js" defer></script>
+<script>
+(function(){
+  var form=document.getElementById('leadForm');
+  if(!form) return;
+  var msg=document.getElementById('leadMsg'), btn=document.getElementById('leadBtn');
+  function show(t,ok){ msg.style.display='block'; msg.textContent=t; msg.style.color=ok?'#3F8F62':'#C0524B'; msg.style.background=ok?'#EAF5EE':'#FBEFEE'; msg.style.borderColor=ok?'#BFE3CC':'#F0CBC7'; }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(document.getElementById('lf_hp').value){ return; }
+    var name=(document.getElementById('name').value||'').trim();
+    var contact=(document.getElementById('contact').value||'').trim();
+    if(contact.length<3){ show('Оставь email или Telegram — иначе мне некуда прислать разбор.',false); return; }
+    btn.disabled=true; var old=btn.textContent; btn.textContent='Отправляю…';
+    var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test',p_result:window.__attachResult||null}) : Promise.reject('no-sb');
+    send.then(function(){
+      form.querySelectorAll('input,button,label,div').forEach(function(el){ el.style.display='none'; });
+      show('Спасибо'+(name?(', '+name):'')+'! Записала твой контакт — пришлю разбор типа привязанности и PDF-гайд в ближайшее время.',true);
+      msg.style.fontSize='1.05rem'; msg.style.padding='16px 18px';
+    }).catch(function(){
+      btn.disabled=false; btn.textContent=old;
+      show('Не получилось отправить. Напиши мне в Telegram — кнопка справа внизу.',false);
+    });
   });
 })();
 </script>
