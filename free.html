@@ -143,6 +143,10 @@
         <label for="contact">Email или Telegram</label>
         <input id="contact" type="text" placeholder="email@почта.ру или @username">
       </div>
+      <label class="lead-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:.84rem;color:var(--muted);font-weight:400;cursor:pointer;line-height:1.45">
+        <input type="checkbox" id="lf_consent" style="margin-top:3px;width:auto;flex:0 0 auto">
+        <span>Я согласна на обработку персональных данных и принимаю <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--rose-ink);text-decoration:underline">политику конфиденциальности</a></span>
+      </label>
       <button class="btn btn-primary btn-lg" type="submit" id="leadBtn">Получить результат + PDF →</button>
       <p class="note" id="leadMsg" style="display:none"></p>
     </form>
@@ -197,7 +201,7 @@
     </div>
     <div class="foot-bottom">
       <span>© Валентина Агеева, 2026 · <a href="https://ageeva.win/">ageeva.win</a></span>
-      <span><a href="#">Оферта</a> · <a href="#">Политика конфиденциальности</a></span>
+      <span><a href="#">Оферта</a> · <a href="privacy.html">Политика конфиденциальности</a></span>
     </div>
   </div>
 </footer>
@@ -220,6 +224,13 @@
   ];
   var LABELS = {anchor:'Надёжная (Якорь)', wave:'Тревожная (Волна)', island:'Избегающая (Остров)'};
   var COLORS = {anchor:'#5B9A78', wave:'#C9756E', island:'#B8946A'};
+  window.shareAttach=function(){
+    var t=window.__attachResult||'мой тип привязанности';
+    var text='Мой тип привязанности — '+t+'. Прошла бесплатный тест у Валентины 🤍';
+    var url='https://ageeva.win/free';
+    if(navigator.share){ navigator.share({title:'Тип привязанности',text:text,url:url}).catch(function(){}); }
+    else { window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text),'_blank'); }
+  };
   var form = document.getElementById('testForm');
   if(!form) return;
   QUESTIONS.forEach(function(item, i){
@@ -230,7 +241,7 @@
       '<div class="slider-row">' +
         '<span class="slider-min">не про меня</span>' +
         '<input type="range" min="1" max="5" value="3" data-h="' + item.h + '">' +
-        '<span class="slider-val unset">·</span>' +
+        '<span class="slider-val">3</span>' +
         '<span class="slider-max">очень про меня</span>' +
       '</div>';
     var inp = row.querySelector('input[type=range]');
@@ -242,11 +253,10 @@
     form.appendChild(row);
   });
   document.getElementById('calcBtn').addEventListener('click', function(){
-    var sums={anchor:0,wave:0,island:0}, counts={anchor:0,wave:0,island:0}, answered=0;
+    var sums={anchor:0,wave:0,island:0}, counts={anchor:0,wave:0,island:0};
     document.querySelectorAll('#testForm input[type=range]').forEach(function(r){
-      if(r.dataset.touched==='1'){ sums[r.dataset.h]+=parseInt(r.value,10); counts[r.dataset.h]+=1; answered++; }
+      sums[r.dataset.h]+=parseInt(r.value,10); counts[r.dataset.h]+=1;
     });
-    if(answered < QUESTIONS.length){ alert('Подвинь слайдер на каждом из '+QUESTIONS.length+' вопросов. Отвечено: '+answered); return; }
     var avgs={anchor:sums.anchor/counts.anchor, wave:sums.wave/counts.wave, island:sums.island/counts.island};
     var max='anchor',maxV=avgs.anchor;
     if(avgs.wave>maxV){max='wave';maxV=avgs.wave;}
@@ -263,7 +273,7 @@
     else if(max==='wave'){ rec='<strong>Тревожная.</strong> Учись успокаивать себя сама (техника 5-4-3-2-1, дыхание 4-7-8) ДО того, как «дёргать» партнёра. Если партнёр избегающий — твоя тревога его пугает; вместо проверок скажи прямо: «мне нужно подтверждение».'; }
     else{ rec='<strong>Избегающая.</strong> Учись оставаться в контакте 20 минут, даже когда хочется уйти. Если партнёр тревожный — твой уход для него триггер; вместо исчезновения — «мне нужно 20 минут, я вернусь».'; }
     html+='<div class="note">'+rec+'</div>';
-    html+='<div class="atest-btns"><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Разобрать свой тип на курсе →</a></div></div>';
+    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Поделиться результатом →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Разобрать на курсе →</a></div></div>';
     html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>Для пары: ловушка «тревожный + избегающий»</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">Самый частый цикл: одна требует близости — другой отступает — первая паникует и требует ещё — второй отступает дальше. Это «преследователь — отстраняющийся» (Сью Джонсон, ЭФТ). Выход: оба учатся <strong>называть цикл</strong>, а не воевать в нём.</p></div>';
     var box=document.getElementById('result');
     box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
@@ -271,7 +281,7 @@
   });
   document.getElementById('resetBtn').addEventListener('click', function(){
     document.querySelectorAll('#testForm input[type=range]').forEach(function(r){ r.value=3; r.dataset.touched='0'; });
-    document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='·'; v.classList.add('unset'); });
+    document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='3'; v.classList.remove('unset'); });
     document.getElementById('result').innerHTML='';
   });
 })();
@@ -289,8 +299,9 @@
     var name=(document.getElementById('name').value||'').trim();
     var contact=(document.getElementById('contact').value||'').trim();
     if(contact.length<3){ show('Оставь email или Telegram — иначе мне некуда прислать разбор.',false); return; }
+    if(!document.getElementById('lf_consent').checked){ show('Отметь согласие на обработку данных — без него не могу принять заявку.',false); return; }
     btn.disabled=true; var old=btn.textContent; btn.textContent='Отправляю…';
-    var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test',p_result:window.__attachResult||null}) : Promise.reject('no-sb');
+    var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test',p_result:window.__attachResult||null,p_consent:true}) : Promise.reject('no-sb');
     send.then(function(){
       form.querySelectorAll('input,button,label,div').forEach(function(el){ el.style.display='none'; });
       show('Спасибо'+(name?(', '+name):'')+'! Записала твой контакт — пришлю разбор типа привязанности и PDF-гайд в ближайшее время.',true);
