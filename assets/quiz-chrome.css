@@ -49,3 +49,10 @@
 }
 @media(max-width:640px){.site-footer .foot-cta{flex-direction:column;align-items:flex-start;padding:22px}}
 @media(max-width:520px){.site-footer .foot{grid-template-columns:1fr}}
+
+/* Мобайл: контент тестов не уезжает вбок (страховка + адаптив широких таблиц) */
+html,body{overflow-x:clip}
+@media(max-width:600px){
+  table{width:100%!important;table-layout:fixed}
+  table td,table th{overflow-wrap:anywhere;word-break:break-word}
+}
