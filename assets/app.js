@@ -13,8 +13,7 @@
     metrika: 109819083,   // Яндекс.Метрика — счётчик ageeva.win (цели идут через data-goal)
     course: "Отношения длиною в жизнь"
   };
-  var TG_URL = "https://t.me/" + CFG.tg +
-    "?text=" + encodeURIComponent("Здравствуйте! Вопрос по курсу «" + CFG.course + "»");
+  var TG_URL = "https://t.me/" + CFG.tg;
 
   // ── Аналитика: одна точка ────────────────────────────────
   function track(goal, params) {
