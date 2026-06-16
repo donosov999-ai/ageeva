@@ -104,22 +104,23 @@
 
   // Настройки: тексты шапки блога (#blogTitle/#blogLead) + фото (#photoHero/#photoAbout/#photoRound)
   function renderSettings() {
-    var t = document.getElementById("blogTitle"), l = document.getElementById("blogLead");
-    var pH = document.getElementById("photoHero"), pA = document.getElementById("photoAbout"), pR = document.getElementById("photoRound");
-    var keys = [];
-    if (t || l) keys.push("blog_title", "blog_lead");
-    if (pH) keys.push("photo_hero");
-    if (pA) keys.push("photo_about");
-    if (pR) keys.push("photo_round");
+    var TEXT = { blogTitle:"blog_title", blogLead:"blog_lead",
+      idxHeroLead:"idx_hero_lead", idxProofNum:"idx_proof_num", idxProofCap:"idx_proof_cap",
+      idxCtaEyebrow:"idx_cta_eyebrow", idxCtaTitle:"idx_cta_title", idxCtaText:"idx_cta_text" };
+    var IMG = { photoHero:"photo_hero", photoAbout:"photo_about", photoRound:"photo_round" };
+    var keys = [], els = {};
+    Object.keys(TEXT).forEach(function (id) { var e = document.getElementById(id); if (e) { els[id] = e; keys.push(TEXT[id]); } });
+    Object.keys(IMG).forEach(function (id) { var e = document.getElementById(id); if (e) { els[id] = e; keys.push(IMG[id]); } });
+    var heroT = document.getElementById("idxHeroTitle"); if (heroT) keys.push("idx_hero_title");
+    var whoB = document.getElementById("idxWhoBody"); if (whoB) keys.push("idx_who_body");
     if (!keys.length) return;
     SB.select("valya_settings?select=key,value&key=in.(" + keys.join(",") + ")")
       .then(function (rows) {
         var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
-        if (t && m.blog_title) t.textContent = m.blog_title;
-        if (l && m.blog_lead) l.textContent = m.blog_lead;
-        if (pH && m.photo_hero) pH.src = m.photo_hero;
-        if (pA && m.photo_about) pA.src = m.photo_about;
-        if (pR && m.photo_round) pR.src = m.photo_round;
+        Object.keys(TEXT).forEach(function (id) { if (els[id] && m[TEXT[id]] != null) els[id].textContent = m[TEXT[id]]; });
+        Object.keys(IMG).forEach(function (id) { if (els[id] && m[IMG[id]]) els[id].src = m[IMG[id]]; });
+        if (heroT && m.idx_hero_title != null) heroT.innerHTML = SB.esc(m.idx_hero_title).replace(/\n/g, "<br>");
+        if (whoB && m.idx_who_body != null) whoB.innerHTML = SB.paras(m.idx_who_body);
       })
       .catch(function () {});
   }

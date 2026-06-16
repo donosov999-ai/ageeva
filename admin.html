@@ -47,7 +47,7 @@
   .chk input{width:auto}
   .spacer{flex:1}
   /* tabs */
-  .tabs{display:flex;gap:8px;margin-bottom:18px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
   .tab{background:var(--cream2);color:var(--rose-ink);border:0;border-radius:999px;padding:10px 20px;font-weight:800;cursor:pointer;font-size:15px}
   .tab.active{background:var(--rose-deep);color:#fff}
   .pane{display:none}.pane.active{display:block}
@@ -100,6 +100,7 @@
   <div class="tabs">
     <button class="tab active" data-tab="reviews" onclick="switchTab('reviews')">Отзывы</button>
     <button class="tab" data-tab="about" onclick="switchTab('about')">Обо мне</button>
+    <button class="tab" data-tab="main" onclick="switchTab('main')">Главная</button>
     <button class="tab" data-tab="posts" onclick="switchTab('posts')">Блог</button>
     <button class="tab" data-tab="leads" onclick="switchTab('leads')">Заявки</button>
     <button class="tab" data-tab="photos" onclick="switchTab('photos')">Фото</button>
@@ -117,6 +118,24 @@
     <p class="hint">Это текст страницы «Обо мне». Каждый блок — необязательный подзаголовок и текст под ним. Пустая строка между абзацами = новый абзац. Порядок — по числу «Порядок» (меньше = выше).</p>
     <button class="btn btn-g btn-sm" style="margin-bottom:16px" onclick="addAbout()">+ Добавить блок</button>
     <div id="aboutList"><div class="empty">Загружаю…</div></div>
+  </div>
+
+  <!-- ГЛАВНАЯ -->
+  <div class="pane" id="paneMain">
+    <p class="hint">Тексты главной страницы. Поменяла → «Сохранить тексты главной». В «Заголовке» перенос строки = перенос на сайте. В блоке «Кто я» пустая строка между абзацами = новый абзац.</p>
+    <div class="card">
+      <div class="field"><label>Первый экран — заголовок</label><textarea rows="3" id="mh_hero_title"></textarea></div>
+      <div class="field"><label>Первый экран — подзаголовок</label><textarea rows="3" id="mh_hero_lead"></textarea></div>
+      <div class="field"><label>Блок «Кто я» — текст про себя</label><textarea rows="9" id="mh_who"></textarea></div>
+      <div class="row">
+        <div class="field" style="max-width:170px;flex:0 0 150px"><label>Соцпруф — число</label><input id="mh_proof_num"></div>
+        <div class="field"><label>Соцпруф — подпись</label><textarea rows="2" id="mh_proof_cap"></textarea></div>
+      </div>
+      <div class="field"><label>Финал — метка (статус набора)</label><input id="mh_cta_eyebrow"></div>
+      <div class="field"><label>Финал — заголовок</label><input id="mh_cta_title"></div>
+      <div class="field"><label>Финал — текст</label><textarea rows="2" id="mh_cta_text"></textarea></div>
+      <div class="card-foot"><span class="spacer"></span><button class="btn btn-p btn-sm" onclick="saveMain()">Сохранить тексты главной</button></div>
+    </div>
   </div>
 
   <!-- БЛОГ -->
@@ -200,12 +219,13 @@ function logout(){ clearCreds(); document.getElementById("appView").style.displa
 function showApp(){
   document.getElementById("loginView").style.display="none";
   document.getElementById("appView").style.display="block";
-  loadReviews(); loadAbout(); loadPosts(); loadLeads(); loadBlogHeader(); loadPhotos();
+  loadReviews(); loadAbout(); loadMain(); loadPosts(); loadLeads(); loadBlogHeader(); loadPhotos();
 }
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.tab===name); });
   document.getElementById("paneReviews").classList.toggle("active", name==="reviews");
   document.getElementById("paneAbout").classList.toggle("active", name==="about");
+  document.getElementById("paneMain").classList.toggle("active", name==="main");
   document.getElementById("panePosts").classList.toggle("active", name==="posts");
   document.getElementById("paneLeads").classList.toggle("active", name==="leads");
   document.getElementById("panePhotos").classList.toggle("active", name==="photos");
@@ -360,6 +380,21 @@ function delPost(btn){
   if(!id){ card.remove(); return; }
   call("valya_post_delete",{p_id:id}).then(function(){ card.remove(); toast("Запись удалена","ok"); })
     .catch(function(){ toast("Не удалось удалить","bad"); });
+}
+
+/* ---------- ТЕКСТЫ ГЛАВНОЙ ---------- */
+var MAIN_MAP={mh_hero_title:"idx_hero_title",mh_hero_lead:"idx_hero_lead",mh_who:"idx_who_body",mh_proof_num:"idx_proof_num",mh_proof_cap:"idx_proof_cap",mh_cta_eyebrow:"idx_cta_eyebrow",mh_cta_title:"idx_cta_title",mh_cta_text:"idx_cta_text"};
+function loadMain(){
+  if(!document.getElementById("mh_hero_title")) return;
+  var ks=Object.keys(MAIN_MAP).map(function(id){return MAIN_MAP[id];}).join(",");
+  SB.select("valya_settings?select=key,value&key=in.("+ks+")").then(function(rows){
+    var m={}; (rows||[]).forEach(function(r){m[r.key]=r.value;});
+    Object.keys(MAIN_MAP).forEach(function(id){ var e=document.getElementById(id); if(e) e.value=m[MAIN_MAP[id]]||""; });
+  }).catch(function(){});
+}
+function saveMain(){
+  var ps=Object.keys(MAIN_MAP).map(function(id){ return call("valya_setting_set",{p_key:MAIN_MAP[id],p_value:document.getElementById(id).value}); });
+  Promise.all(ps).then(function(){ toast("Тексты главной сохранены — обнови сайт","ok"); }).catch(function(){ toast("Не удалось сохранить","bad"); });
 }
 
 /* ---------- ФОТО ---------- */
