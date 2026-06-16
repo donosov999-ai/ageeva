@@ -102,6 +102,7 @@
     <button class="tab" data-tab="about" onclick="switchTab('about')">Обо мне</button>
     <button class="tab" data-tab="posts" onclick="switchTab('posts')">Блог</button>
     <button class="tab" data-tab="leads" onclick="switchTab('leads')">Заявки</button>
+    <button class="tab" data-tab="photos" onclick="switchTab('photos')">Фото</button>
   </div>
 
   <!-- ОТЗЫВЫ -->
@@ -135,6 +136,31 @@
   <div class="pane" id="paneLeads">
     <p class="hint">Заявки с формы на странице «Бесплатное» (тест): имя, контакт и тип привязанности. Можно удалить спам. Отвечай людям в Telegram/на почту.</p>
     <div id="leadsList"><div class="empty">Загружаю…</div></div>
+  </div>
+
+  <!-- ФОТО -->
+  <div class="pane" id="panePhotos">
+    <p class="hint">Замени любое фото со своего телефона: жми «Заменить» под фото → выбери картинку. Она сожмётся и сразу появится на сайте (обнови вкладку с сайтом). Главное и круглое фото стоят и на главной, и на курсе.</p>
+    <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+      <div class="card" style="text-align:center">
+        <div style="font-weight:700;margin-bottom:10px">Главное фото<br><span style="font-weight:400;color:var(--muted);font-size:12px">главная + курс</span></div>
+        <img id="prev_hero" src="assets/photo-hero.jpg" alt="" style="width:100%;max-width:190px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+        <input type="file" accept="image/*" id="file_hero" style="display:none" onchange="uploadPhoto(this,'photo_hero','prev_hero')">
+        <div style="margin-top:12px"><button class="btn btn-p btn-sm" onclick="document.getElementById('file_hero').click()">Заменить</button></div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-weight:700;margin-bottom:10px">Фото «Обо мне»<br><span style="font-weight:400;color:var(--muted);font-size:12px">страница «Обо мне»</span></div>
+        <img id="prev_about" src="assets/photo-about.jpg" alt="" style="width:100%;max-width:190px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:1px solid var(--line)">
+        <input type="file" accept="image/*" id="file_about" style="display:none" onchange="uploadPhoto(this,'photo_about','prev_about')">
+        <div style="margin-top:12px"><button class="btn btn-p btn-sm" onclick="document.getElementById('file_about').click()">Заменить</button></div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-weight:700;margin-bottom:10px">Круглое «Кто я»<br><span style="font-weight:400;color:var(--muted);font-size:12px">главная + курс</span></div>
+        <img id="prev_round" src="assets/photo-round2.jpg" alt="" style="width:100%;max-width:190px;aspect-ratio:1;object-fit:cover;border-radius:50%;border:1px solid var(--line)">
+        <input type="file" accept="image/*" id="file_round" style="display:none" onchange="uploadPhoto(this,'photo_round','prev_round')">
+        <div style="margin-top:12px"><button class="btn btn-p btn-sm" onclick="document.getElementById('file_round').click()">Заменить</button></div>
+      </div>
+    </div>
   </div>
 
   <div class="muted-note">Изменения видны на сайте сразу после «Сохранить» (обнови вкладку с сайтом).</div>
@@ -174,7 +200,7 @@ function logout(){ clearCreds(); document.getElementById("appView").style.displa
 function showApp(){
   document.getElementById("loginView").style.display="none";
   document.getElementById("appView").style.display="block";
-  loadReviews(); loadAbout(); loadPosts(); loadLeads(); loadBlogHeader();
+  loadReviews(); loadAbout(); loadPosts(); loadLeads(); loadBlogHeader(); loadPhotos();
 }
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.tab===name); });
@@ -182,6 +208,7 @@ function switchTab(name){
   document.getElementById("paneAbout").classList.toggle("active", name==="about");
   document.getElementById("panePosts").classList.toggle("active", name==="posts");
   document.getElementById("paneLeads").classList.toggle("active", name==="leads");
+  document.getElementById("panePhotos").classList.toggle("active", name==="photos");
 }
 
 /* ---------- ОТЗЫВЫ ---------- */
@@ -333,6 +360,41 @@ function delPost(btn){
   if(!id){ card.remove(); return; }
   call("valya_post_delete",{p_id:id}).then(function(){ card.remove(); toast("Запись удалена","ok"); })
     .catch(function(){ toast("Не удалось удалить","bad"); });
+}
+
+/* ---------- ФОТО ---------- */
+function loadPhotos(){
+  if(!document.getElementById("prev_hero")) return;
+  SB.select("valya_settings?select=key,value&key=in.(photo_hero,photo_about,photo_round)").then(function(rows){
+    var m={}; (rows||[]).forEach(function(r){ m[r.key]=r.value; });
+    if(m.photo_hero) document.getElementById("prev_hero").src=m.photo_hero;
+    if(m.photo_about) document.getElementById("prev_about").src=m.photo_about;
+    if(m.photo_round) document.getElementById("prev_round").src=m.photo_round;
+  }).catch(function(){});
+}
+function uploadPhoto(input, key, prevId){
+  var f=input.files && input.files[0]; if(!f) return;
+  if(!/^image\//.test(f.type||"")){ toast("Нужна картинка (jpg/png)","bad"); input.value=""; return; }
+  var reader=new FileReader();
+  reader.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var max=1280, w=img.width, h=img.height;
+      if(w>max||h>max){ if(w>=h){ h=Math.round(h*max/w); w=max; } else { w=Math.round(w*max/h); h=max; } }
+      var cv=document.createElement("canvas"); cv.width=w; cv.height=h;
+      cv.getContext("2d").drawImage(img,0,0,w,h);
+      var dataUrl=cv.toDataURL("image/jpeg",0.82);
+      if(dataUrl.length>1500000) dataUrl=cv.toDataURL("image/jpeg",0.68);
+      toast("Сохраняю фото…","");
+      call("valya_setting_set",{p_key:key,p_value:dataUrl}).then(function(){
+        document.getElementById(prevId).src=dataUrl; toast("Фото обновлено — обнови сайт","ok");
+      }).catch(function(){ toast("Не удалось сохранить","bad"); });
+      input.value="";
+    };
+    img.onerror=function(){ toast("Не удалось прочитать фото","bad"); input.value=""; };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(f);
 }
 
 /* ---------- ШАПКА БЛОГА ---------- */

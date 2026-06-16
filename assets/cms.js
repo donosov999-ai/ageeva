@@ -102,15 +102,24 @@
       .catch(function () { /* оставляем фолбэк */ });
   }
 
-  // Настройки (тексты шапки блога) → #blogTitle / #blogLead
+  // Настройки: тексты шапки блога (#blogTitle/#blogLead) + фото (#photoHero/#photoAbout/#photoRound)
   function renderSettings() {
     var t = document.getElementById("blogTitle"), l = document.getElementById("blogLead");
-    if (!t && !l) return;
-    SB.select("valya_settings?select=key,value")
+    var pH = document.getElementById("photoHero"), pA = document.getElementById("photoAbout"), pR = document.getElementById("photoRound");
+    var keys = [];
+    if (t || l) keys.push("blog_title", "blog_lead");
+    if (pH) keys.push("photo_hero");
+    if (pA) keys.push("photo_about");
+    if (pR) keys.push("photo_round");
+    if (!keys.length) return;
+    SB.select("valya_settings?select=key,value&key=in.(" + keys.join(",") + ")")
       .then(function (rows) {
         var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
         if (t && m.blog_title) t.textContent = m.blog_title;
         if (l && m.blog_lead) l.textContent = m.blog_lead;
+        if (pH && m.photo_hero) pH.src = m.photo_hero;
+        if (pA && m.photo_about) pA.src = m.photo_about;
+        if (pR && m.photo_round) pR.src = m.photo_round;
       })
       .catch(function () {});
   }
