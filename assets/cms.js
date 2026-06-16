@@ -102,7 +102,20 @@
       .catch(function () { /* оставляем фолбэк */ });
   }
 
-  function renderAll() { renderReviews(); renderPosts(); renderAbout(); }
+  // Настройки (тексты шапки блога) → #blogTitle / #blogLead
+  function renderSettings() {
+    var t = document.getElementById("blogTitle"), l = document.getElementById("blogLead");
+    if (!t && !l) return;
+    SB.select("valya_settings?select=key,value")
+      .then(function (rows) {
+        var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
+        if (t && m.blog_title) t.textContent = m.blog_title;
+        if (l && m.blog_lead) l.textContent = m.blog_lead;
+      })
+      .catch(function () {});
+  }
+
+  function renderAll() { renderReviews(); renderPosts(); renderAbout(); renderSettings(); }
 
   window.SB = SB;
   if (document.readyState !== "loading") renderAll();

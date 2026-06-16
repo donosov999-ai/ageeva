@@ -120,7 +120,13 @@
 
   <!-- БЛОГ -->
   <div class="pane" id="panePosts">
-    <p class="hint">Записи с галочкой «Опубликовать» появляются в разделе «Блог». Обложка — ссылка на картинку (необязательно).</p>
+    <div class="card" style="margin-bottom:18px">
+      <p class="hint" style="margin:0 0 12px">Шапка страницы «Блог» — заголовок и подзаголовок вверху раздела.</p>
+      <div class="field"><label>Заголовок</label><input id="bh_title"></div>
+      <div class="field"><label>Подзаголовок</label><textarea rows="3" id="bh_lead"></textarea></div>
+      <div class="card-foot"><span class="spacer"></span><button class="btn btn-p btn-sm" onclick="saveBlogHeader()">Сохранить шапку</button></div>
+    </div>
+    <p class="hint" style="margin:0 0 10px">Записи блога (с галочкой «Опубликовать» появляются на сайте):</p>
     <button class="btn btn-g btn-sm" style="margin-bottom:16px" onclick="addPost()">+ Добавить запись</button>
     <div id="postsList"><div class="empty">Загружаю…</div></div>
   </div>
@@ -168,7 +174,7 @@ function logout(){ clearCreds(); document.getElementById("appView").style.displa
 function showApp(){
   document.getElementById("loginView").style.display="none";
   document.getElementById("appView").style.display="block";
-  loadReviews(); loadAbout(); loadPosts(); loadLeads();
+  loadReviews(); loadAbout(); loadPosts(); loadLeads(); loadBlogHeader();
 }
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.tab===name); });
@@ -327,6 +333,22 @@ function delPost(btn){
   if(!id){ card.remove(); return; }
   call("valya_post_delete",{p_id:id}).then(function(){ card.remove(); toast("Запись удалена","ok"); })
     .catch(function(){ toast("Не удалось удалить","bad"); });
+}
+
+/* ---------- ШАПКА БЛОГА ---------- */
+function loadBlogHeader(){
+  if(!document.getElementById("bh_title")) return;
+  SB.select("valya_settings?select=key,value").then(function(rows){
+    var m={}; (rows||[]).forEach(function(r){ m[r.key]=r.value; });
+    document.getElementById("bh_title").value=m.blog_title||"";
+    document.getElementById("bh_lead").value=m.blog_lead||"";
+  }).catch(function(){});
+}
+function saveBlogHeader(){
+  var t=document.getElementById("bh_title").value, l=document.getElementById("bh_lead").value;
+  Promise.all([ call("valya_setting_set",{p_key:"blog_title",p_value:t}), call("valya_setting_set",{p_key:"blog_lead",p_value:l}) ])
+    .then(function(){ toast("Шапка блога сохранена","ok"); })
+    .catch(function(){ toast("Не удалось сохранить","bad"); });
 }
 
 /* ---------- ЗАЯВКИ ---------- */
