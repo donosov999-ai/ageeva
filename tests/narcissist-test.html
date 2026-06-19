@@ -656,6 +656,8 @@ function fb(t){const a=document.createElement('textarea');a.value=t;document.bod
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 </script>
 
+<section style="padding:46px 16px 6px"><div id="quizLead"></div></section>
+
 <footer class="site-footer">
   <div class="container">
     <div class="foot-cta">
@@ -696,5 +698,6 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
   </div>
 </footer>
 
+<script src="../assets/quiz-lead.js" defer></script>
 </body>
 </html>
