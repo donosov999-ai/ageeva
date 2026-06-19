@@ -72,11 +72,8 @@
         box.innerHTML = rows.map(function (p) {
           var cover = p.cover_url
             ? '<div class="bcard-img"><img src="' + SB.esc(p.cover_url) + '" alt="" loading="lazy"></div>' : "";
-          var date = p.published_at
-            ? new Date(p.published_at).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }) : "";
           return '<article class="bcard">' + cover +
             '<div class="bcard-body">' +
-            (date ? '<div class="bcard-date">' + date + "</div>" : "") +
             "<h2>" + SB.esc(p.title) + "</h2>" +
             (p.excerpt ? '<p class="bcard-lead">' + SB.esc(p.excerpt) + "</p>" : "") +
             '<div class="bcard-text">' + SB.paras(p.body) + "</div>" +
