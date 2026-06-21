@@ -1,19 +1,13 @@
 ---
-// Общий каркас сайта Вали: <head> + Яндекс.Метрика + шапка + подвал.
-// Раньше это дублировалось в каждом HTML-файле; теперь — один компонент.
-// Дизайн и пути 1:1 со статической версией.
+// Общий каркас сайта Вали: <head> + Метрика + шапка + подвал. Мультиязык: RU (корень) / EN (/en) / ES (/es).
+// lang по умолчанию 'ru' → строки = текущие русские (обратная совместимость).
 const {
-  title,
-  description,
-  keywords,
-  canonical,
-  ogType = 'website',
-  ogTitle,
-  ogDescription,
-  twTitle,
-  twDescription,
+  title, description, keywords, canonical,
+  ogType = 'website', ogTitle, ogDescription, twTitle, twDescription,
   cms = false,
   robots = 'index, follow, max-image-preview:large',
+  lang = 'ru',
+  altPath = '',   // имя файла без локали: 'about.html', 'course.html'… пусто = главная
 } = Astro.props;
 
 const ogUrl = canonical;
@@ -21,6 +15,30 @@ const ogT = ogTitle ?? title;
 const ogD = ogDescription ?? description;
 const twT = twTitle ?? title;
 const twD = twDescription ?? description;
+
+// строки шапки/подвала по языку
+const STR = {
+  ru: { b1: 'Отношения', b2: 'длиною в жизнь', about: 'Обо мне', course: 'Курс', tests: 'Тесты', free: 'Бесплатное', freeBtn: 'Бесплатный тест',
+    tag: 'Живая реальность вместо красивой обёртки из соцсетей. И живая ты.',
+    sec: 'Разделы', cAbout: 'Обо мне — моя история', cCourse: 'Курс «Отношения длиною в жизнь»', cTests: 'Бесплатные тесты', cBlog: 'Блог про отношения',
+    con: 'Связь', cTg: 'Написать в Telegram', cPdf: 'Получить PDF-гайд', cPrices: 'Тарифы курса', offer: 'Оферта', privacy: 'Политика конфиденциальности', locale: 'ru_RU' },
+  en: { b1: 'Relationships', b2: 'for a lifetime', about: 'About', course: 'Course', tests: 'Tests', free: 'Free', freeBtn: 'Free test',
+    tag: 'Real life instead of a pretty social-media wrapper. And the real you.',
+    sec: 'Sections', cAbout: 'About — my story', cCourse: 'Course «Relationships for a Lifetime»', cTests: 'Free tests', cBlog: 'Relationship blog',
+    con: 'Contact', cTg: 'Message on Telegram', cPdf: 'Get the PDF guide', cPrices: 'Course pricing', offer: 'Terms', privacy: 'Privacy Policy', locale: 'en_US' },
+  es: { b1: 'Relaciones', b2: 'para toda la vida', about: 'Sobre mí', course: 'Curso', tests: 'Tests', free: 'Gratis', freeBtn: 'Test gratis',
+    tag: 'La vida real en lugar de un bonito envoltorio de redes. Y la verdadera tú.',
+    sec: 'Secciones', cAbout: 'Sobre mí — mi historia', cCourse: 'Curso «Relaciones para toda la vida»', cTests: 'Tests gratis', cBlog: 'Blog de relaciones',
+    con: 'Contacto', cTg: 'Escribir por Telegram', cPdf: 'Recibir la guía PDF', cPrices: 'Precios del curso', offer: 'Términos', privacy: 'Política de privacidad', locale: 'es_ES' },
+};
+const T = STR[lang] || STR.ru;
+const base = lang === 'ru' ? '' : '/' + lang;
+const home = lang === 'ru' ? '/' : base + '.html';
+const L = (p) => base + '/' + p;
+const SITE = 'https://ageeva.win';
+const altRu = altPath ? '/' + altPath : '/';
+const altEn = altPath ? '/en/' + altPath : '/en.html';
+const altEs = altPath ? '/es/' + altPath : '/es.html';
 
 const METRIKA = `(function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -32,7 +50,7 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
     ym(109819083, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`;
 ---
 <!DOCTYPE html>
-<html lang="ru">
+<html lang={lang}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,10 +65,14 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 {keywords && <meta name="keywords" content={keywords} />}
 <meta name="author" content="Валентина Агеева">
 <link rel="canonical" href={canonical}>
+<link rel="alternate" hreflang="ru" href={SITE + altRu} />
+<link rel="alternate" hreflang="en" href={SITE + altEn} />
+<link rel="alternate" hreflang="es" href={SITE + altEs} />
+<link rel="alternate" hreflang="x-default" href={SITE + altRu} />
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <meta property="og:type" content={ogType}>
 <meta property="og:site_name" content="Валентина Агеева — психология отношений">
-<meta property="og:locale" content="ru_RU">
+<meta property="og:locale" content={T.locale}>
 <meta property="og:url" content={ogUrl}>
 <meta property="og:title" content={ogT}>
 <meta property="og:description" content={ogD}>
@@ -71,15 +93,20 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 
 <header class="site-header">
   <div class="container nav">
-    <a href="index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
+    <a href={home} class="brand">{T.b1} <span>{T.b2}</span></a>
     <nav class="nav-links" id="navLinks">
-      <a href="about.html">Обо мне</a>
-      <a href="course.html">Курс</a>
-      <a href="tests/">Тесты</a>
-      <a href="free.html">Бесплатное</a>
-      <a href="free.html" class="btn btn-primary btn-sm nav-cta">Бесплатный тест</a>
+      <a href={L('about.html')}>{T.about}</a>
+      <a href={L('course.html')}>{T.course}</a>
+      <a href="/tests/">{T.tests}</a>
+      <a href={L('free.html')}>{T.free}</a>
+      <a href={L('free.html')} class="btn btn-primary btn-sm nav-cta">{T.freeBtn}</a>
+      <span class="lang-switch" style="display:inline-flex;gap:9px;align-items:center;font-size:13px;font-weight:700;margin-left:4px">
+        <a href={altRu} style={lang === 'ru' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>RU</a>
+        <a href={altEn} style={lang === 'en' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>EN</a>
+        <a href={altEs} style={lang === 'es' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>ES</a>
+      </span>
     </nav>
-    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
   </div>
 </header>
 
@@ -89,31 +116,31 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
   <div class="container">
     <div class="foot">
       <div>
-        <a href="index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
-        <p>Живая реальность вместо красивой обёртки из соцсетей. И живая ты.</p>
+        <a href={home} class="brand">{T.b1} <span>{T.b2}</span></a>
+        <p>{T.tag}</p>
         <div class="foot-social">
           <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Telegram</a>
           <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click">Instagram</a>
         </div>
       </div>
       <div>
-        <h4>Разделы</h4>
-        <a href="about.html">Обо мне — моя история</a>
-        <a href="course.html">Курс «Отношения длиною в жизнь»</a>
-        <a href="tests/">Бесплатные тесты</a>
-        <a href="blog.html">Блог про отношения</a>
+        <h4>{T.sec}</h4>
+        <a href={L('about.html')}>{T.cAbout}</a>
+        <a href={L('course.html')}>{T.cCourse}</a>
+        <a href="/tests/">{T.cTests}</a>
+        <a href={L('blog.html')}>{T.cBlog}</a>
       </div>
       <div>
-        <h4>Связь</h4>
-        <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Написать в Telegram</a>
+        <h4>{T.con}</h4>
+        <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">{T.cTg}</a>
         <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click">Instagram @ageeva_win</a>
-        <a href="free.html">Получить PDF-гайд</a>
-        <a href="course.html#tarify">Тарифы курса</a>
+        <a href={L('free.html')}>{T.cPdf}</a>
+        <a href={L('course.html') + '#tarify'}>{T.cPrices}</a>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© Валентина Агеева, 2026 · <a href="https://ageeva.win/">ageeva.win</a></span>
-      <span><a href="#">Оферта</a> · <a href="privacy.html">Политика конфиденциальности</a></span>
+      <span><a href="#">{T.offer}</a> · <a href={L('privacy.html')}>{T.privacy}</a></span>
     </div>
   </div>
 </footer>
