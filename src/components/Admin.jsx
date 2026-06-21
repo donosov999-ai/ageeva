@@ -45,7 +45,7 @@ const BLOCK_LABEL = {}; BLOCK_TYPES.forEach((t) => { BLOCK_LABEL[t.type] = t.lab
 
 const TABS = [
   ['main', 'Главная'], ['about', 'Обо мне'], ['reviews', 'Отзывы'],
-  ['posts', 'Блог'], ['pages', 'Страницы'], ['photos', 'Фото'], ['leads', 'Заявки'],
+  ['posts', 'Блог'], ['pages', 'Страницы'], ['tests', 'Тесты'], ['photos', 'Фото'], ['leads', 'Заявки'],
 ];
 
 // многоабзацный текст → JSX (для превью)
@@ -76,6 +76,7 @@ export default function Admin() {
   const [posts, setPosts] = useState(null);
   const [leads, setLeads] = useState(null);
   const [pages, setPages] = useState(null);
+  const [tests, setTests] = useState(null);
   const [editing, setEditing] = useState(null);
 
   function flash(msg, kind) {
@@ -96,6 +97,7 @@ export default function Admin() {
     call('valya_posts_all').then(setPosts).catch(authFail);
     call('valya_leads_all').then(setLeads).catch(() => setLeads([]));
     call('valya_pages_all').then(setPages).catch(() => setPages([]));
+    call('valya_tests_all').then(setTests).catch(() => setTests([]));
   }
   function loadPages() { call('valya_pages_all').then(setPages).catch(() => setPages([])); }
 
@@ -204,6 +206,8 @@ export default function Admin() {
   function delPost(it, idx) { if (!confirm('Удалить эту запись?')) return; if (!it.id) { drop(setPosts, idx); return; } call('valya_post_delete', { p_id: it.id }).then(() => drop(setPosts, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
 
   function delLead(it, idx) { if (!confirm('Удалить эту заявку?')) return; call('valya_lead_delete', { p_id: it.id }).then(() => drop(setLeads, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
+
+  function toggleTest(it, idx) { call('valya_test_set_enabled', { p_id: it.id, p_enabled: !it.enabled }).then(() => { patch(setTests, idx, 'enabled', !it.enabled); flash(it.enabled ? 'Тест выключен — обнови сайт' : 'Тест включён — обнови сайт', 'ok'); }).catch(() => flash('Не удалось изменить', 'bad')); }
 
   // ---- страницы-конструктор ----
   function newPage() { setEditing({ slug: '', title: '', published: false, blocks: [] }); }
@@ -458,6 +462,22 @@ export default function Admin() {
                 </div>
               </div>
             )}
+          </Section>
+        )}
+        {tab === 'tests' && (
+          <Section title="Тесты" hint="Готовые тесты по модели Готтмана. Выключатель «на сайте» убирает тест из списка и со страницы. Вопросы и тексты результатов уже выверены — трогать не нужно.">
+            {tests == null ? <Loading /> : tests.length === 0 ? <Empty t="Пока нет тестов." /> : tests.map((it, idx) => (
+              <div class={'ed-card ed-lead' + (it.enabled ? '' : ' off')} key={it.id}>
+                <div>
+                  <b>{it.title}</b> {it.enabled ? '' : <span style="color:var(--muted);font-size:12px">(выключен)</span>}
+                  <div class="ed-lead-meta">{it.subtitle}{Array.isArray(it.questions) ? ' · вопросов: ' + it.questions.length : ''}{it.source ? ' · ' + it.source : ''}</div>
+                </div>
+                <span style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                  <a class="ed-btn ed-g ed-sm" href={'/test.html?s=' + encodeURIComponent(it.slug)} target="_blank" rel="noopener" style="text-decoration:none;margin:0">↗ открыть</a>
+                  <label class="ed-chk" style="margin:0"><input type="checkbox" checked={!!it.enabled} onChange={() => toggleTest(it, idx)} /> на сайте</label>
+                </span>
+              </div>
+            ))}
           </Section>
         )}
       </main>
