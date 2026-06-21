@@ -66,17 +66,18 @@
     var box = document.getElementById("blogList");
     if (!box) return;
     var empty = '<p class="blog-empty">Первые материалы уже готовятся. А пока — загляни в Instagram или пройди тест.</p>';
-    SB.select("valya_posts?select=title,cover_url,excerpt,body,published_at&published=eq.true&order=published_at.desc")
+    SB.select("valya_posts?select=slug,title,cover_url,excerpt,published_at&published=eq.true&order=published_at.desc")
       .then(function (rows) {
         if (!rows || !rows.length) { box.innerHTML = empty; return; }
         box.innerHTML = rows.map(function (p) {
+          var href = "post.html?s=" + encodeURIComponent(p.slug || "");
           var cover = p.cover_url
-            ? '<div class="bcard-img"><img src="' + SB.esc(p.cover_url) + '" alt="" loading="lazy"></div>' : "";
+            ? '<a href="' + href + '" class="bcard-img"><img src="' + SB.esc(p.cover_url) + '" alt="" loading="lazy"></a>' : "";
           return '<article class="bcard">' + cover +
             '<div class="bcard-body">' +
-            "<h2>" + SB.esc(p.title) + "</h2>" +
+            '<h2><a href="' + href + '" style="color:inherit">' + SB.esc(p.title) + "</a></h2>" +
             (p.excerpt ? '<p class="bcard-lead">' + SB.esc(p.excerpt) + "</p>" : "") +
-            '<div class="bcard-text">' + SB.paras(p.body) + "</div>" +
+            '<a href="' + href + '" class="more" style="color:var(--rose-ink);font-weight:700;display:inline-block;margin-top:6px">Читать →</a>' +
             "</div></article>";
         }).join("");
       })

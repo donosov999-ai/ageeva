@@ -58,6 +58,7 @@ function Paras({ text }) {
 function Lines({ text }) {
   return String(text || '').split('\n').map((line, j) => (j > 0 ? [<br />, line] : line));
 }
+function slugify(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9а-яё]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'post'; }
 
 export default function Admin() {
   const [view, setView] = useState('login');
@@ -161,7 +162,7 @@ export default function Admin() {
   // ---- списки: review / about / post ----
   function blankReview() { return { _new: true, body: '', author: 'участница первого потока', sort: (reviews ? reviews.length + 1 : 1), published: true }; }
   function blankAbout() { return { _new: true, heading: '', body: '', sort: (about ? about.length + 1 : 1), published: true }; }
-  function blankPost() { return { _new: true, title: '', excerpt: '', body: '', cover_url: '', published: false }; }
+  function blankPost() { return { _new: true, title: '', excerpt: '', body: '', cover_url: '', slug: '', published: false }; }
 
   const patch = (setList, idx, field, val) => setList((list) => list.map((it, i) => (i === idx ? { ...it, [field]: val } : it)));
   const drop = (setList, idx) => setList((list) => list.filter((_, i) => i !== idx));
@@ -195,9 +196,10 @@ export default function Admin() {
 
   function savePost(it, idx) {
     if (!it.title || !it.title.trim()) { flash('Нужен заголовок', 'bad'); return; }
-    call('valya_post_save', { p_id: it.id || null, p_slug: null, p_title: it.title, p_cover: it.cover_url, p_excerpt: it.excerpt, p_body: it.body, p_published: !!it.published })
-      .then((id) => { patch(setPosts, idx, 'id', id || it.id); patch(setPosts, idx, '_new', false); flash('Запись сохранена', 'ok'); })
-      .catch(() => flash('Не удалось сохранить', 'bad'));
+    const slug = (it.slug && it.slug.trim()) ? it.slug.trim() : (slugify(it.title) + '-' + Math.random().toString(36).slice(2, 6));
+    call('valya_post_save', { p_id: it.id || null, p_slug: slug, p_title: it.title, p_cover: it.cover_url, p_excerpt: it.excerpt, p_body: it.body, p_published: !!it.published })
+      .then((id) => { patch(setPosts, idx, 'id', id || it.id); patch(setPosts, idx, 'slug', slug); patch(setPosts, idx, '_new', false); flash('Запись сохранена', 'ok'); })
+      .catch(() => flash('Не удалось сохранить (возможно, адрес занят)', 'bad'));
   }
   function delPost(it, idx) { if (!confirm('Удалить эту запись?')) return; if (!it.id) { drop(setPosts, idx); return; } call('valya_post_delete', { p_id: it.id }).then(() => drop(setPosts, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
 
@@ -363,6 +365,12 @@ export default function Admin() {
                         <input style="flex:1;min-width:0" placeholder="ссылка https://… или загрузи →" value={it.cover_url || ''} onInput={(e) => patch(setPosts, idx, 'cover_url', e.target.value)} />
                         <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;white-space:nowrap" onClick={(e) => e.currentTarget.parentNode.querySelector('input[type=file]').click()}>📷 Файл</button>
                         <input type="file" accept="image/*" style="display:none" onChange={(e) => { uploadCover(e.target.files && e.target.files[0], idx); e.target.value = ''; }} />
+                      </div>
+                    </div>
+                    <div class="ed-field"><label>Адрес статьи (для ссылки)</label>
+                      <div style="display:flex;gap:8px;align-items:stretch">
+                        <input style="flex:1;min-width:0" placeholder="заполнится из заголовка при сохранении" value={it.slug || ''} onInput={(e) => patch(setPosts, idx, 'slug', e.target.value)} />
+                        {it.slug && <a class="ed-btn ed-g ed-sm" style="margin:0;text-decoration:none;display:inline-flex;align-items:center" href={'/post.html?s=' + encodeURIComponent(it.slug)} target="_blank" rel="noopener">↗</a>}
                       </div>
                     </div>
                     <CardFoot it={it} pubLabel="Опубликовать" onPub={(v) => patch(setPosts, idx, 'published', v)} onDel={() => delPost(it, idx)} onSave={() => savePost(it, idx)} />
