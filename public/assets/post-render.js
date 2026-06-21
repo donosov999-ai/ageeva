@@ -20,8 +20,7 @@
         var p = rows[0];
         if (p.title) document.title = p.title + ' — Отношения длиною в жизнь';
         root.innerHTML =
-          '<section class="hero"><div class="container narrow center"><span class="eyebrow">Блог</span><h1>' + esc(p.title) + '</h1>' +
-          (p.published_at ? '<p class="lead" style="margin-left:auto;margin-right:auto">' + fmtDate(p.published_at) + '</p>' : '') + '</div></section>' +
+          '<section class="hero"><div class="container narrow center"><span class="eyebrow">Блог</span><h1>' + esc(p.title) + '</h1></div></section>' +
           '<section class="section"><div class="container narrow">' +
           (p.cover_url ? '<img src="' + escAttr(p.cover_url) + '" alt="" style="display:block;width:100%;border-radius:18px;margin-bottom:28px">' : '') +
           '<div class="story">' + (p.excerpt ? '<p class="lead">' + esc(p.excerpt) + '</p>' : '') + paras(p.body) + '</div>' +
