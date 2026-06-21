@@ -22,7 +22,7 @@
         root.innerHTML =
           '<section class="hero"><div class="container narrow center"><span class="eyebrow">Блог</span><h1>' + esc(p.title) + '</h1></div></section>' +
           '<section class="section"><div class="container narrow">' +
-          (p.cover_url ? '<img src="' + escAttr(p.cover_url) + '" alt="" style="display:block;width:100%;border-radius:18px;margin-bottom:28px">' : '') +
+          (p.cover_url ? '<img src="' + escAttr(p.cover_url) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:18px;margin-bottom:28px">' : '') +
           '<div class="story">' + (p.excerpt ? '<p class="lead">' + esc(p.excerpt) + '</p>' : '') + paras(p.body) + '</div>' +
           '<div class="btn-row center" style="margin-top:38px"><a class="btn btn-ghost btn-lg" href="blog.html">← Все статьи</a><a class="btn btn-primary btn-lg" href="free.html">Пройти бесплатный тест →</a></div>' +
           '</div></section>';
