@@ -15,6 +15,9 @@ const MAIN_FIELDS = [
   { k: 'idx_hero_title', label: 'Первый экран — заголовок', rows: 3, hint: 'перенос строки = перенос на сайте' },
   { k: 'idx_hero_lead', label: 'Первый экран — подзаголовок', rows: 3 },
   { k: 'idx_who_body', label: 'Блок «Кто я» — текст про себя', rows: 8, hint: 'пустая строка между абзацами = новый абзац' },
+  { k: 'idx_pain', label: 'Блок «Тебе знакомо?» — список', rows: 9, hint: 'один пункт = одна строка' },
+  { k: 'idx_why', label: 'Блок «Почему мне можно верить» — текст', rows: 6, hint: 'пустая строка = новый абзац' },
+  { k: 'idx_notfit', label: 'Блок «Кому курс НЕ подойдёт» — список', rows: 6, hint: 'один пункт = одна строка' },
   { k: 'idx_proof_num', label: 'Соцпруф — число', input: true },
   { k: 'idx_proof_cap', label: 'Соцпруф — подпись', rows: 2 },
   { k: 'idx_cta_eyebrow', label: 'Финал — метка (статус набора)', input: true },
@@ -229,6 +232,18 @@ export default function Admin() {
                 <section class="section"><div class="container narrow">
                   <span class="eyebrow">Кто я</span><h2>Меня зовут Валентина</h2><hr class="rule" />
                   <Paras text={settings.idx_who_body} />
+                </div></section>
+                <section class="section bg-cream2"><div class="container center">
+                  <span class="eyebrow">Тебе знакомо?</span><h2>Если ты в отношениях, где…</h2><hr class="rule" />
+                  <ul class="pain">{(settings.idx_pain || '').split(/\n+/).filter((x) => x.trim()).map((li, i) => <li key={i}>{li}</li>)}</ul>
+                </div></section>
+                <section class="section"><div class="container narrow center">
+                  <span class="eyebrow">Почему мне можно верить</span><hr class="rule" />
+                  {(settings.idx_why || '').split(/\n{2,}/).filter((x) => x.trim()).map((p, i) => <p class="lead" key={i}>{p}</p>)}
+                </div></section>
+                <section class="section bg-blush"><div class="container narrow">
+                  <div class="panel no"><h3>Кому НЕ подойдёт</h3>
+                  <ul>{(settings.idx_notfit || '').split(/\n+/).filter((x) => x.trim()).map((li, i) => <li key={i}>{li}</li>)}</ul></div>
                 </div></section>
                 <section class="section bg-cream2"><div class="container center">
                   <div class="bignum">{settings.idx_proof_num}</div>

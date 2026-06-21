@@ -105,19 +105,24 @@
       idxHeroLead:"idx_hero_lead", idxProofNum:"idx_proof_num", idxProofCap:"idx_proof_cap",
       idxCtaEyebrow:"idx_cta_eyebrow", idxCtaTitle:"idx_cta_title", idxCtaText:"idx_cta_text" };
     var IMG = { photoHero:"photo_hero", photoAbout:"photo_about", photoRound:"photo_round" };
+    var BR = { idxHeroTitle:"idx_hero_title" };                 // \n → <br>
+    var PARAS = { idxWhoBody:"idx_who_body" };                  // \n\n → <p>
+    var LEAD = { idxWhy:"idx_why" };                            // \n\n → <p class="lead">
+    var LIST = { idxPain:"idx_pain", idxNotfit:"idx_notfit" };  // строка → <li>
     var keys = [], els = {};
-    Object.keys(TEXT).forEach(function (id) { var e = document.getElementById(id); if (e) { els[id] = e; keys.push(TEXT[id]); } });
-    Object.keys(IMG).forEach(function (id) { var e = document.getElementById(id); if (e) { els[id] = e; keys.push(IMG[id]); } });
-    var heroT = document.getElementById("idxHeroTitle"); if (heroT) keys.push("idx_hero_title");
-    var whoB = document.getElementById("idxWhoBody"); if (whoB) keys.push("idx_who_body");
+    [TEXT, IMG, BR, PARAS, LEAD, LIST].forEach(function (mp) {
+      Object.keys(mp).forEach(function (id) { var e = document.getElementById(id); if (e) { els[id] = e; keys.push(mp[id]); } });
+    });
     if (!keys.length) return;
     SB.select("valya_settings?select=key,value&key=in.(" + keys.join(",") + ")")
       .then(function (rows) {
         var m = {}; (rows || []).forEach(function (r) { m[r.key] = r.value; });
         Object.keys(TEXT).forEach(function (id) { if (els[id] && m[TEXT[id]] != null) els[id].textContent = m[TEXT[id]]; });
         Object.keys(IMG).forEach(function (id) { if (els[id] && m[IMG[id]]) els[id].src = m[IMG[id]]; });
-        if (heroT && m.idx_hero_title != null) heroT.innerHTML = SB.esc(m.idx_hero_title).replace(/\n/g, "<br>");
-        if (whoB && m.idx_who_body != null) whoB.innerHTML = SB.paras(m.idx_who_body);
+        Object.keys(BR).forEach(function (id) { if (els[id] && m[BR[id]] != null) els[id].innerHTML = SB.esc(m[BR[id]]).replace(/\n/g, "<br>"); });
+        Object.keys(PARAS).forEach(function (id) { if (els[id] && m[PARAS[id]] != null) els[id].innerHTML = SB.paras(m[PARAS[id]]); });
+        Object.keys(LEAD).forEach(function (id) { if (els[id] && m[LEAD[id]] != null) els[id].innerHTML = String(m[LEAD[id]]).split(/\n{2,}/).map(function (p) { return '<p class="lead">' + SB.esc(p).replace(/\n/g, "<br>") + "</p>"; }).join(""); });
+        Object.keys(LIST).forEach(function (id) { if (els[id] && m[LIST[id]] != null) els[id].innerHTML = String(m[LIST[id]]).split(/\n+/).filter(function (x) { return x.trim(); }).map(function (li) { return "<li>" + SB.esc(li) + "</li>"; }).join(""); });
       })
       .catch(function () {});
   }
