@@ -100,29 +100,37 @@ export default function Admin() {
       .then(() => flash(okMsg || 'Сохранено — обнови сайт', 'ok')).catch(() => flash('Не удалось сохранить', 'bad'));
   }
 
-  // ---- фото ----
-  function handleFile(file, key) {
+  // ---- фото / картинки ----
+  function fileToDataUrl(file, maxPx, cb) {
     if (!file) return;
     if (!/^image\//.test(file.type || '')) { flash('Нужна картинка (jpg/png)', 'bad'); return; }
     const reader = new FileReader();
     reader.onload = () => {
       const img = new Image();
       img.onload = () => {
-        const max = 1280; let w = img.width, h = img.height;
+        const max = maxPx; let w = img.width, h = img.height;
         if (w > max || h > max) { if (w >= h) { h = Math.round(h * max / w); w = max; } else { w = Math.round(w * max / h); h = max; } }
         const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
         cv.getContext('2d').drawImage(img, 0, 0, w, h);
         let url = cv.toDataURL('image/jpeg', 0.82);
         if (url.length > 1500000) url = cv.toDataURL('image/jpeg', 0.68);
-        flash('Сохраняю фото…', '');
-        call('valya_setting_set', { p_key: key, p_value: url })
-          .then(() => { setKey(key, url); flash('Фото обновлено — обнови сайт', 'ok'); })
-          .catch(() => flash('Не удалось сохранить', 'bad'));
+        cb(url);
       };
       img.onerror = () => flash('Не удалось прочитать фото', 'bad');
       img.src = reader.result;
     };
     reader.readAsDataURL(file);
+  }
+  function handleFile(file, key) {
+    fileToDataUrl(file, 1280, (url) => {
+      flash('Сохраняю фото…', '');
+      call('valya_setting_set', { p_key: key, p_value: url })
+        .then(() => { setKey(key, url); flash('Фото обновлено — обнови сайт', 'ok'); })
+        .catch(() => flash('Не удалось сохранить', 'bad'));
+    });
+  }
+  function uploadCover(file, idx) {
+    fileToDataUrl(file, 1000, (url) => { patch(setPosts, idx, 'cover_url', url); flash('Обложка загружена — нажми «Сохранить»', 'ok'); });
   }
 
   // ---- списки: review / about / post ----
@@ -284,7 +292,14 @@ export default function Admin() {
                     <div class="ed-field"><label>Заголовок</label><input value={it.title || ''} onInput={(e) => patch(setPosts, idx, 'title', e.target.value)} /></div>
                     <div class="ed-field"><label>Краткое описание (необязательно)</label><textarea rows="2" value={it.excerpt || ''} onInput={(e) => patch(setPosts, idx, 'excerpt', e.target.value)} /></div>
                     <div class="ed-field"><label>Текст записи</label><textarea rows="6" value={it.body || ''} onInput={(e) => patch(setPosts, idx, 'body', e.target.value)} /></div>
-                    <div class="ed-field"><label>Обложка — ссылка на картинку (необязательно)</label><input placeholder="https://…" value={it.cover_url || ''} onInput={(e) => patch(setPosts, idx, 'cover_url', e.target.value)} /></div>
+                    <div class="ed-field"><label>Обложка (необязательно)</label>
+                      {it.cover_url && <img src={it.cover_url} alt="" style="display:block;width:100%;max-height:120px;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:8px" />}
+                      <div style="display:flex;gap:8px;align-items:stretch">
+                        <input style="flex:1;min-width:0" placeholder="ссылка https://… или загрузи →" value={it.cover_url || ''} onInput={(e) => patch(setPosts, idx, 'cover_url', e.target.value)} />
+                        <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;white-space:nowrap" onClick={(e) => e.currentTarget.parentNode.querySelector('input[type=file]').click()}>📷 Файл</button>
+                        <input type="file" accept="image/*" style="display:none" onChange={(e) => { uploadCover(e.target.files && e.target.files[0], idx); e.target.value = ''; }} />
+                      </div>
+                    </div>
                     <CardFoot it={it} pubLabel="Опубликовать" onPub={(v) => patch(setPosts, idx, 'published', v)} onDel={() => delPost(it, idx)} onSave={() => savePost(it, idx)} />
                   </div>
                   <Preview small><article class="bcard">{it.cover_url && <div class="bcard-img"><img src={it.cover_url} alt="" /></div>}<div class="bcard-body"><h2>{it.title}</h2>{it.excerpt && <p class="bcard-lead">{it.excerpt}</p>}<div class="bcard-text"><Paras text={it.body} /></div></div></article></Preview>
