@@ -140,6 +140,17 @@ export default function Admin() {
 
   const patch = (setList, idx, field, val) => setList((list) => list.map((it, i) => (i === idx ? { ...it, [field]: val } : it)));
   const drop = (setList, idx) => setList((list) => list.filter((_, i) => i !== idx));
+  function reorder(list, setList, rpcSave, idx, dir) {
+    const j = idx + dir;
+    if (j < 0 || j >= list.length) return;
+    const arr = list.slice();
+    const tmp = arr[idx]; arr[idx] = arr[j]; arr[j] = tmp;
+    const next = arr.map((it, i) => ({ ...it, sort: i + 1 }));
+    setList(next);
+    Promise.all(next.filter((it) => it.id).map((it) => rpcSave(it).catch(() => {}))).then(() => flash('Порядок изменён — обнови сайт', 'ok'));
+  }
+  const rpcSaveReview = (it) => call('valya_review_save', { p_id: it.id, p_body: it.body, p_author: it.author, p_sort: it.sort | 0, p_published: !!it.published });
+  const rpcSaveAbout = (it) => call('valya_about_save', { p_id: it.id, p_heading: it.heading, p_body: it.body, p_sort: it.sort | 0, p_published: !!it.published });
 
   function saveReview(it, idx) {
     if (!it.body || !it.body.trim()) { flash('Текст отзыва пустой', 'bad'); return; }
@@ -242,7 +253,7 @@ export default function Admin() {
                     <div class="ed-field"><label>Подзаголовок (необязательно)</label><input value={it.heading || ''} onInput={(e) => patch(setAbout, idx, 'heading', e.target.value)} /></div>
                     <div class="ed-field"><label>Текст</label><textarea rows="6" value={it.body || ''} onInput={(e) => patch(setAbout, idx, 'body', e.target.value)} /></div>
                     <div class="ed-field ed-narrow"><label>Порядок</label><input type="number" value={it.sort == null ? 0 : it.sort} onInput={(e) => patch(setAbout, idx, 'sort', parseInt(e.target.value, 10) || 0)} /></div>
-                    <CardFoot it={it} onPub={(v) => patch(setAbout, idx, 'published', v)} onDel={() => delAbout(it, idx)} onSave={() => saveAbout(it, idx)} />
+                    <CardFoot it={it} onPub={(v) => patch(setAbout, idx, 'published', v)} onDel={() => delAbout(it, idx)} onSave={() => saveAbout(it, idx)} onUp={idx > 0 ? () => reorder(about, setAbout, rpcSaveAbout, idx, -1) : null} onDown={idx < about.length - 1 ? () => reorder(about, setAbout, rpcSaveAbout, idx, 1) : null} />
                   </div>
                   <Preview small><div class="story">{it.heading && <h2>{it.heading}</h2>}<hr class="rule" /><Paras text={it.body} /></div></Preview>
                 </div>
@@ -263,7 +274,7 @@ export default function Admin() {
                       <div class="ed-field"><label>Подпись</label><input value={it.author || ''} onInput={(e) => patch(setReviews, idx, 'author', e.target.value)} /></div>
                       <div class="ed-field ed-narrow"><label>Порядок</label><input type="number" value={it.sort == null ? 0 : it.sort} onInput={(e) => patch(setReviews, idx, 'sort', parseInt(e.target.value, 10) || 0)} /></div>
                     </div>
-                    <CardFoot it={it} pubLabel="Показывать на сайте" onPub={(v) => patch(setReviews, idx, 'published', v)} onDel={() => delReview(it, idx)} onSave={() => saveReview(it, idx)} />
+                    <CardFoot it={it} pubLabel="Показывать на сайте" onPub={(v) => patch(setReviews, idx, 'published', v)} onDel={() => delReview(it, idx)} onSave={() => saveReview(it, idx)} onUp={idx > 0 ? () => reorder(reviews, setReviews, rpcSaveReview, idx, -1) : null} onDown={idx < reviews.length - 1 ? () => reorder(reviews, setReviews, rpcSaveReview, idx, 1) : null} />
                   </div>
                   <Preview small><div class="quote"><p>«{it.body}»</p><div class="who">— {it.author || 'участница первого потока'}</div></div></Preview>
                 </div>
@@ -345,10 +356,16 @@ function Section({ title, hint, children }) {
 function Preview({ children, small }) {
   return (<div class={'ed-preview' + (small ? ' sm' : '')}><div class="ed-preview-tag">превью</div><div class="ed-preview-body">{children}</div></div>);
 }
-function CardFoot({ it, pubLabel, onPub, onDel, onSave }) {
+function CardFoot({ it, pubLabel, onPub, onDel, onSave, onUp, onDown }) {
   return (
     <div class="ed-foot">
       <label class="ed-chk"><input type="checkbox" checked={!!it.published} onChange={(e) => onPub(e.target.checked)} /> {pubLabel || 'Показывать на сайте'}</label>
+      {(onUp !== undefined || onDown !== undefined) && (
+        <span style="display:flex;gap:4px;margin-left:6px">
+          <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:6px 11px" disabled={!onUp} onClick={onUp || undefined} title="Выше">↑</button>
+          <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:6px 11px" disabled={!onDown} onClick={onDown || undefined} title="Ниже">↓</button>
+        </span>
+      )}
       <span class="ed-spacer" />
       <button class="ed-btn ed-d ed-sm" onClick={onDel}>Удалить</button>
       <button class="ed-btn ed-p ed-sm" onClick={onSave}>Сохранить</button>
