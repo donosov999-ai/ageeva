@@ -39,6 +39,7 @@ const SITE = 'https://ageeva.win';
 const altRu = altPath ? '/' + altPath : '/';
 const altEn = altPath ? '/en/' + altPath : '/en.html';
 const altEs = altPath ? '/es/' + altPath : '/es.html';
+const i18nReady = false; // переключатель языков скрыт, пока EN/ES не достроены (мультиязык #7 на паузе после Пасса 1)
 
 const METRIKA = `(function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -100,11 +101,13 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
       <a href="/tests/">{T.tests}</a>
       <a href={L('free.html')}>{T.free}</a>
       <a href={L('free.html')} class="btn btn-primary btn-sm nav-cta">{T.freeBtn}</a>
+      {i18nReady && (
       <span class="lang-switch" style="display:inline-flex;gap:9px;align-items:center;font-size:13px;font-weight:700;margin-left:4px">
         <a href={altRu} style={lang === 'ru' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>RU</a>
         <a href={altEn} style={lang === 'en' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>EN</a>
         <a href={altEs} style={lang === 'es' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>ES</a>
       </span>
+      )}
     </nav>
     <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
   </div>
