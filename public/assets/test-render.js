@@ -53,6 +53,7 @@
     res.innerHTML = '<div class="qresult"><span class="eyebrow">Результат</span><h2>' + esc(band ? band.title : '') + '</h2>' +
       '<div class="qbar"><span style="width:' + pct + '%"></span></div><p class="qscore">' + score + ' из ' + max + '</p>' +
       '<p>' + esc(band ? band.text : '') + '</p>' +
+      (test.help ? test.help : '') +
       '<div class="qcta"><p class="lead">Это один из «этажей» крепких отношений по Готтману. На курсе «Отношения длиною в жизнь» собираем всю картину — шаг за шагом.</p>' +
       '<div class="btn-row center"><a class="btn btn-primary btn-lg" href="/course.html">О курсе →</a><a class="btn btn-ghost btn-lg" href="/tests/">Другие тесты</a></div></div>' +
       '<button type="button" class="qretry" id="quizRetry">Пройти заново</button></div>';
@@ -66,7 +67,7 @@
     var root = document.getElementById('testRoot'); if (!root) return;
     var slug = new URLSearchParams(location.search).get('s');
     if (!slug) { root.innerHTML = ph('Тест не указан'); return; }
-    fetch(SB_URL + '/rest/v1/valya_tests?slug=eq.' + encodeURIComponent(slug) + '&enabled=eq.true&select=slug,title,subtitle,intro,scale,questions,bands', { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } })
+    fetch(SB_URL + '/rest/v1/valya_tests?slug=eq.' + encodeURIComponent(slug) + '&enabled=eq.true&select=slug,title,subtitle,intro,scale,questions,bands,help', { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } })
       .then(function (r) { return r.json(); })
       .then(function (rows) {
         if (!rows || !rows.length) { root.innerHTML = ph('Тест не найден или выключен'); return; }
