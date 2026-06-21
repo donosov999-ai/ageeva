@@ -166,6 +166,7 @@ import Layout from '../layouts/Layout.astro';
         <p>Подробный опросник, чтобы увидеть себя в отношениях со стороны: паттерны, реакции, зоны роста.</p>
         <span class="more">Пройти тест →</span>
       </a>
+      <div id="dynTests" style="display:contents"></div>
     </div>
     <p class="center" style="margin-top:28px"><a href="tests/" class="btn btn-ghost" data-goal="free_all_tests">Все тесты об отношениях →</a></p>
   </div>
@@ -278,4 +279,5 @@ import Layout from '../layouts/Layout.astro';
 })();
   </script>
   <script src="/assets/test-icons.js" defer is:inline slot="scripts"></script>
+  <script src="/assets/tests-list.js" defer is:inline slot="scripts"></script>
 </Layout>
