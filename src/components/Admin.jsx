@@ -25,9 +25,27 @@ const MAIN_FIELDS = [
   { k: 'idx_cta_text', label: 'Финал — текст', rows: 2 },
 ];
 const MAIN_KEYS = MAIN_FIELDS.map((f) => f.k);
+
+// Схема блоков конструктора. f.ta=textarea, f.lines=массив строк, f.img=фото, f.bool, f.sel, f.rep=повторитель.
+const BLOCK_TYPES = [
+  { type: 'hero', label: 'Hero — шапка', fields: [{ k: 'eyebrow', l: 'Метка (мелкая)' }, { k: 'title', l: 'Заголовок', ta: 2 }, { k: 'subtitle', l: 'Подзаголовок', ta: 2 }, { k: 'btnText', l: 'Кнопка — текст' }, { k: 'btnUrl', l: 'Кнопка — ссылка' }, { k: 'photo', l: 'Фото справа', img: 1 }] },
+  { type: 'text', label: 'Текст', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'body', l: 'Текст', ta: 5 }] },
+  { type: 'list', label: 'Список', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Пункты', lines: 1 }] },
+  { type: 'textphoto', label: 'Текст + фото', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'body', l: 'Текст', ta: 4 }, { k: 'photo', l: 'Фото', img: 1 }, { k: 'side', l: 'Фото слева/справа', sel: ['left', 'right'] }, { k: 'round', l: 'Круглое фото', bool: 1 }] },
+  { type: 'cta', label: 'Призыв (баннер)', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'title', l: 'Заголовок' }, { k: 'text', l: 'Текст', ta: 2 }, { k: 'btnText', l: 'Кнопка — текст' }, { k: 'btnUrl', l: 'Кнопка — ссылка' }] },
+  { type: 'cards', label: 'Карточки', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Карточки', rep: [{ k: 'ico', l: 'Значок (эмодзи)' }, { k: 'title', l: 'Заголовок' }, { k: 'text', l: 'Текст', ta: 2 }, { k: 'url', l: 'Ссылка' }] }] },
+  { type: 'prices', label: 'Тарифы / цена', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Тарифы', rep: [{ k: 'name', l: 'Название' }, { k: 'tag', l: 'Подпись' }, { k: 'features', l: 'Пункты', lines: 1 }, { k: 'amount', l: 'Цена' }, { k: 'btnText', l: 'Кнопка' }, { k: 'btnUrl', l: 'Ссылка' }, { k: 'featured', l: 'Выделить', bool: 1 }, { k: 'badge', l: 'Бейдж' }] }] },
+  { type: 'faq', label: 'FAQ', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Вопросы', rep: [{ k: 'q', l: 'Вопрос' }, { k: 'a', l: 'Ответ', ta: 2 }] }] },
+  { type: 'reviews', label: 'Отзывы', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Отзывы', rep: [{ k: 'body', l: 'Текст', ta: 3 }, { k: 'author', l: 'Подпись' }] }] },
+  { type: 'steps', label: 'Шаги / программа', fields: [{ k: 'eyebrow', l: 'Метка' }, { k: 'heading', l: 'Заголовок' }, { k: 'items', l: 'Шаги', rep: [{ k: 'title', l: 'Заголовок шага' }, { k: 'text', l: 'Описание', ta: 2 }] }] },
+  { type: 'forwhom', label: 'Кому подойдёт / нет', fields: [{ k: 'yesTitle', l: 'Заголовок «да»' }, { k: 'yes', l: 'Пункты «да»', lines: 1 }, { k: 'noTitle', l: 'Заголовок «нет»' }, { k: 'no', l: 'Пункты «нет»', lines: 1 }] },
+  { type: 'video', label: 'Видео', fields: [{ k: 'caption', l: 'Подпись (необязательно)' }, { k: 'url', l: 'Ссылка YouTube/embed' }] },
+];
+const BLOCK_LABEL = {}; BLOCK_TYPES.forEach((t) => { BLOCK_LABEL[t.type] = t.label; });
+
 const TABS = [
   ['main', 'Главная'], ['about', 'Обо мне'], ['reviews', 'Отзывы'],
-  ['posts', 'Блог'], ['photos', 'Фото'], ['leads', 'Заявки'],
+  ['posts', 'Блог'], ['pages', 'Страницы'], ['photos', 'Фото'], ['leads', 'Заявки'],
 ];
 
 // многоабзацный текст → JSX (для превью)
@@ -56,6 +74,8 @@ export default function Admin() {
   const [about, setAbout] = useState(null);
   const [posts, setPosts] = useState(null);
   const [leads, setLeads] = useState(null);
+  const [pages, setPages] = useState(null);
+  const [editing, setEditing] = useState(null);
 
   function flash(msg, kind) {
     setToast({ msg, kind });
@@ -74,7 +94,9 @@ export default function Admin() {
     call('valya_about_all').then(setAbout).catch(authFail);
     call('valya_posts_all').then(setPosts).catch(authFail);
     call('valya_leads_all').then(setLeads).catch(() => setLeads([]));
+    call('valya_pages_all').then(setPages).catch(() => setPages([]));
   }
+  function loadPages() { call('valya_pages_all').then(setPages).catch(() => setPages([])); }
 
   useEffect(() => {
     const c = creds();
@@ -180,6 +202,23 @@ export default function Admin() {
   function delPost(it, idx) { if (!confirm('Удалить эту запись?')) return; if (!it.id) { drop(setPosts, idx); return; } call('valya_post_delete', { p_id: it.id }).then(() => drop(setPosts, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
 
   function delLead(it, idx) { if (!confirm('Удалить эту заявку?')) return; call('valya_lead_delete', { p_id: it.id }).then(() => drop(setLeads, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
+
+  // ---- страницы-конструктор ----
+  function newPage() { setEditing({ slug: '', title: '', published: false, blocks: [] }); }
+  function openPage(pg) { setEditing({ id: pg.id, slug: pg.slug, title: pg.title || '', published: !!pg.published, blocks: Array.isArray(pg.blocks) ? pg.blocks : [] }); }
+  function savePage() {
+    const e = editing; if (!e) return;
+    if (!e.slug || !e.slug.trim()) { flash('Укажи адрес страницы', 'bad'); return; }
+    call('valya_page_save', { p_id: e.id || null, p_slug: e.slug, p_title: e.title, p_blocks: e.blocks, p_published: !!e.published })
+      .then((id) => { flash('Страница сохранена', 'ok'); setEditing({ ...e, id: id || e.id }); loadPages(); })
+      .catch(() => flash('Не удалось сохранить (возможно, адрес занят)', 'bad'));
+  }
+  function delPage(pg) { if (!confirm('Удалить страницу?')) return; call('valya_page_delete', { p_id: pg.id }).then(() => { loadPages(); if (editing && editing.id === pg.id) setEditing(null); flash('Страница удалена', 'ok'); }).catch(() => flash('Не удалось удалить', 'bad')); }
+  const setBlocks = (fn) => setEditing((e) => ({ ...e, blocks: fn(e.blocks) }));
+  const addBlock = (type) => setBlocks((bl) => [...bl, { type }]);
+  const updateBlock = (idx, nb) => setBlocks((bl) => bl.map((b, i) => (i === idx ? nb : b)));
+  const removeBlock = (idx) => setBlocks((bl) => bl.filter((_, i) => i !== idx));
+  const moveBlock = (idx, dir) => setBlocks((bl) => { const j = idx + dir; if (j < 0 || j >= bl.length) return bl; const a = bl.slice(); const t = a[idx]; a[idx] = a[j]; a[j] = t; return a; });
 
   // ============== РЕНДЕР ==============
   if (view === 'login') {
@@ -358,6 +397,61 @@ export default function Admin() {
             ))}
           </Section>
         )}
+
+        {tab === 'pages' && (
+          <Section title="Страницы (конструктор)" hint="Собери лендинг из блоков. Адрес даёт ссылку /p.html?s=<адрес> — её можно слать в рекламу и сторис, страница появляется сразу.">
+            {!editing ? (
+              <div>
+                <button class="ed-btn ed-g" onClick={newPage}>+ Новая страница</button>
+                {pages == null ? <Loading /> : pages.length === 0 ? <Empty t="Пока нет страниц. Нажми «Новая страница»." /> : pages.map((pg) => (
+                  <div class={'ed-card ed-lead' + (pg.published ? '' : ' off')} key={pg.id}>
+                    <div>
+                      <b>{pg.title || pg.slug}</b> {pg.published ? '' : <span style="color:var(--muted);font-size:12px">(черновик)</span>}
+                      <div class="ed-lead-meta">/p.html?s={pg.slug} · блоков: {Array.isArray(pg.blocks) ? pg.blocks.length : 0}</div>
+                    </div>
+                    <span style="display:flex;gap:6px;flex-wrap:wrap">
+                      <button class="ed-btn ed-g ed-sm" onClick={() => openPage(pg)}>Открыть</button>
+                      <a class="ed-btn ed-g ed-sm" href={'/p.html?s=' + encodeURIComponent(pg.slug)} target="_blank" rel="noopener" style="text-decoration:none">↗</a>
+                      <button class="ed-btn ed-g ed-sm" onClick={() => { if (navigator.clipboard) navigator.clipboard.writeText(location.origin + '/p.html?s=' + pg.slug); flash('Ссылка скопирована', 'ok'); }}>Ссылка</button>
+                      <button class="ed-btn ed-d ed-sm" onClick={() => delPage(pg)}>Удалить</button>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>
+                <button class="ed-btn ed-g" onClick={() => { setEditing(null); loadPages(); }}>← К списку</button>
+                <div class="ed-split">
+                  <div class="ed-form">
+                    <div class="ed-row">
+                      <div class="ed-field"><label>Адрес (латиницей, напр. potok2)</label><input value={editing.slug} onInput={(e) => setEditing({ ...editing, slug: e.target.value })} /></div>
+                      <div class="ed-field"><label>Заголовок вкладки</label><input value={editing.title} onInput={(e) => setEditing({ ...editing, title: e.target.value })} /></div>
+                    </div>
+                    <label class="ed-chk" style="margin:2px 0 12px"><input type="checkbox" checked={editing.published} onChange={(e) => setEditing({ ...editing, published: e.target.checked })} /> Опубликовать (иначе черновик)</label>
+                    {editing.blocks.map((b, idx) => (
+                      <div class="ed-card" key={idx}>
+                        <div class="ed-foot" style="margin:0 0 8px">
+                          <b style="font-size:13px">{BLOCK_LABEL[b.type] || b.type}</b>
+                          <span class="ed-spacer" />
+                          <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:6px 10px" disabled={idx === 0} onClick={() => moveBlock(idx, -1)}>↑</button>
+                          <button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:6px 10px" disabled={idx === editing.blocks.length - 1} onClick={() => moveBlock(idx, 1)}>↓</button>
+                          <button type="button" class="ed-btn ed-d ed-sm" style="margin:0;padding:6px 10px" onClick={() => removeBlock(idx)}>✕</button>
+                        </div>
+                        <BlockForm block={b} onChange={(nb) => updateBlock(idx, nb)} onImg={(file, cb) => fileToDataUrl(file, 1280, cb)} />
+                      </div>
+                    ))}
+                    <div class="ed-addblock">
+                      <span style="font-size:13px;color:var(--muted);margin-right:4px">+ блок:</span>
+                      {BLOCK_TYPES.map((t) => <button key={t.type} type="button" class="ed-btn ed-g ed-sm" style="margin:0 6px 6px 0" onClick={() => addBlock(t.type)}>{t.label}</button>)}
+                    </div>
+                    <button class="ed-btn ed-p" style="margin-top:10px;width:100%" onClick={savePage}>Сохранить страницу</button>
+                  </div>
+                  <div class="ed-preview"><div class="ed-preview-tag">превью страницы</div><div class="ed-preview-body" dangerouslySetInnerHTML={{ __html: (typeof window !== 'undefined' && window.PageRender ? window.PageRender.blocksToHtml(editing.blocks) : '') }} /></div>
+                </div>
+              </div>
+            )}
+          </Section>
+        )}
       </main>
 
       {toast && <div class={'ed-toast ' + (toast.kind || '')}>{toast.msg}</div>}
@@ -405,3 +499,60 @@ function PhotoCard({ title, note, round, src, onFile }) {
 }
 function Loading() { return <div class="ed-empty">Загружаю…</div>; }
 function Empty({ t }) { return <div class="ed-empty">{t}</div>; }
+
+function BlockForm({ block, onChange, onImg }) {
+  const schema = BLOCK_TYPES.find((t) => t.type === block.type);
+  if (!schema) return null;
+  const set = (k, v) => onChange({ ...block, [k]: v });
+  return (
+    <div>
+      {schema.fields.map((f) => (
+        <div class="ed-field" key={f.k}>
+          <label>{f.l}</label>
+          {f.ta ? <textarea rows={f.ta} value={block[f.k] || ''} onInput={(e) => set(f.k, e.target.value)} />
+            : f.lines ? <textarea rows="4" placeholder="по одному пункту на строку" value={Array.isArray(block[f.k]) ? block[f.k].join('\n') : (block[f.k] || '')} onInput={(e) => set(f.k, e.target.value.split('\n'))} />
+              : f.bool ? <label class="ed-chk"><input type="checkbox" checked={!!block[f.k]} onChange={(e) => set(f.k, e.target.checked)} /> да</label>
+                : f.sel ? <select value={block[f.k] || f.sel[0]} onChange={(e) => set(f.k, e.target.value)}>{f.sel.map((o) => <option value={o} key={o}>{o}</option>)}</select>
+                  : f.img ? <ImgField val={block[f.k]} onPick={(file) => onImg(file, (url) => set(f.k, url))} onClear={() => set(f.k, '')} />
+                    : f.rep ? <RepeaterField items={Array.isArray(block[f.k]) ? block[f.k] : []} sub={f.rep} onChange={(items) => set(f.k, items)} />
+                      : <input value={block[f.k] || ''} onInput={(e) => set(f.k, e.target.value)} />}
+        </div>
+      ))}
+    </div>
+  );
+}
+function ImgField({ val, onPick, onClear }) {
+  return (
+    <div>
+      {val && <img src={val} alt="" style="display:block;max-height:90px;border-radius:8px;border:1px solid var(--line);margin-bottom:6px" />}
+      <div style="display:flex;gap:6px">
+        <button type="button" class="ed-btn ed-g ed-sm" style="margin:0" onClick={(e) => e.currentTarget.parentNode.querySelector('input').click()}>📷 Загрузить</button>
+        {val && <button type="button" class="ed-btn ed-d ed-sm" style="margin:0" onClick={onClear}>Убрать</button>}
+        <input type="file" accept="image/*" style="display:none" onChange={(e) => { onPick(e.target.files && e.target.files[0]); e.target.value = ''; }} />
+      </div>
+    </div>
+  );
+}
+function RepeaterField({ items, sub, onChange }) {
+  const upd = (i, nb) => onChange(items.map((x, k) => (k === i ? nb : x)));
+  const swap = (i, j) => { if (j < 0 || j >= items.length) return; const a = items.slice(); const t = a[i]; a[i] = a[j]; a[j] = t; onChange(a); };
+  return (
+    <div class="ed-rep">
+      {items.map((it, i) => (
+        <div class="ed-rep-item" key={i}>
+          <div class="ed-foot" style="margin:0 0 6px"><span style="font-size:12px;color:var(--muted)">#{i + 1}</span><span class="ed-spacer" /><button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:5px 9px" disabled={i === 0} onClick={() => swap(i, i - 1)}>↑</button><button type="button" class="ed-btn ed-g ed-sm" style="margin:0;padding:5px 9px" disabled={i === items.length - 1} onClick={() => swap(i, i + 1)}>↓</button><button type="button" class="ed-btn ed-d ed-sm" style="margin:0;padding:5px 9px" onClick={() => onChange(items.filter((_, k) => k !== i))}>✕</button></div>
+          {sub.map((f) => (
+            <div class="ed-field" key={f.k}>
+              <label>{f.l}</label>
+              {f.ta ? <textarea rows={f.ta} value={it[f.k] || ''} onInput={(e) => upd(i, { ...it, [f.k]: e.target.value })} />
+                : f.lines ? <textarea rows="3" placeholder="по одному на строку" value={Array.isArray(it[f.k]) ? it[f.k].join('\n') : (it[f.k] || '')} onInput={(e) => upd(i, { ...it, [f.k]: e.target.value.split('\n') })} />
+                  : f.bool ? <label class="ed-chk"><input type="checkbox" checked={!!it[f.k]} onChange={(e) => upd(i, { ...it, [f.k]: e.target.checked })} /> да</label>
+                    : <input value={it[f.k] || ''} onInput={(e) => upd(i, { ...it, [f.k]: e.target.value })} />}
+            </div>
+          ))}
+        </div>
+      ))}
+      <button type="button" class="ed-btn ed-g ed-sm" style="margin:0" onClick={() => onChange([...items, {}])}>+ добавить</button>
+    </div>
+  );
+}
