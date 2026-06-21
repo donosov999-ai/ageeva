@@ -1,69 +1,23 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="color-scheme" content="light only">
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109819083', 'ym');
+---
+import Layout from '../layouts/Layout.astro';
 
-    ym(109819083, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-<title>Психология отношений для женщин — Валентина Агеева | За семью, без «бросай»</title>
-<meta name="description" content="Помогаю женщинам остаться в отношениях и быть в них счастливыми. Бесплатный тест на тип привязанности и курс «Отношения длиною в жизнь».">
-<meta name="keywords" content="психология отношений, как сохранить отношения, отношения с мужчиной, тип привязанности, тест на тип привязанности, теория привязанности, кризис в отношениях, как наладить отношения, ссоры в паре, вернуть близость в отношениях, курс по отношениям для женщин, Готтман, Сью Джонсон, Валентина Агеева, отношения длиною в жизнь">
-<meta name="author" content="Валентина Агеева">
-<link rel="canonical" href="https://ageeva.win/">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Валентина Агеева — психология отношений">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:url" content="https://ageeva.win/">
-<meta property="og:title" content="Психология отношений для женщин — Валентина Агеева. За семью, без «бросай»">
-<meta property="og:description" content="Помогаю женщинам остаться в отношениях и быть в них счастливыми. Бесплатный тест на тип привязанности и курс «Отношения длиною в жизнь».">
-<meta property="og:image" content="https://ageeva.win/assets/og-cover.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Психология отношений для женщин — Валентина Агеева">
-<meta name="twitter:description" content="Остаться в отношениях и быть счастливой. Бесплатный тест на тип привязанности + курс «Отношения длиною в жизнь».">
-<meta name="twitter:image" content="https://ageeva.win/assets/og-cover.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/hooks.css">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
+const jsonld = `{"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://ageeva.win/#website","url":"https://ageeva.win/","name":"Валентина Агеева — психология отношений","inLanguage":"ru-RU"},
 {"@type":"Person","@id":"https://ageeva.win/#person","name":"Валентина Агеева","url":"https://ageeva.win/","jobTitle":"Наставник по отношениям","description":"Помогаю женщинам сохранять отношения и быть в них счастливыми — на основе теории привязанности, работ Джона Готтмана и Сью Джонсон.","image":"https://ageeva.win/assets/og-cover.jpg","sameAs":["https://instagram.com/ageeva_win","https://t.me/valli790"]}
-]}
-</script>
-</head>
-<body>
-
-<header class="site-header">
-  <div class="container nav">
-    <a href="index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
-    <nav class="nav-links" id="navLinks">
-      <a href="about.html">Обо мне</a>
-      <a href="course.html">Курс</a>
-      <a href="tests/">Тесты</a>
-      <a href="free.html">Бесплатное</a>
-      <a href="free.html" class="btn btn-primary btn-sm nav-cta">Бесплатный тест</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
-  </div>
-</header>
+]}`;
+---
+<Layout
+  title="Психология отношений для женщин — Валентина Агеева | За семью, без «бросай»"
+  description="Помогаю женщинам остаться в отношениях и быть в них счастливыми. Бесплатный тест на тип привязанности и курс «Отношения длиною в жизнь»."
+  keywords="психология отношений, как сохранить отношения, отношения с мужчиной, тип привязанности, тест на тип привязанности, теория привязанности, кризис в отношениях, как наладить отношения, ссоры в паре, вернуть близость в отношениях, курс по отношениям для женщин, Готтман, Сью Джонсон, Валентина Агеева, отношения длиною в жизнь"
+  canonical="https://ageeva.win/"
+  ogTitle="Психология отношений для женщин — Валентина Агеева. За семью, без «бросай»"
+  ogDescription="Помогаю женщинам остаться в отношениях и быть в них счастливыми. Бесплатный тест на тип привязанности и курс «Отношения длиною в жизнь»."
+  twTitle="Психология отношений для женщин — Валентина Агеева"
+  twDescription="Остаться в отношениях и быть счастливой. Бесплатный тест на тип привязанности + курс «Отношения длиною в жизнь»."
+  cms={true}
+>
+  <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
 
 <!-- 1. HERO -->
 <section class="hero">
@@ -78,7 +32,7 @@
       </div>
     </div>
     <div class="photo photo--portrait">
-      <img src="assets/photo-hero.jpg" alt="Валентина Агеева" id="photoHero">
+      <img src="/assets/photo-hero.jpg" alt="Валентина Агеева" id="photoHero">
     </div>
   </div>
 </section>
@@ -119,7 +73,7 @@
 <section class="section">
   <div class="container grid grid-2" style="align-items:center">
     <div class="photo photo--round">
-      <img src="assets/photo-round2.jpg" alt="Валентина Агеева" id="photoRound">
+      <img src="/assets/photo-round2.jpg" alt="Валентина Агеева" id="photoRound">
     </div>
     <div>
       <span class="eyebrow">Кто я</span>
@@ -241,41 +195,4 @@
 </section>
 
 <div class="seo-spoiler"><details><summary>Подробнее о курсе и подходе</summary><p>«Отношения длиною в жизнь» — курс из 10 шагов о том, как сохранить отношения, выйти из круга ссор и снова услышать партнёра. В основе — методы Джона Готтмана, Сью Джонсон и теория привязанности. Бесплатный тест на тип привязанности помогает понять свой стиль поведения в близости: тревожный, избегающий или надёжный. Для женщин, которые хотят не уйти, а разобраться и починить — без «бросай при первом же» и без обесценивания партнёра.</p></details></div>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="foot">
-      <div>
-        <a href="index.html" class="brand">Отношения <span>длиною в жизнь</span></a>
-        <p>Живая реальность вместо красивой обёртки из соцсетей. И живая ты.</p>
-        <div class="foot-social">
-          <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Telegram</a>
-          <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click">Instagram</a>
-        </div>
-      </div>
-      <div>
-        <h4>Разделы</h4>
-        <a href="about.html">Обо мне — моя история</a>
-        <a href="course.html">Курс «Отношения длиною в жизнь»</a>
-        <a href="tests/">Бесплатные тесты</a>
-        <a href="blog.html">Блог про отношения</a>
-      </div>
-      <div>
-        <h4>Связь</h4>
-        <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">Написать в Telegram</a>
-        <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click">Instagram @ageeva_win</a>
-        <a href="free.html">Получить PDF-гайд</a>
-        <a href="course.html#tarify">Тарифы курса</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© Валентина Агеева, 2026 · <a href="https://ageeva.win/">ageeva.win</a></span>
-      <span><a href="#">Оферта</a> · <a href="privacy.html">Политика конфиденциальности</a></span>
-    </div>
-  </div>
-</footer>
-
-<script src="assets/cms.js" defer></script>
-<script src="assets/app.js" defer></script>
-</body>
-</html>
+</Layout>

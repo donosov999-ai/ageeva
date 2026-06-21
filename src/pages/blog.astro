@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Блог про отношения — Валентина Агеева"
+  description="Разборы, рилсы и живые истории про отношения — коротко и по делу."
+  keywords="блог про отношения, психология отношений, разборы отношений, советы по отношениям, отношения с мужчиной, теория привязанности, Валентина Агеева"
+  canonical="https://ageeva.win/blog.html"
+  ogTitle="Блог про отношения — Валентина Агеева"
+  ogDescription="Разборы, рилсы и живые истории про отношения — коротко и по делу."
+  twTitle="Блог про отношения — Валентина Агеева"
+  twDescription="Разборы, рилсы и живые истории про отношения."
+  cms={true}
+>
+  <style is:inline slot="head">
+  .blog-list{max-width:780px;margin:0 auto;display:grid;gap:30px}
+  .bcard{background:#fff;border:1.5px solid var(--line,#E9DDD3);border-radius:18px;overflow:hidden;box-shadow:0 8px 26px rgba(155,84,78,.06)}
+  .bcard-img img{display:block;width:100%;max-height:380px;object-fit:cover}
+  .bcard-body{padding:26px 28px}
+  .bcard-date{color:var(--muted,#7C736D);font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+  .bcard h2{font-family:var(--serif,"Playfair Display",serif);font-size:25px;margin:0 0 10px;line-height:1.18}
+  .bcard-lead{font-size:17px;color:var(--rose-ink,#9B544E);margin:0 0 14px;font-weight:600}
+  .bcard-text{font-size:16.5px;line-height:1.62}
+  .bcard-text p{margin:0 0 13px}
+  .blog-empty{text-align:center;color:var(--muted,#7C736D);font-size:17px;padding:18px}
+  @media(max-width:560px){.bcard-body{padding:20px}.bcard h2{font-size:22px}}
+  </style>
+
+<section class="hero">
+  <div class="container" style="grid-template-columns:1fr;text-align:center;max-width:720px">
+    <div>
+      <span class="eyebrow">Блог</span>
+      <h1 id="blogTitle">Про отношения — честно и по делу</h1>
+      <p class="lead" id="blogLead" style="margin-left:auto;margin-right:auto">Разборы, рилсы и живые истории. Коротко, без воды и без «беги при первом красном флаге». Чтобы не пропустить — подпишись в Instagram.</p>
+      <div class="btn-row center">
+        <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click" class="btn btn-primary btn-lg">Написать в Telegram</a>
+        <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click" class="btn btn-ghost btn-lg">Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="blog-list" id="blogList">
+      <p class="blog-empty">Загружаю материалы…</p>
+    </div>
+  </div>
+</section>
+</Layout>
