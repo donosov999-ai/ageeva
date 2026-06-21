@@ -8,6 +8,7 @@ const {
   robots = 'index, follow, max-image-preview:large',
   lang = 'ru',
   altPath = '',   // имя файла без локали: 'about.html', 'course.html'… пусто = главная
+  i18n = false,   // true только на переведённых страницах → показать переключатель языков + hreflang
 } = Astro.props;
 
 const ogUrl = canonical;
@@ -39,7 +40,6 @@ const SITE = 'https://ageeva.win';
 const altRu = altPath ? '/' + altPath : '/';
 const altEn = altPath ? '/en/' + altPath : '/en.html';
 const altEs = altPath ? '/es/' + altPath : '/es.html';
-const i18nReady = false; // переключатель языков скрыт, пока EN/ES не достроены (мультиязык #7 на паузе после Пасса 1)
 
 const METRIKA = `(function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -66,10 +66,12 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 {keywords && <meta name="keywords" content={keywords} />}
 <meta name="author" content="Валентина Агеева">
 <link rel="canonical" href={canonical}>
+{i18n && (<Fragment>
 <link rel="alternate" hreflang="ru" href={SITE + altRu} />
 <link rel="alternate" hreflang="en" href={SITE + altEn} />
 <link rel="alternate" hreflang="es" href={SITE + altEs} />
 <link rel="alternate" hreflang="x-default" href={SITE + altRu} />
+</Fragment>)}
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <meta property="og:type" content={ogType}>
 <meta property="og:site_name" content="Валентина Агеева — психология отношений">
@@ -101,7 +103,7 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
       <a href="/tests/">{T.tests}</a>
       <a href={L('free.html')}>{T.free}</a>
       <a href={L('free.html')} class="btn btn-primary btn-sm nav-cta">{T.freeBtn}</a>
-      {i18nReady && (
+      {i18n && (
       <span class="lang-switch" style="display:inline-flex;gap:9px;align-items:center;font-size:13px;font-weight:700;margin-left:4px">
         <a href={altRu} style={lang === 'ru' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>RU</a>
         <a href={altEn} style={lang === 'en' ? 'color:var(--rose-deep)' : 'color:var(--muted);opacity:.65'}>EN</a>

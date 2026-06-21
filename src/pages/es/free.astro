@@ -1,0 +1,245 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  lang="es"
+  altPath="free.html"
+  i18n={true}
+  title="Test gratis de estilo de apego — Valentina Ageeva"
+  description="Descubre tu estilo de apego en 5 minutos. Gratis + guía PDF de regalo."
+  keywords="test de estilo de apego, estilo de apego, test de pareja, teoría del apego, apego ansioso, apego evitativo, apego seguro, test de relaciones gratis, psicología de las relaciones, Valentina Ageeva"
+  canonical="https://ageeva.win/es/free.html"
+  ogTitle="Test gratis de estilo de apego — Valentina Ageeva"
+  ogDescription="Descubre tu estilo de apego en 5 minutos. Gratis + guía PDF de regalo."
+  twTitle="Test gratis de estilo de apego"
+  twDescription="Descubre tu estilo de apego en 5 minutos. Gratis + guía PDF."
+>
+  <style is:inline slot="head">
+/* Test de apego — en la marca «Relaciones para toda la vida» */
+.atest{max-width:680px;margin:30px auto 0;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 10px 30px rgba(155,84,78,.06)}
+.atest .scale-note{font-size:.92rem;color:var(--muted);margin:0 0 16px;text-align:center}
+.slider-q{padding:15px 0;border-bottom:1px solid var(--line)}
+.slider-q:last-of-type{border-bottom:0}
+.slider-q .q{font-weight:700;margin-bottom:12px;color:var(--ink)}
+.slider-row{display:flex;align-items:center;gap:9px}
+.slider-min,.slider-max{font-size:.74rem;color:var(--muted);flex:0 1 60px;min-width:0;line-height:1.15}
+.slider-max{text-align:right}
+.slider-q input[type=range]{flex:1;accent-color:var(--rose-deep)}
+.slider-val{flex:0 0 20px;text-align:center;font-weight:800;color:var(--rose-deep)}
+.slider-val.unset{color:var(--rose)}
+.atest-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.result-box{margin-top:22px;background:var(--blush-2);border:1.5px solid var(--rose);border-radius:16px;padding:24px}
+.result-box h3{margin:0 0 4px}
+.result-box .stat{font-family:var(--serif);font-size:1.55rem;color:var(--rose-ink);margin-bottom:12px}
+.progress{height:10px;background:rgba(154,95,87,.12);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;border-radius:999px}
+.atest .note{background:#fff;border-left:3px solid var(--rose-deep);padding:12px 16px;border-radius:8px;margin-top:14px;font-size:.96rem}
+.atest details{margin-top:18px}
+.atest summary{cursor:pointer;font-weight:700;color:var(--rose-ink)}
+.atest details p{font-size:.95rem;margin:8px 0;color:var(--ink)}
+.atest-src{font-size:.8rem;color:var(--muted);margin-top:16px;text-align:center}
+  </style>
+
+<!-- 1-2. ENCABEZADO + PARA QUÉ -->
+<section class="hero">
+  <div class="container" style="grid-template-columns:1fr;text-align:center;max-width:760px">
+    <div>
+      <span class="eyebrow">Gratis · 5 minutos</span>
+      <h1>Descubre tu estilo<br>de apego</h1>
+      <p class="lead" style="margin-left:auto;margin-right:auto">Es la forma en que actúas en la cercanía: te lanzas a rescatar, exiges, te paralizas o huyes. De tu estilo de apego depende por qué discutís precisamente así — y qué hacer con ello. 5 minutos, y entenderás de ti algo que explica años de relación.</p>
+      <a href="#test" class="btn btn-primary btn-lg">Empezar el test →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. TEST -->
+<section class="section bg-cream2" id="test">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Paso 1</span>
+      <h2>Haz el test</h2>
+      <hr class="rule center">
+    </div>
+    <div class="atest">
+      <p class="scale-note">Escala: 1 — nada que ver conmigo · 5 — muy yo. 12 preguntas, responde con honestidad — es para ti.</p>
+      <form id="testForm"></form>
+      <div class="atest-btns">
+        <button class="btn btn-primary" id="calcBtn" type="button">Calcular mi estilo →</button>
+        <button class="btn btn-ghost" id="resetBtn" type="button">Reiniciar</button>
+      </div>
+      <div id="result"></div>
+      <details>
+        <summary>¿Qué son los estilos de apego?</summary>
+        <p><strong>Seguro (Ancla, ~50%):</strong> te sientes a gusto tanto en la cercanía como a solas contigo. Las emociones se regulan con calma, el conflicto no destruye la sensación de seguridad.</p>
+        <p><strong>Ansioso (Ola, ~20%):</strong> pánico ante el distanciamiento, comprobación constante de «¿cómo me trata ahora?», miedo a ser abandonada.</p>
+        <p><strong>Evitativo (Isla, ~25%):</strong> incomodidad ante la cercanía, ganas de alejarte cuando es «demasiado cerca», se valora la autonomía por encima del vínculo.</p>
+        <p><strong>Al apego seguro se puede llegar.</strong> Es un camino real a través del trabajo personal, no una condena de nacimiento.</p>
+      </details>
+      <p class="atest-src">Se basa en la teoría del apego (Bowlby), las investigaciones de Mikulincer y Shaver, el modelo de Tatkin (PACT) y la TFE de Sue Johnson.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4-5. CAPTURA + BONUS -->
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Paso 2</span>
+      <h2>¿Adónde te envío el resultado + el regalo?</h2>
+      <hr class="rule center">
+      <p class="lead narrow">Déjame tu nombre y un contacto — te enviaré un análisis detallado de tu estilo y la <strong>guía PDF «Cuál es tu estilo de apego y qué hacer con él»</strong> de regalo.</p>
+    </div>
+    <form class="form" id="leadForm" style="margin-top:28px">
+      <input type="text" name="website" id="lf_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+      <div>
+        <label for="name">¿Cómo te llamas?</label>
+        <input id="name" type="text" placeholder="Nombre">
+      </div>
+      <div>
+        <label for="contact">Email o Telegram</label>
+        <input id="contact" type="text" placeholder="email@correo.com o @usuario">
+      </div>
+      <label class="lead-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:.84rem;color:var(--muted);font-weight:400;cursor:pointer;line-height:1.45">
+        <input type="checkbox" id="lf_consent" style="margin-top:3px;width:auto;flex:0 0 auto">
+        <span>Acepto el tratamiento de mis datos personales y la <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--rose-ink);text-decoration:underline">política de privacidad</a></span>
+      </label>
+      <button class="btn btn-primary btn-lg" type="submit" id="leadBtn">Recibir el resultado + PDF →</button>
+      <p class="note" id="leadMsg" style="display:none"></p>
+    </form>
+  </div>
+</section>
+
+<!-- 6. QUÉ SIGUE -->
+<section class="section bg-blush">
+  <div class="container narrow center">
+    <span class="eyebrow">Qué sigue</span>
+    <h2>Después del test</h2>
+    <hr class="rule center">
+    <p class="lead">El bot de Telegram te enviará enseguida tu resultado y la guía PDF. Y a partir de ahí — sin spam ni ventas a la cara: de vez en cuando compartiré análisis e historias. Si quieres ir más a fondo — ahí te cuento sobre el curso «Relaciones para toda la vida». Si no quieres — simplemente te quedas con el test y la guía.</p>
+    <div class="btn-row center" style="margin-top:10px">
+      <a href="course.html" class="btn btn-ghost btn-lg">¿Y qué es el curso «Relaciones para toda la vida»?</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MÁS TESTS GRATIS -->
+<section class="section bg-cream2">
+  <div class="container narrow center">
+    <span class="eyebrow">Más gratis · sin registro</span>
+    <h2>Más tests sobre relaciones</h2>
+    <hr class="rule center">
+    <p class="lead narrow">Tests cortos — sobre ti, tus elecciones y tu pareja. Gratis, directamente en la web.</p>
+    <div class="btn-row center" style="margin-top:10px">
+      <a href="/tests/" class="btn btn-ghost btn-lg" data-goal="free_all_tests">Todos los tests sobre relaciones →</a>
+    </div>
+  </div>
+</section>
+
+  <script is:inline slot="scripts">
+(function(){
+  var QUESTIONS = [
+    {h:'anchor', q:'Me siento a gusto tanto sola como en una relación cercana'},
+    {h:'anchor', q:'Puedo pedir apoyo sin sentirme culpable'},
+    {h:'anchor', q:'El conflicto no destruye mi sensación de seguridad con mi pareja'},
+    {h:'anchor', q:'Confío en que mi pareja volverá si se fue a calmarse'},
+    {h:'wave',   q:'Cuando mi pareja no responde rápido, empiezo a inquietarme'},
+    {h:'wave',   q:'A menudo compruebo cómo me trata mi pareja en este momento'},
+    {h:'wave',   q:'Ante el enfriamiento entro en pánico y empiezo a «presionar» a mi pareja'},
+    {h:'wave',   q:'Temo que me abandonen, incluso sin motivos objetivos'},
+    {h:'island', q:'Cuando mi pareja está «demasiado cerca», me dan ganas de alejarme'},
+    {h:'island', q:'Valoro la libertad y la autonomía por encima de un vínculo emocional profundo'},
+    {h:'island', q:'Las conversaciones emocionales me agotan'},
+    {h:'island', q:'Bajo estrés prefiero arreglármelas sola, sin ayuda'}
+  ];
+  var LABELS = {anchor:'Seguro (Ancla)', wave:'Ansioso (Ola)', island:'Evitativo (Isla)'};
+  var COLORS = {anchor:'#5B9A78', wave:'#C9756E', island:'#B8946A'};
+  window.shareAttach=function(){
+    var t=window.__attachResult||'mi estilo de apego';
+    var text='Mi estilo de apego es '+t+'. Hice el test gratis con Valentina 🤍';
+    var url='https://ageeva.win/es/free';
+    if(navigator.share){ navigator.share({title:'Estilo de apego',text:text,url:url}).catch(function(){}); }
+    else { window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text),'_blank'); }
+  };
+  var form = document.getElementById('testForm');
+  if(!form) return;
+  QUESTIONS.forEach(function(item, i){
+    var row = document.createElement('div');
+    row.className = 'slider-q';
+    row.innerHTML =
+      '<div class="q">' + (i+1) + '. ' + item.q + '</div>' +
+      '<div class="slider-row">' +
+        '<span class="slider-min">nada que ver</span>' +
+        '<input type="range" min="1" max="5" value="3" data-h="' + item.h + '">' +
+        '<span class="slider-val">3</span>' +
+        '<span class="slider-max">muy yo</span>' +
+      '</div>';
+    var inp = row.querySelector('input[type=range]');
+    var val = row.querySelector('.slider-val');
+    inp.dataset.touched = '0';
+    inp.addEventListener('input', function(){
+      val.textContent = inp.value; val.classList.remove('unset'); inp.dataset.touched = '1';
+    });
+    form.appendChild(row);
+  });
+  document.getElementById('calcBtn').addEventListener('click', function(){
+    var sums={anchor:0,wave:0,island:0}, counts={anchor:0,wave:0,island:0};
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){
+      sums[r.dataset.h]+=parseInt(r.value,10); counts[r.dataset.h]+=1;
+    });
+    var avgs={anchor:sums.anchor/counts.anchor, wave:sums.wave/counts.wave, island:sums.island/counts.island};
+    var max='anchor',maxV=avgs.anchor;
+    if(avgs.wave>maxV){max='wave';maxV=avgs.wave;}
+    if(avgs.island>maxV){max='island';maxV=avgs.island;}
+    window.__attachResult=LABELS[max];
+    var html='<div class="result-box"><h3>Tu estilo:</h3><div class="stat">'+LABELS[max]+'</div>';
+    ['anchor','wave','island'].forEach(function(k){
+      var pct=Math.round((avgs[k]-1)/4*100);
+      html+='<div style="margin:14px 0;"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;"><span>'+LABELS[k]+'</span><span>'+pct+'%</span></div>';
+      html+='<div class="progress"><div class="progress-bar" style="width:'+pct+'%;background:'+COLORS[k]+'"></div></div></div>';
+    });
+    var rec='';
+    if(max==='anchor'){ rec='<strong>Apego seguro.</strong> Es tu recurso. Cuida el contacto cálido y los rituales de cercanía — y ayuda a tu pareja (si es ansiosa o evitativa) a moverse hacia ese mismo punto de apoyo.'; }
+    else if(max==='wave'){ rec='<strong>Ansioso.</strong> Aprende a calmarte tú misma (técnica 5-4-3-2-1, respiración 4-7-8) ANTES de «presionar» a tu pareja. Si tu pareja es evitativa, tu ansiedad la asusta; en lugar de comprobaciones, dilo claro: «necesito que me lo confirmes».'; }
+    else{ rec='<strong>Evitativo.</strong> Aprende a quedarte en contacto 20 minutos, aunque tengas ganas de irte. Si tu pareja es ansiosa, tu retirada es un detonante para ella; en lugar de desaparecer: «necesito 20 minutos y vuelvo».'; }
+    html+='<div class="note">'+rec+'</div>';
+    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Compartir el resultado →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Trabajarlo en el curso →</a></div></div>';
+    html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>Para la pareja: la trampa «ansioso + evitativo»</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">El ciclo más frecuente: una pide cercanía — el otro se retira — la primera entra en pánico y pide aún más — el segundo se retira más lejos. Es el «perseguidor — distanciador» (Sue Johnson, TFE). La salida: ambos aprenden a <strong>nombrar el ciclo</strong>, en lugar de pelear dentro de él.</p></div>';
+    var box=document.getElementById('result');
+    box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
+    if(window.track){ try{ track('test_complete'); }catch(e){} }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){ r.value=3; r.dataset.touched='0'; });
+    document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='3'; v.classList.remove('unset'); });
+    document.getElementById('result').innerHTML='';
+  });
+})();
+  </script>
+  <script is:inline slot="scripts">
+(function(){
+  var form=document.getElementById('leadForm');
+  if(!form) return;
+  var msg=document.getElementById('leadMsg'), btn=document.getElementById('leadBtn');
+  function show(t,ok){ msg.style.display='block'; msg.textContent=t; msg.style.color=ok?'#3F8F62':'#C0524B'; msg.style.background=ok?'#EAF5EE':'#FBEFEE'; msg.style.borderColor=ok?'#BFE3CC':'#F0CBC7'; }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(document.getElementById('lf_hp').value){ return; }
+    var name=(document.getElementById('name').value||'').trim();
+    var contact=(document.getElementById('contact').value||'').trim();
+    if(contact.length<3){ show('Déjame tu email o Telegram — si no, no tengo adónde enviarte el análisis.',false); return; }
+    if(!document.getElementById('lf_consent').checked){ show('Marca el consentimiento para el tratamiento de datos — sin él no puedo aceptar la solicitud.',false); return; }
+    btn.disabled=true; var old=btn.textContent; btn.textContent='Enviando…';
+    var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test-es',p_result:window.__attachResult||null,p_consent:true}) : Promise.reject('no-sb');
+    send.then(function(){
+      form.querySelectorAll('input,button,label,div').forEach(function(el){ el.style.display='none'; });
+      show('¡Gracias'+(name?(', '+name):'')+'! Guardé tu contacto — te enviaré el análisis de tu estilo de apego y la guía PDF muy pronto.',true);
+      msg.style.fontSize='1.05rem'; msg.style.padding='16px 18px';
+    }).catch(function(){
+      btn.disabled=false; btn.textContent=old;
+      show('No se pudo enviar. Escríbeme por Telegram — el botón está abajo a la derecha.',false);
+    });
+  });
+})();
+  </script>
+  <script src="/assets/test-icons.js" defer is:inline slot="scripts"></script>
+</Layout>

@@ -1,0 +1,245 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  lang="en"
+  altPath="free.html"
+  i18n={true}
+  title="Free Attachment-Style Test — Valentina Ageeva"
+  description="Find your attachment style in 5 minutes. Free + a PDF guide as a gift."
+  keywords="attachment style test, attachment style, relationship test, attachment theory, anxious attachment, avoidant attachment, secure attachment, free relationship test, relationship psychology, Valentina Ageeva"
+  canonical="https://ageeva.win/en/free.html"
+  ogTitle="Free Attachment-Style Test — Valentina Ageeva"
+  ogDescription="Find your attachment style in 5 minutes. Free + a PDF guide as a gift."
+  twTitle="Free Attachment-Style Test"
+  twDescription="Find your attachment style in 5 minutes. Free + a PDF guide."
+>
+  <style is:inline slot="head">
+/* Attachment test — on brand «Relationships for a Lifetime» */
+.atest{max-width:680px;margin:30px auto 0;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 10px 30px rgba(155,84,78,.06)}
+.atest .scale-note{font-size:.92rem;color:var(--muted);margin:0 0 16px;text-align:center}
+.slider-q{padding:15px 0;border-bottom:1px solid var(--line)}
+.slider-q:last-of-type{border-bottom:0}
+.slider-q .q{font-weight:700;margin-bottom:12px;color:var(--ink)}
+.slider-row{display:flex;align-items:center;gap:9px}
+.slider-min,.slider-max{font-size:.74rem;color:var(--muted);flex:0 1 60px;min-width:0;line-height:1.15}
+.slider-max{text-align:right}
+.slider-q input[type=range]{flex:1;accent-color:var(--rose-deep)}
+.slider-val{flex:0 0 20px;text-align:center;font-weight:800;color:var(--rose-deep)}
+.slider-val.unset{color:var(--rose)}
+.atest-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.result-box{margin-top:22px;background:var(--blush-2);border:1.5px solid var(--rose);border-radius:16px;padding:24px}
+.result-box h3{margin:0 0 4px}
+.result-box .stat{font-family:var(--serif);font-size:1.55rem;color:var(--rose-ink);margin-bottom:12px}
+.progress{height:10px;background:rgba(154,95,87,.12);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;border-radius:999px}
+.atest .note{background:#fff;border-left:3px solid var(--rose-deep);padding:12px 16px;border-radius:8px;margin-top:14px;font-size:.96rem}
+.atest details{margin-top:18px}
+.atest summary{cursor:pointer;font-weight:700;color:var(--rose-ink)}
+.atest details p{font-size:.95rem;margin:8px 0;color:var(--ink)}
+.atest-src{font-size:.8rem;color:var(--muted);margin-top:16px;text-align:center}
+  </style>
+
+<!-- 1-2. HEADLINE + WHY -->
+<section class="hero">
+  <div class="container" style="grid-template-columns:1fr;text-align:center;max-width:760px">
+    <div>
+      <span class="eyebrow">Free · 5 minutes</span>
+      <h1>Find your<br>attachment style</h1>
+      <p class="lead" style="margin-left:auto;margin-right:auto">It's how you behave when you get close: you rush to rescue, you demand, you freeze, or you run. Your attachment style is why you fight the way you do — and what to do about it. Five minutes, and you'll understand something about yourself that explains years of your relationships.</p>
+      <a href="#test" class="btn btn-primary btn-lg">Start the test →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. TEST -->
+<section class="section bg-cream2" id="test">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Step 1</span>
+      <h2>Take the test</h2>
+      <hr class="rule center">
+    </div>
+    <div class="atest">
+      <p class="scale-note">Scale: 1 — not me at all · 5 — very much me. 12 questions, answer honestly — this is for you.</p>
+      <form id="testForm"></form>
+      <div class="atest-btns">
+        <button class="btn btn-primary" id="calcBtn" type="button">Show my style →</button>
+        <button class="btn btn-ghost" id="resetBtn" type="button">Reset</button>
+      </div>
+      <div id="result"></div>
+      <details>
+        <summary>What are attachment styles?</summary>
+        <p><strong>Secure (Anchor, ~50%):</strong> comfortable both in closeness and on your own. Emotions settle calmly, and conflict doesn't shake your sense of safety.</p>
+        <p><strong>Anxious (Wave, ~20%):</strong> panic when there's distance, constant checking of «how does he feel about me right now», a fear of being left.</p>
+        <p><strong>Avoidant (Island, ~25%):</strong> discomfort with closeness, the urge to pull back when it gets «too close», independence valued above connection.</p>
+        <p><strong>Secure attachment can be learned.</strong> It's a real path through working on yourself, not a verdict you're born with.</p>
+      </details>
+      <p class="atest-src">Based on attachment theory (Bowlby), the research of Mikulincer and Shaver, Tatkin's PACT model, and Sue Johnson's EFT.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4-5. CAPTURE + BONUS -->
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Step 2</span>
+      <h2>Where to send your result + gift</h2>
+      <hr class="rule center">
+      <p class="lead narrow">Leave your name and a contact — I'll send you a full breakdown of your style and the <strong>PDF guide «Your Attachment Style and What to Do About It»</strong> as a gift.</p>
+    </div>
+    <form class="form" id="leadForm" style="margin-top:28px">
+      <input type="text" name="website" id="lf_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+      <div>
+        <label for="name">What's your name</label>
+        <input id="name" type="text" placeholder="Name">
+      </div>
+      <div>
+        <label for="contact">Email or Telegram</label>
+        <input id="contact" type="text" placeholder="email@example.com or @username">
+      </div>
+      <label class="lead-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:.84rem;color:var(--muted);font-weight:400;cursor:pointer;line-height:1.45">
+        <input type="checkbox" id="lf_consent" style="margin-top:3px;width:auto;flex:0 0 auto">
+        <span>I agree to the processing of my personal data and accept the <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--rose-ink);text-decoration:underline">privacy policy</a></span>
+      </label>
+      <button class="btn btn-primary btn-lg" type="submit" id="leadBtn">Get my result + PDF →</button>
+      <p class="note" id="leadMsg" style="display:none"></p>
+    </form>
+  </div>
+</section>
+
+<!-- 6. WHAT'S NEXT -->
+<section class="section bg-blush">
+  <div class="container narrow center">
+    <span class="eyebrow">What's next</span>
+    <h2>After the test</h2>
+    <hr class="rule center">
+    <p class="lead">A Telegram bot will send you your result and the PDF guide right away. After that — no spam and no hard selling: every now and then I'll share breakdowns and stories. If you want to go deeper, that's where I'll tell you about the course «Relationships for a Lifetime». If you don't, you simply keep the test and the guide.</p>
+    <div class="btn-row center" style="margin-top:10px">
+      <a href="course.html" class="btn btn-ghost btn-lg">So what's the course «Relationships for a Lifetime»?</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MORE FREE TESTS -->
+<section class="section bg-cream2">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">More free · no sign-up</span>
+      <h2>More relationship tests</h2>
+      <hr class="rule center">
+      <p class="lead narrow">Short tests — about you, your choices, and your couple. Free, right here on the site.</p>
+    </div>
+    <p class="center" style="margin-top:28px"><a href="/tests/" class="btn btn-ghost" data-goal="free_all_tests">All relationship tests →</a></p>
+  </div>
+</section>
+
+  <script is:inline slot="scripts">
+(function(){
+  var QUESTIONS = [
+    {h:'anchor', q:'I feel comfortable both on my own and in close relationships'},
+    {h:'anchor', q:'I can ask for support without feeling guilty'},
+    {h:'anchor', q:'Conflict doesn’t destroy my sense of safety with my partner'},
+    {h:'anchor', q:'I trust that my partner will come back if he stepped away to cool off'},
+    {h:'wave',   q:'When my partner doesn’t reply quickly, I start to feel anxious'},
+    {h:'wave',   q:'I often check how my partner feels about me right now'},
+    {h:'wave',   q:'When things cool down, I panic and start «pulling at» my partner'},
+    {h:'wave',   q:'I’m afraid of being left, even with no real reason'},
+    {h:'island', q:'When my partner gets «too close», I want to pull away'},
+    {h:'island', q:'I value freedom and independence above deep emotional connection'},
+    {h:'island', q:'Emotional conversations wear me out'},
+    {h:'island', q:'Under stress I prefer to cope on my own, without help'}
+  ];
+  var LABELS = {anchor:'Secure (Anchor)', wave:'Anxious (Wave)', island:'Avoidant (Island)'};
+  var COLORS = {anchor:'#5B9A78', wave:'#C9756E', island:'#B8946A'};
+  window.shareAttach=function(){
+    var t=window.__attachResult||'my attachment style';
+    var text='My attachment style is '+t+'. I took Valentina’s free test 🤍';
+    var url='https://ageeva.win/en/free';
+    if(navigator.share){ navigator.share({title:'Attachment style',text:text,url:url}).catch(function(){}); }
+    else { window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text),'_blank'); }
+  };
+  var form = document.getElementById('testForm');
+  if(!form) return;
+  QUESTIONS.forEach(function(item, i){
+    var row = document.createElement('div');
+    row.className = 'slider-q';
+    row.innerHTML =
+      '<div class="q">' + (i+1) + '. ' + item.q + '</div>' +
+      '<div class="slider-row">' +
+        '<span class="slider-min">not me</span>' +
+        '<input type="range" min="1" max="5" value="3" data-h="' + item.h + '">' +
+        '<span class="slider-val">3</span>' +
+        '<span class="slider-max">very much me</span>' +
+      '</div>';
+    var inp = row.querySelector('input[type=range]');
+    var val = row.querySelector('.slider-val');
+    inp.dataset.touched = '0';
+    inp.addEventListener('input', function(){
+      val.textContent = inp.value; val.classList.remove('unset'); inp.dataset.touched = '1';
+    });
+    form.appendChild(row);
+  });
+  document.getElementById('calcBtn').addEventListener('click', function(){
+    var sums={anchor:0,wave:0,island:0}, counts={anchor:0,wave:0,island:0};
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){
+      sums[r.dataset.h]+=parseInt(r.value,10); counts[r.dataset.h]+=1;
+    });
+    var avgs={anchor:sums.anchor/counts.anchor, wave:sums.wave/counts.wave, island:sums.island/counts.island};
+    var max='anchor',maxV=avgs.anchor;
+    if(avgs.wave>maxV){max='wave';maxV=avgs.wave;}
+    if(avgs.island>maxV){max='island';maxV=avgs.island;}
+    window.__attachResult=LABELS[max];
+    var html='<div class="result-box"><h3>Your style:</h3><div class="stat">'+LABELS[max]+'</div>';
+    ['anchor','wave','island'].forEach(function(k){
+      var pct=Math.round((avgs[k]-1)/4*100);
+      html+='<div style="margin:14px 0;"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;"><span>'+LABELS[k]+'</span><span>'+pct+'%</span></div>';
+      html+='<div class="progress"><div class="progress-bar" style="width:'+pct+'%;background:'+COLORS[k]+'"></div></div></div>';
+    });
+    var rec='';
+    if(max==='anchor'){ rec='<strong>Secure attachment.</strong> This is your resource. Keep the warm contact and your rituals of closeness — and help your partner (if he’s anxious or avoidant) move toward the same solid ground.'; }
+    else if(max==='wave'){ rec='<strong>Anxious.</strong> Learn to soothe yourself first (the 5-4-3-2-1 technique, 4-7-8 breathing) BEFORE you start «pulling at» your partner. If your partner is avoidant, your anxiety scares him; instead of checking, say it plainly: «I need reassurance.»'; }
+    else{ rec='<strong>Avoidant.</strong> Learn to stay in contact for 20 minutes, even when you want to leave. If your partner is anxious, your leaving is a trigger for him; instead of disappearing — «I need 20 minutes, I’ll be back.»'; }
+    html+='<div class="note">'+rec+'</div>';
+    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Share my result →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Work on it in the course →</a></div></div>';
+    html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>For couples: the «anxious + avoidant» trap</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">The most common cycle: one demands closeness — the other withdraws — the first panics and demands more — the second withdraws further. This is «pursuer — withdrawer» (Sue Johnson, EFT). The way out: both learn to <strong>name the cycle</strong> instead of fighting inside it.</p></div>';
+    var box=document.getElementById('result');
+    box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
+    if(window.track){ try{ track('test_complete'); }catch(e){} }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('#testForm input[type=range]').forEach(function(r){ r.value=3; r.dataset.touched='0'; });
+    document.querySelectorAll('#testForm .slider-val').forEach(function(v){ v.textContent='3'; v.classList.remove('unset'); });
+    document.getElementById('result').innerHTML='';
+  });
+})();
+  </script>
+  <script is:inline slot="scripts">
+(function(){
+  var form=document.getElementById('leadForm');
+  if(!form) return;
+  var msg=document.getElementById('leadMsg'), btn=document.getElementById('leadBtn');
+  function show(t,ok){ msg.style.display='block'; msg.textContent=t; msg.style.color=ok?'#3F8F62':'#C0524B'; msg.style.background=ok?'#EAF5EE':'#FBEFEE'; msg.style.borderColor=ok?'#BFE3CC':'#F0CBC7'; }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(document.getElementById('lf_hp').value){ return; }
+    var name=(document.getElementById('name').value||'').trim();
+    var contact=(document.getElementById('contact').value||'').trim();
+    if(contact.length<3){ show('Leave an email or Telegram — otherwise I’ve nowhere to send your breakdown.',false); return; }
+    if(!document.getElementById('lf_consent').checked){ show('Please check the consent to data processing — without it I can’t accept your request.',false); return; }
+    btn.disabled=true; var old=btn.textContent; btn.textContent='Sending…';
+    var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test-en',p_result:window.__attachResult||null,p_consent:true}) : Promise.reject('no-sb');
+    send.then(function(){
+      form.querySelectorAll('input,button,label,div').forEach(function(el){ el.style.display='none'; });
+      show('Thank you'+(name?(', '+name):'')+'! I’ve saved your contact — I’ll send your attachment-style breakdown and the PDF guide very soon.',true);
+      msg.style.fontSize='1.05rem'; msg.style.padding='16px 18px';
+    }).catch(function(){
+      btn.disabled=false; btn.textContent=old;
+      show('Couldn’t send it. Message me on Telegram — the button is at the bottom right.',false);
+    });
+  });
+})();
+  </script>
+  <script src="/assets/test-icons.js" defer is:inline slot="scripts"></script>
+</Layout>
