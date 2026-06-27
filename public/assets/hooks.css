@@ -5,7 +5,7 @@
    =========================================================== */
 
 /* фолбэк-переменные — чтобы бар/dock работали и на страницах без style.css (старые статичные тесты) */
-:root{--cream:#FCF8F3;--cream-2:#F7ECE4;--blush:#F4E3DC;--blush-2:#FBEEE9;--rose:#D7A39B;--rose-deep:#BE7E75;--rose-ink:#9A5F57;--ink:#4A403A;--muted:#8B7C73;--line:#EADFD6;--shadow-sm:0 6px 22px rgba(120,90,80,.08);}
+:root{--cream:#FCF8F3;--cream-2:#F7ECE4;--blush:#F4E3DC;--blush-2:#FBEEE9;--rose:#D7A39B;--rose-deep:#BE7E75;--rose-ink:#9A5F57;--ink:#4A403A;--muted:#7A6A61;--line:#EADFD6;--shadow-sm:0 6px 22px rgba(120,90,80,.08);}
 
 /* Aa — крупнее текст */
 body.text-lg { font-size: 20.5px; }

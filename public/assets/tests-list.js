@@ -12,7 +12,7 @@
     .then(function (rows) {
       if (!rows || !rows.length) return;
       box.innerHTML = rows.map(function (t) {
-        var ico = ICO[t.goal] || '❖';
+        var ico = (window.testIconSVG && window.testIconSVG(t.goal)) || ('<span style="font-size:24px">' + (ICO[t.goal] || '❖') + '</span>');
         return '<a href="/test/' + encodeURIComponent(t.slug) + '.html" class="card" data-goal="gott_' + esc(t.slug) + '" data-theme="' + (THEME[t.goal] || 'couple') + '">' +
           '<span class="ico">' + ico + '</span><h3>' + esc(t.title) + '</h3>' +
           '<p>' + esc(t.subtitle || '') + '</p><span class="more">Пройти тест →</span></a>';
