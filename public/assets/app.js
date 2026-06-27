@@ -84,7 +84,7 @@
       stickyCTA = el("div", { class: "ccta" });
       stickyCTA.innerHTML =
         '<span class="ccta__t">Курс «' + CFG.course + '»</span>' +
-        '<a href="#tarify" class="btn btn-primary btn-sm" data-goal="cta_zapis">Записаться →</a>';
+        '<a href="#tarify" class="btn btn-primary btn-sm cta-shine" data-goal="cta_zapis">Записаться →</a>';
       document.body.appendChild(stickyCTA);
     }
 
