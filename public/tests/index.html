@@ -46,6 +46,11 @@
   .tgrid .card .ico{font-size:26px}
   .tcard-flag{border:2px solid var(--rose)!important;background:var(--blush-2)!important}
   .tflag-badge{display:inline-block;background:var(--rose-deep);color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+  .ttabs{display:flex;gap:8px;justify-content:center;flex-wrap:nowrap;margin:34px auto 0;max-width:560px}
+  .ttab{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:10px 6px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink);transition:.15s;white-space:nowrap}
+  .ttab.on{background:var(--rose-deep);border-color:var(--rose-deep);color:#fff}
+  .ttab:hover{border-color:var(--rose-deep)}
+  @media(max-width:480px){.ttab{font-size:12.5px;padding:10px 4px}}
 </style>
 </head>
 <body>
@@ -76,6 +81,11 @@
 
 <section class="section">
   <div class="container">
+    <div class="ttabs" id="ttabs">
+      <button type="button" class="ttab on" data-theme="self">Про тебя</button>
+      <button type="button" class="ttab" data-theme="couple">Ваша пара</button>
+      <button type="button" class="ttab" data-theme="conflict">Конфликты</button>
+    </div>
     <div class="tgrid">
 
       <a href="../free.html" class="card tcard-flag" data-goal="hub_attachment">
@@ -175,6 +185,25 @@
 </footer>
 
 <script src="../assets/test-icons.js" defer></script>
+<script>
+(function(){
+  var active='self', tabs=document.getElementById('ttabs');
+  var ST={hub_attachment:'self',hub_triangle:'self',hub_horsemen:'conflict',hub_alpha:'self',hub_erotic:'couple',hub_narc:'self',hub_self:'self'};
+  window.applyTestTabs=function(){
+    document.querySelectorAll('.tgrid a.card').forEach(function(c){
+      var th=c.getAttribute('data-theme')||ST[c.getAttribute('data-goal')]||'self';
+      c.style.display=(th===active)?'':'none';
+    });
+  };
+  if(tabs){ tabs.addEventListener('click',function(e){
+    var b=e.target.closest('.ttab'); if(!b)return;
+    active=b.getAttribute('data-theme');
+    tabs.querySelectorAll('.ttab').forEach(function(x){x.classList.toggle('on',x===b);});
+    window.applyTestTabs();
+  }); }
+  window.applyTestTabs();
+})();
+</script>
 <script src="/assets/tests-list.js" defer></script>
 </body>
 </html>
