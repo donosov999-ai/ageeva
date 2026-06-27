@@ -12,6 +12,8 @@
     { k: 'Телефон', label: 'Твой телефон', ph: '+7 999 123-45-67' },
     { k: 'Email', label: 'Твой email', ph: 'email@почта.ру' }
   ];
+  var PDF_MAP = { 'love-maps':'tip-privyazannosti','fondness-admiration':'blizost','turning-towards':'kak-govorit','trust':'revnost-doverie','commitment':'kogda-lyubish','harsh-startup':'kak-ssoritsya','flooding':'kak-ssoritsya','repair-attempts':'kak-ssoritsya','accepting-influence':'kak-govorit','negative-sentiment':'revnost-doverie','gridlock':'kak-ssoritsya','emotional-disengagement':'kogda-lyubish','compromise':'kak-ssoritsya','shared-meaning':'kogda-lyubish','respect-boundaries':'uvazhenie-granitsy','quality-romance':'blizost','sex-satisfaction-3d':'blizost','meta-emotions':'kak-govorit','chaos-control':'nevidimyy-trud','family-of-origin':'tip-privyazannosti','solvable-vs-perpetual':'kak-ssoritsya' };
+  function pdfFor(slug){ return '/assets/pdf/' + (PDF_MAP[slug] || 'tip-privyazannosti') + '.pdf'; }
 
   function scale() { return (test.scale && test.scale.length) ? test.scale : ['Да, точно', 'Скорее да', 'Скорее нет', 'Нет']; }
   function maxScore() { return (test.questions || []).length * (scale().length - 1); }
@@ -128,7 +130,7 @@
     var pairBtn = test.pair ? '<button type="button" class="btn btn-ghost btn-lg" id="quizPair">Сравнить с партнёром →</button>' : '';
     res.innerHTML = '<div class="qresult"><span class="eyebrow">Результат</span><h2>' + esc(band ? band.title : '') + '</h2>' +
       '<div class="qbar"><span style="width:' + pct + '%"></span></div><p class="qscore">' + score + ' из ' + max + '</p>' +
-      '<p>' + esc(band ? band.text : '') + '</p>' + (captured ? '<p style="color:var(--rose-ink);font-weight:600;font-size:.92rem">✓ Результат сохранён — пришлём тебе и при желании разберём глубже.</p>' : '') + (test.help ? test.help : '') +
+      '<p>' + esc(band ? band.text : '') + '</p>' + (captured ? '<p style="color:var(--rose-ink);font-weight:600;font-size:.92rem">✓ Результат сохранён — пришлём тебе и при желании разберём глубже.</p>' : '') + (test.help ? test.help : '') + '<div style="margin:20px 0 4px;text-align:center"><a class="btn btn-primary btn-lg cta-shine" href="' + pdfFor(test.slug) + '" target="_blank" rel="noopener" data-goal="pdf_download">📄 Скачать разбор по этой теме (PDF)</a></div>' +
       '<div class="qcta"><p class="lead">Это один из «этажей» крепких отношений по Готтману. На курсе «Отношения длиною в жизнь» собираем всю картину — шаг за шагом.</p>' +
       '<div class="btn-row center"><a class="btn btn-primary btn-lg" href="/course.html">О курсе →</a>' + pairBtn + '<a class="btn btn-ghost btn-lg" href="/tests/">Другие тесты</a></div></div>' +
       '<button type="button" class="qretry" id="quizRetry">Пройти заново</button></div>';

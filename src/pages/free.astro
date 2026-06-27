@@ -241,7 +241,7 @@ import Layout from '../layouts/Layout.astro';
     else if(max==='wave'){ rec='<strong>Тревожная.</strong> Учись успокаивать себя сама (техника 5-4-3-2-1, дыхание 4-7-8) ДО того, как «дёргать» партнёра. Если партнёр избегающий — твоя тревога его пугает; вместо проверок скажи прямо: «мне нужно подтверждение».'; }
     else{ rec='<strong>Избегающая.</strong> Учись оставаться в контакте 20 минут, даже когда хочется уйти. Если партнёр тревожный — твой уход для него триггер; вместо исчезновения — «мне нужно 20 минут, я вернусь».'; }
     html+='<div class="note">'+rec+'</div>';
-    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Поделиться результатом →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Разобрать на курсе →</a></div></div>';
+    html+='<div class="atest-btns"><a class="btn btn-primary cta-shine" href="/assets/pdf/tip-privyazannosti.pdf" target="_blank" rel="noopener" data-goal="pdf_download">📄 Скачать разбор (PDF)</a><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Разобрать на курсе →</a><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Поделиться →</button></div></div>';
     html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>Для пары: ловушка «тревожный + избегающий»</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">Самый частый цикл: одна требует близости — другой отступает — первая паникует и требует ещё — второй отступает дальше. Это «преследователь — отстраняющийся» (Сью Джонсон, ЭФТ). Выход: оба учатся <strong>называть цикл</strong>, а не воевать в нём.</p></div>';
     var box=document.getElementById('result');
     box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
@@ -271,8 +271,9 @@ import Layout from '../layouts/Layout.astro';
     var send = window.SB ? SB.rpc('valya_lead_add',{p_name:name,p_contact:contact,p_source:'free-test',p_result:window.__attachResult||null,p_consent:true}) : Promise.reject('no-sb');
     send.then(function(){
       form.querySelectorAll('input,button,label,div').forEach(function(el){ el.style.display='none'; });
-      show('Спасибо'+(name?(', '+name):'')+'! Записала твой контакт — пришлю разбор типа привязанности и PDF-гайд в ближайшее время.',true);
+      show('Спасибо'+(name?(', '+name):'')+'! Твой разбор готов — скачивай. Копию пришлю и на твой контакт.',true);
       msg.style.fontSize='1.05rem'; msg.style.padding='16px 18px';
+      msg.innerHTML += '<br><br><a class="btn btn-primary cta-shine" href="/assets/pdf/tip-privyazannosti.pdf" target="_blank" rel="noopener" data-goal="pdf_download">📄 Скачать PDF-разбор «Тип привязанности»</a>';
     }).catch(function(){
       btn.disabled=false; btn.textContent=old;
       show('Не получилось отправить. Напиши мне в Telegram — кнопка справа внизу.',false);
