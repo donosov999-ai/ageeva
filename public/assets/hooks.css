@@ -101,6 +101,24 @@ body.text-lg { font-size: 20.5px; }
 .tg-ask { text-align: center; margin-top: 24px; color: var(--muted); }
 .tg-ask a { color: var(--rose-ink); font-weight: 700; }
 
+/* ── Модалка заявки на курс ─────────────────────────────── */
+.capply-ov{position:fixed;inset:0;z-index:130;background:rgba(60,40,38,.5);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.2s}
+.capply-ov.show{opacity:1;visibility:visible}
+.capply{background:#fffdfb;border-radius:20px;padding:30px 28px;max-width:430px;width:100%;position:relative;box-shadow:0 20px 60px rgba(120,60,55,.28);max-height:92vh;overflow:auto}
+.capply h3{font-family:var(--serif);font-size:1.5rem;margin:0 0 8px;color:var(--ink)}
+.capply>p{color:var(--ink);line-height:1.6;margin:0 0 4px}
+.capply-tier{color:var(--rose-ink)!important;font-size:.95rem;margin:0 0 16px!important}
+.capply label{display:block;font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:5px}
+.capply input[type=text]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;box-sizing:border-box;background:#fff}
+.capply input[type=text]:focus{outline:none;border-color:var(--rose-deep,#be7e75)}
+.capply-chk{display:flex;gap:9px;align-items:flex-start;font-size:.82rem!important;font-weight:400!important;color:var(--muted);margin:14px 0!important;cursor:pointer;line-height:1.4}
+.capply-chk input{width:auto;margin-top:3px;flex:0 0 auto}
+.capply-chk a{color:var(--rose-ink);text-decoration:underline}
+.capply #capplyGo{width:100%;margin-top:4px}
+.capply-msg{font-size:.88rem;margin:10px 0 0;min-height:1em;color:var(--muted)}
+.capply-msg.bad{color:#C0524B}
+.capply-x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--muted);cursor:pointer}
+
 /* ── SEO-спойлер ────────────────────────────────────────── */
 .seo-spoiler { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 34px; }
 .seo-spoiler details { border-top: 1px solid var(--line); padding-top: 18px; }
