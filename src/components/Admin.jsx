@@ -45,7 +45,7 @@ const BLOCK_LABEL = {}; BLOCK_TYPES.forEach((t) => { BLOCK_LABEL[t.type] = t.lab
 
 const TABS = [
   ['main', 'Главная'], ['about', 'Обо мне'], ['reviews', 'Отзывы'],
-  ['posts', 'Блог'], ['pages', 'Страницы'], ['tests', 'Тесты'], ['photos', 'Фото'], ['leads', 'Заявки'],
+  ['posts', 'Блог'], ['pages', 'Страницы'], ['tests', 'Тесты'], ['photos', 'Фото'], ['leads', 'Заявки'], ['results', 'Результаты тестов'],
 ];
 
 // многоабзацный текст → JSX (для превью)
@@ -77,6 +77,7 @@ export default function Admin() {
   const [leads, setLeads] = useState(null);
   const [pages, setPages] = useState(null);
   const [tests, setTests] = useState(null);
+  const [results, setResults] = useState(null);
   const [editing, setEditing] = useState(null);
 
   function flash(msg, kind) {
@@ -98,6 +99,7 @@ export default function Admin() {
     call('valya_leads_all').then(setLeads).catch(() => setLeads([]));
     call('valya_pages_all').then(setPages).catch(() => setPages([]));
     call('valya_tests_all').then(setTests).catch(() => setTests([]));
+    call('valya_test_results_all').then(setResults).catch(() => setResults([]));
   }
   function loadPages() { call('valya_pages_all').then(setPages).catch(() => setPages([])); }
 
@@ -206,6 +208,7 @@ export default function Admin() {
   function delPost(it, idx) { if (!confirm('Удалить эту запись?')) return; if (!it.id) { drop(setPosts, idx); return; } call('valya_post_delete', { p_id: it.id }).then(() => drop(setPosts, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
 
   function delLead(it, idx) { if (!confirm('Удалить эту заявку?')) return; call('valya_lead_delete', { p_id: it.id }).then(() => drop(setLeads, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
+  function delResult(it, idx) { if (!confirm('Удалить эту запись?')) return; call('valya_test_result_delete', { p_id: it.id }).then(() => drop(setResults, idx)).catch(() => flash('Не удалось удалить', 'bad')); }
 
   function toggleTest(it, idx) { call('valya_test_set_enabled', { p_id: it.id, p_enabled: !it.enabled }).then(() => { patch(setTests, idx, 'enabled', !it.enabled); flash(it.enabled ? 'Тест выключен — обнови сайт' : 'Тест включён — обнови сайт', 'ok'); }).catch(() => flash('Не удалось изменить', 'bad')); }
 
@@ -476,6 +479,19 @@ export default function Admin() {
                   <a class="ed-btn ed-g ed-sm" href={'/test.html?s=' + encodeURIComponent(it.slug)} target="_blank" rel="noopener" style="text-decoration:none;margin:0">↗ открыть</a>
                   <label class="ed-chk" style="margin:0"><input type="checkbox" checked={!!it.enabled} onChange={() => toggleTest(it, idx)} /> на сайте</label>
                 </span>
+              </div>
+            ))}
+          </Section>
+        )}
+        {tab === 'results' && (
+          <Section title="Результаты тестов" hint="Кто прошёл тест и оставил контакт. Напиши и предложи глубокий разбор. Эти заявки также дублируются тебе на почту.">
+            {results == null ? <Loading /> : results.length === 0 ? <Empty t="Пока никто не оставил контакт на тесте." /> : results.map((it, idx) => (
+              <div class="ed-card ed-lead" key={it.id}>
+                <div>
+                  <b>{it.name || '(без имени)'}</b> · <span class="ed-contact">{it.contact}</span>
+                  <div class="ed-lead-meta">«{it.test_title}» → <b>{it.band_title}</b> ({it.score}/{it.max_score}) · {it.channel || '—'} · {it.created_at ? new Date(it.created_at).toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''}</div>
+                </div>
+                <button class="ed-btn ed-d ed-sm" onClick={() => delResult(it, idx)}>Удалить</button>
               </div>
             ))}
           </Section>
