@@ -118,6 +118,11 @@ body.text-lg { font-size: 20.5px; }
 .capply-msg{font-size:.88rem;margin:10px 0 0;min-height:1em;color:var(--muted)}
 .capply-msg.bad{color:#C0524B}
 .capply-x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--muted);cursor:pointer}
+.capply-chans{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+.capply-ch{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);transition:.15s}
+.capply-ch.on{background:var(--rose-deep,#be7e75);border-color:var(--rose-deep,#be7e75);color:#fff}
+.capply-req{color:var(--rose-deep,#be7e75)}
+.capply input[type=text].miss{border-color:#C0524B}
 
 /* ── SEO-спойлер ────────────────────────────────────────── */
 .seo-spoiler { max-width: var(--maxw); margin: 0 auto; padding: 0 24px 34px; }
