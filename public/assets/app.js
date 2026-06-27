@@ -91,7 +91,7 @@
     }
 
     // ── 6. EXIT-INTENT (десктоп, 15с, 1 раз/сессию) ────────
-    var canExit = !("ontouchstart" in window) && window.innerWidth > 768;
+    var canExit = !("ontouchstart" in window) && window.innerWidth > 768 && !!document.querySelector(".site-header");
     if (canExit && !sessionStorage.getItem("ageeva_exit") && page !== "free") {
       var armed = false;
       setTimeout(function () { armed = true; }, 15000);

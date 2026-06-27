@@ -4,25 +4,40 @@
    back-to-top · Aa · trust · SEO-спойлер · отзывы-свайп
    =========================================================== */
 
+/* фолбэк-переменные — чтобы бар/dock работали и на страницах без style.css (старые статичные тесты) */
+:root{--cream:#FCF8F3;--cream-2:#F7ECE4;--blush:#F4E3DC;--blush-2:#FBEEE9;--rose:#D7A39B;--rose-deep:#BE7E75;--rose-ink:#9A5F57;--ink:#4A403A;--muted:#8B7C73;--line:#EADFD6;--shadow-sm:0 6px 22px rgba(120,90,80,.08);}
+
 /* Aa — крупнее текст */
 body.text-lg { font-size: 20.5px; }
 
 /* ── Мобильный нижний бар ───────────────────────────────── */
-.mbar { display: none; }
+.mbar {
+  display: flex; position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 95;
+  background: rgba(252,248,243,.97); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 10px 30px rgba(120,90,80,.18);
+  padding: 6px; gap: 2px;
+}
+.mbar a {
+  display: flex; align-items: center; gap: 7px; padding: 9px 17px; border-radius: 999px;
+  font-size: .86rem; font-weight: 700; color: var(--muted); text-decoration: none;
+  transition: background .15s, color .15s; white-space: nowrap;
+}
+.mbar a:hover { color: var(--rose-ink); background: var(--blush-2); }
+.mbar a.is-active { color: #fff; background: var(--rose-deep); }
+.mbar__i { font-size: 1rem; line-height: 1; }
 @media (max-width: 768px) {
   .mbar {
-    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-    background: rgba(252,248,243,.97); backdrop-filter: blur(10px);
+    left: 0; right: 0; transform: none; bottom: 0; border-radius: 0; border: 0;
     border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(120,90,80,.10);
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding: 0; padding-bottom: env(safe-area-inset-bottom, 0); gap: 0;
   }
   .mbar a {
-    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
-    padding: 9px 4px 8px; font-size: .72rem; font-weight: 700; color: var(--muted);
-    text-decoration: none; border-top: 2px solid transparent;
+    flex: 1; flex-direction: column; gap: 2px; padding: 9px 3px 8px;
+    font-size: .7rem; border-radius: 0; border-top: 2px solid transparent;
   }
-  .mbar a.is-active { color: var(--rose-ink); border-top-color: var(--rose-deep); }
-  .mbar__i { font-size: 1.15rem; line-height: 1; }
+  .mbar a:hover { background: transparent; }
+  .mbar a.is-active { color: var(--rose-ink); background: transparent; border-top-color: var(--rose-deep); }
+  .mbar__i { font-size: 1.15rem; }
   body { padding-bottom: 64px; }
 }
 
