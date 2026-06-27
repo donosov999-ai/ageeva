@@ -51,7 +51,7 @@
     // ── 2. ДЕСКТОП DOCK: TG · Aa · ↑ ───────────────────────
     var dock = el("div", { class: "dock" });
     dock.innerHTML =
-      '<a class="dock__b dock__tg" href="' + TG_URL + '" target="_blank" rel="noopener" title="Написать в Telegram" data-goal="tg_click">✈</a>' +
+      '<a class="dock__tg" href="' + TG_URL + '" target="_blank" rel="noopener" title="Написать Вале в Telegram" data-goal="tg_click">✈ Написать</a>' +
       '<button class="dock__b" id="aaBtn" title="Крупнее текст" aria-label="Размер текста">Aa</button>' +
       '<button class="dock__b dock__up" id="upBtn" title="Наверх" aria-label="Наверх">↑</button>';
     document.body.appendChild(dock);
