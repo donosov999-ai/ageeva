@@ -40,8 +40,9 @@
     // ── 1. МОБ. НИЖНИЙ БАР: Тест · Курс · Telegram ──────────
     var bar = el("nav", { class: "mbar", "aria-label": "Быстрые действия" });
     bar.innerHTML =
-      '<a href="free.html" data-p="free" data-goal="bar_test"><span class="mbar__i">✦</span>Тест</a>' +
-      '<a href="course.html" data-p="course" data-goal="bar_course"><span class="mbar__i">❤</span>Курс</a>' +
+      '<a href="/free.html" data-p="free" data-goal="bar_test"><span class="mbar__i">✦</span>Тест</a>' +
+      '<a href="/tests/" data-p="tests" data-goal="bar_tests"><span class="mbar__i">✶</span>Тесты</a>' +
+      '<a href="/course.html" data-p="course" data-goal="bar_course"><span class="mbar__i">❤</span>Курс</a>' +
       '<a href="' + TG_URL + '" target="_blank" rel="noopener" data-goal="tg_click"><span class="mbar__i">✈</span>Telegram</a>';
     document.body.appendChild(bar);
     var act = bar.querySelector('[data-p="' + page + '"]');
@@ -109,7 +110,7 @@
         '<button class="exit-x" aria-label="Закрыть">×</button>' +
         '<h3>Не уходи с пустыми руками</h3>' +
         '<p>Пройди бесплатный тест на тип привязанности — за 5 минут поймёшь, почему ты реагируешь именно так. В подарок PDF-гайд.</p>' +
-        '<a href="free.html" class="btn btn-primary btn-lg" data-goal="exit_test">Пройти бесплатный тест →</a>' +
+        '<a href="/free.html" class="btn btn-primary btn-lg" data-goal="exit_test">Пройти бесплатный тест →</a>' +
         '</div>';
       document.body.appendChild(ov);
       requestAnimationFrame(function () { ov.classList.add("show"); });
