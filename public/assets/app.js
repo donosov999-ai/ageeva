@@ -50,10 +50,11 @@
     // ── 2. ДЕСКТОП DOCK: TG · Aa · ↑ ───────────────────────
     var dock = el("div", { class: "dock" });
     dock.innerHTML =
-      '<a class="dock__b" href="' + TG_URL + '" target="_blank" rel="noopener" title="Написать в Telegram" data-goal="tg_click">✈</a>' +
+      '<a class="dock__b dock__tg" href="' + TG_URL + '" target="_blank" rel="noopener" title="Написать в Telegram" data-goal="tg_click">✈</a>' +
       '<button class="dock__b" id="aaBtn" title="Крупнее текст" aria-label="Размер текста">Aa</button>' +
       '<button class="dock__b dock__up" id="upBtn" title="Наверх" aria-label="Наверх">↑</button>';
     document.body.appendChild(dock);
+    dock.classList.add("show");
 
     // ── 3. BACK-TO-TOP (моб. отдельная кнопка над баром) ────
     var upM = el("button", { class: "to-top", "aria-label": "Наверх" }, "↑");
@@ -64,7 +65,7 @@
     function onScroll() {
       var y = window.pageYOffset;
       upM.classList.toggle("show", y > 600);
-      dock.classList.toggle("show", y > 400);
+      document.getElementById("upBtn").classList.toggle("dock__up--on", y > 400);
       if (stickyCTA) stickyCTA.classList.toggle("show", y > 700);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
