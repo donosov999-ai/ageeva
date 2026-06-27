@@ -13,7 +13,7 @@
       if (!rows || !rows.length) return;
       box.innerHTML = rows.map(function (t) {
         var ico = ICO[t.goal] || '❖';
-        return '<a href="/test.html?s=' + encodeURIComponent(t.slug) + '" class="card" data-goal="gott_' + esc(t.slug) + '" data-theme="' + (THEME[t.goal] || 'couple') + '">' +
+        return '<a href="/test/' + encodeURIComponent(t.slug) + '.html" class="card" data-goal="gott_' + esc(t.slug) + '" data-theme="' + (THEME[t.goal] || 'couple') + '">' +
           '<span class="ico">' + ico + '</span><h3>' + esc(t.title) + '</h3>' +
           '<p>' + esc(t.subtitle || '') + '</p><span class="more">Пройти тест →</span></a>';
       }).join('');

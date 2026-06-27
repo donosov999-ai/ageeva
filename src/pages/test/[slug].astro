@@ -1,0 +1,100 @@
+---
+// Пре-рендеренная страница теста: /test/<slug>.html — со своими title/meta/H1/canonical/JSON-LD.
+// Сам опросник дорисовывает test-render.js (читает slug из пути). Старый /test.html?s= тоже работает.
+const METRIKA = `(function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109819083', 'ym');
+    ym(109819083, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`;
+
+export async function getStaticPaths() {
+  const SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dnZoZWVvY29iaGlvdGhmZ2VpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTQ1ODcsImV4cCI6MjA5MjA5MDU4N30.IJ5i3UkC0GoIWGFnLKmc1UeX2iqn8LzNYfvEfj-3hIY';
+  let rows = [];
+  try {
+    const r = await fetch(SB_URL + '/rest/v1/valya_tests?enabled=eq.true&select=slug,title,subtitle', { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } });
+    rows = await r.json();
+    if (!Array.isArray(rows)) rows = [];
+  } catch (e) { rows = []; }
+  return rows.map((t) => ({ params: { slug: t.slug }, props: { test: t } }));
+}
+
+const { test } = Astro.props;
+const title = test.title || 'Тест';
+const desc = (test.subtitle || 'Бесплатный тест об отношениях от психолога Валентины Агеевой. Без регистрации.').slice(0, 165);
+const canonical = `https://ageeva.win/test/${test.slug}.html`;
+const ogTitle = `${title} — тест об отношениях`;
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": title,
+  "description": desc,
+  "url": canonical,
+  "inLanguage": "ru",
+  "about": { "@type": "Thing", "name": "Психология отношений" },
+  "author": { "@type": "Person", "name": "Валентина Агеева", "url": "https://ageeva.win/about.html" },
+  "isAccessibleForFree": true
+};
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<script is:inline type="text/javascript" set:html={METRIKA}></script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<title>{title} — тест об отношениях · Валентина Агеева</title>
+<meta name="description" content={desc}>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href={canonical}>
+<meta name="author" content="Валентина Агеева">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Валентина Агеева — психология отношений">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={desc}>
+<meta property="og:image" content="https://ageeva.win/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={ogTitle}>
+<meta name="twitter:description" content={desc}>
+<meta name="twitter:image" content="https://ageeva.win/assets/og-cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/quiz.css">
+<link rel="stylesheet" href="/assets/hooks.css">
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonld)}></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">Отношения <span>длиною в жизнь</span></a>
+    <nav class="nav-links">
+      <a href="/about.html">Обо мне</a>
+      <a href="/course.html">Курс</a>
+      <a href="/tests/">Тесты</a>
+      <a href="/free.html">Бесплатное</a>
+      <a href="/free.html" class="btn btn-primary btn-sm nav-cta">Бесплатный тест</a>
+    </nav>
+  </div>
+</header>
+<div id="testRoot">
+  <section class="hero"><div class="container narrow center">
+    <span class="eyebrow">Тест об отношениях</span>
+    <h1>{title}</h1>
+    <p class="lead">{desc}</p>
+  </div></section>
+  <div class="container narrow center" style="padding:46px 24px;color:var(--muted)">Загружаю тест…</div>
+</div>
+<script src="/assets/test-render.js" is:inline></script>
+<script src="/assets/app.js" is:inline></script>
+</body>
+</html>

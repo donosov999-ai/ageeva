@@ -9,7 +9,7 @@
   // каналы связи: подпись поля + placeholder
   var CHANS = [
     { k: 'Telegram', label: 'Твой Telegram', ph: '@username или ссылка' },
-    { k: 'Макс', label: 'Твой Макс', ph: 'телефон или @ник в MAX' },
+    { k: 'MAX', label: 'Твой MAX', ph: 'телефон или @ник в MAX (мессенджер)' },
     { k: 'Телефон', label: 'Твой телефон', ph: '+7 999 123-45-67' },
     { k: 'Email', label: 'Твой email', ph: 'email@почта.ру' }
   ];

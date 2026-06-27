@@ -8,7 +8,7 @@
   var test = null, answers = [], result1 = null, isPartner = false, captured = false;
   var CHANS = [
     { k: 'Telegram', label: 'Твой Telegram', ph: '@username или ссылка' },
-    { k: 'Макс', label: 'Твой Макс', ph: 'телефон или @ник в MAX' },
+    { k: 'MAX', label: 'Твой MAX', ph: 'телефон или @ник в MAX (мессенджер)' },
     { k: 'Телефон', label: 'Твой телефон', ph: '+7 999 123-45-67' },
     { k: 'Email', label: 'Твой email', ph: 'email@почта.ру' }
   ];
@@ -186,6 +186,7 @@
   function mount() {
     var root = document.getElementById('testRoot'); if (!root) return;
     var slug = new URLSearchParams(location.search).get('s');
+    if (!slug) { var pm = location.pathname.match(/\/test\/([^\/]+?)\.html$/); if (pm) slug = decodeURIComponent(pm[1]); }
     if (!slug) { root.innerHTML = ph('Тест не указан'); return; }
     fetch(SB_URL + '/rest/v1/valya_tests?slug=eq.' + encodeURIComponent(slug) + '&enabled=eq.true&select=slug,title,subtitle,intro,scale,questions,bands,help,pair', { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } })
       .then(function (r) { return r.json(); })
