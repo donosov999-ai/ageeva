@@ -5,7 +5,13 @@
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function ph(t) { return '<section class="section"><div class="container narrow center" style="padding:80px 24px"><span class="eyebrow">Тест</span><h2>' + esc(t) + '</h2><hr class="rule center"><p class="lead"><a href="/tests/" style="color:var(--rose-ink)">← Все тесты</a></p></div></section>'; }
 
-  var test = null, answers = [], result1 = null, isPartner = false;
+  var test = null, answers = [], result1 = null, isPartner = false, captured = false;
+  var CHANS = [
+    { k: 'Telegram', label: 'Твой Telegram', ph: '@username или ссылка' },
+    { k: 'Макс', label: 'Твой Макс', ph: 'телефон или @ник в MAX' },
+    { k: 'Телефон', label: 'Твой телефон', ph: '+7 999 123-45-67' },
+    { k: 'Email', label: 'Твой email', ph: 'email@почта.ру' }
+  ];
 
   function scale() { return (test.scale && test.scale.length) ? test.scale : ['Да, точно', 'Скорее да', 'Скорее нет', 'Нет']; }
   function maxScore() { return (test.questions || []).length * (scale().length - 1); }
@@ -65,7 +71,56 @@
     var score = compute(), max = maxScore(), band = bandFor(score), pct = max ? Math.round(score / max * 100) : 0;
     document.getElementById('quizHint').textContent = '';
     if (isPartner) { showPair(result1, { score: score, band: band, pct: pct }); return; }
+    if (!captured && !test.help) { showCapture(score, band, pct); return; }
     showSolo(score, band, pct);
+  }
+
+  function showCapture(score, band, pct) {
+    var res = document.getElementById('quizResult');
+    var inp = 'width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;box-sizing:border-box;background:#fff';
+    var lbl = 'display:block;font-weight:700;font-size:14px;margin-bottom:5px;color:var(--ink)';
+    res.innerHTML = '<div class="qresult" style="text-align:left"><span class="eyebrow" style="display:block;text-align:center">Почти готово</span>' +
+      '<h2 style="text-align:center">Куда прислать результат?</h2>' +
+      '<p style="text-align:center;max-width:460px;margin:0 auto 20px">Оставь имя и контакт — пришлём твой результат, и сможем разобрать его глубже, если захочешь.</p>' +
+      '<form id="capForm" style="max-width:400px;margin:0 auto">' +
+      '<input type="text" id="capHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">' +
+      '<label style="' + lbl + '">Как тебя зовут</label><input id="capName" type="text" placeholder="Имя" autocomplete="name" style="' + inp + '">' +
+      '<label style="' + lbl + ';margin-top:14px">Как удобнее прислать?</label>' +
+      '<div class="capply-chans" id="capChans">' + CHANS.map(function (c, i) { return '<button type="button" class="capply-ch' + (i === 0 ? ' on' : '') + '" data-ch="' + c.k + '">' + c.k + '</button>'; }).join('') + '</div>' +
+      '<label style="' + lbl + '" id="capCLabel">Твой Telegram *</label><input id="capContact" type="text" placeholder="@username или ссылка" style="' + inp + '">' +
+      '<label style="display:flex;gap:9px;align-items:flex-start;font-size:.82rem;color:var(--muted);margin:14px 0;cursor:pointer;line-height:1.4"><input type="checkbox" id="capConsent" style="margin-top:3px;width:auto;flex:0 0 auto"> <span>Согласна на обработку данных и <a href="/privacy.html" target="_blank" rel="noopener" style="color:var(--rose-ink)">политику конфиденциальности</a></span></label>' +
+      '<button type="submit" class="btn btn-primary btn-lg" id="capGo" style="width:100%">Получить результат →</button>' +
+      '<p class="qhint" id="capMsg" style="text-align:center"></p>' +
+      '<button type="button" class="qretry" id="capSkip" style="display:block;margin:6px auto 0">Просто показать результат</button>' +
+      '</form></div>';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var channel = 'Telegram';
+    document.getElementById('capChans').addEventListener('click', function (e) {
+      var b = e.target.closest('.capply-ch'); if (!b) return;
+      channel = b.getAttribute('data-ch');
+      this.querySelectorAll('.capply-ch').forEach(function (x) { x.classList.toggle('on', x === b); });
+      var c = CHANS.filter(function (x) { return x.k === channel; })[0] || CHANS[0];
+      document.getElementById('capCLabel').textContent = c.label + ' *';
+      document.getElementById('capContact').placeholder = c.ph;
+    });
+    document.getElementById('capSkip').addEventListener('click', function () { captured = true; showSolo(score, band, pct); });
+    document.getElementById('capForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (document.getElementById('capHp').value) return;
+      var name = (document.getElementById('capName').value || '').trim();
+      var contactRaw = (document.getElementById('capContact').value || '').trim();
+      var msg = document.getElementById('capMsg');
+      if (contactRaw.length < 3) { msg.textContent = 'Оставь контакт — без него не пришлём результат.'; return; }
+      if (!document.getElementById('capConsent').checked) { msg.textContent = 'Отметь согласие на обработку данных.'; return; }
+      var btn = document.getElementById('capGo'); btn.disabled = true; btn.textContent = 'Сохраняю…';
+      fetch(SB_URL + '/rest/v1/rpc/valya_test_result_add', {
+        method: 'POST', headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_slug: test.slug, p_title: test.title, p_name: name, p_contact: channel + ': ' + contactRaw, p_channel: channel, p_score: score, p_max: maxScore(), p_band: band ? band.title : '', p_answers: answers, p_consent: true })
+      })
+        .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+        .then(function () { captured = true; if (window.ym) { try { ym(109819083, 'reachGoal', 'test_lead'); } catch (e) {} } showSolo(score, band, pct); })
+        .catch(function () { btn.disabled = false; btn.textContent = 'Получить результат →'; msg.textContent = 'Не удалось сохранить. Попробуй ещё раз.'; });
+    });
   }
 
   function showSolo(score, band, pct) {
@@ -73,7 +128,7 @@
     var pairBtn = test.pair ? '<button type="button" class="btn btn-ghost btn-lg" id="quizPair">Сравнить с партнёром →</button>' : '';
     res.innerHTML = '<div class="qresult"><span class="eyebrow">Результат</span><h2>' + esc(band ? band.title : '') + '</h2>' +
       '<div class="qbar"><span style="width:' + pct + '%"></span></div><p class="qscore">' + score + ' из ' + max + '</p>' +
-      '<p>' + esc(band ? band.text : '') + '</p>' + (test.help ? test.help : '') +
+      '<p>' + esc(band ? band.text : '') + '</p>' + (captured ? '<p style="color:var(--rose-ink);font-weight:600;font-size:.92rem">✓ Результат сохранён — пришлём тебе и при желании разберём глубже.</p>' : '') + (test.help ? test.help : '') +
       '<div class="qcta"><p class="lead">Это один из «этажей» крепких отношений по Готтману. На курсе «Отношения длиною в жизнь» собираем всю картину — шаг за шагом.</p>' +
       '<div class="btn-row center"><a class="btn btn-primary btn-lg" href="/course.html">О курсе →</a>' + pairBtn + '<a class="btn btn-ghost btn-lg" href="/tests/">Другие тесты</a></div></div>' +
       '<button type="button" class="qretry" id="quizRetry">Пройти заново</button></div>';
