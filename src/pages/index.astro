@@ -19,6 +19,7 @@ const jsonld = `{"@context":"https://schema.org","@graph":[
   cms={true}
 >
   <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
+  <link rel="preload" as="image" href="/assets/photo-hero.jpg" fetchpriority="high" slot="head">
 
 <!-- 1. HERO -->
 <section class="hero">
@@ -33,7 +34,7 @@ const jsonld = `{"@context":"https://schema.org","@graph":[
       </div>
     </div>
     <div class="photo photo--portrait">
-      <img src="/assets/photo-hero.jpg" alt="Валентина Агеева" id="photoHero">
+      <img src="/assets/photo-hero.jpg" alt="Валентина Агеева" id="photoHero" width="853" height="1280" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
