@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 
 const jsonld = `{"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://ageeva.win/#website","url":"https://ageeva.win/","name":"Валентина Агеева — психология отношений","inLanguage":"ru-RU"},
-{"@type":"Person","@id":"https://ageeva.win/#person","name":"Валентина Агеева","url":"https://ageeva.win/","jobTitle":"Наставник по отношениям","description":"Помогаю женщинам сохранять отношения и быть в них счастливыми — на основе теории привязанности, работ Джона Готтмана и Сью Джонсон.","image":"https://ageeva.win/assets/og-cover.jpg","sameAs":["https://instagram.com/ageeva_win","https://t.me/valli790"]}
+{"@type":"Person","@id":"https://ageeva.win/#person","name":"Валентина Агеева","url":"https://ageeva.win/","jobTitle":"Наставник по отношениям","description":"Помогаю женщинам сохранять отношения и быть в них счастливыми — на основе теории привязанности, работ Джона Готтмана и Сью Джонсон.","image":"https://ageeva.win/assets/og-cover.webp","sameAs":["https://instagram.com/ageeva_win","https://t.me/valli790"]}
 ]}`;
 ---
 <Layout
@@ -19,7 +19,7 @@ const jsonld = `{"@context":"https://schema.org","@graph":[
   cms={true}
 >
   <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
-  <link rel="preload" as="image" href="/assets/photo-hero.jpg" fetchpriority="high" slot="head">
+  <link rel="preload" as="image" href="/assets/photo-hero.webp" fetchpriority="high" slot="head">
 
 <!-- 1. HERO -->
 <section class="hero">
@@ -34,7 +34,7 @@ const jsonld = `{"@context":"https://schema.org","@graph":[
       </div>
     </div>
     <div class="photo photo--portrait">
-      <img src="/assets/photo-hero.jpg" alt="Валентина Агеева" id="photoHero" width="853" height="1280" fetchpriority="high" decoding="async">
+      <img src="/assets/photo-hero.webp" alt="Валентина Агеева" id="photoHero" width="853" height="1280" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -75,7 +75,7 @@ const jsonld = `{"@context":"https://schema.org","@graph":[
 <section class="section">
   <div class="container grid grid-2" style="align-items:center">
     <div class="photo photo--round">
-      <img src="/assets/photo-round2.jpg" alt="Валентина Агеева" id="photoRound" loading="lazy">
+      <img src="/assets/photo-round2.webp" alt="Валентина Агеева" id="photoRound" loading="lazy">
     </div>
     <div>
       <span class="eyebrow">Кто я</span>
