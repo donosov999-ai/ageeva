@@ -1,11 +1,37 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const published = '2026-06-01';
+const modified = new Date().toISOString().slice(0, 10);
+
+const faq = [
+  { q: '¿En qué se diferencia tu enfoque de «mereces algo mejor, déjalo y ya»?',
+    a: "No se trata de irte, sino de entender. La mayoría de los cursos enseñan a irte a la primera incomodidad. Yo te ayudo a entender qué pasa, tu parte en ello y cómo cambiarlo. Si hay algo que reparar, lo reparamos. Si no, al menos te entenderás a ti misma." },
+  { q: '¿Qué es el estilo de apego y por qué conocer el mío?',
+    a: "Es cómo te comportas en la cercanía: ansiosa, evitativa o segura. Al conocer tu estilo, entiendes por qué reaccionas así y de dónde viene. Empieza con el test gratuito de estilo de apego — 5 minutos." },
+  { q: '¿El curso funciona si mi pareja no quiere participar?',
+    a: "Sí. Empiezas por ti misma — cambias tus reacciones, y la dinámica de la pareja cambia también. La participación de tu pareja no es necesaria para que la relación empiece a mejorar." },
+  { q: '¿En qué se basa el curso — es esoterismo?',
+    a: "No. Se basa en John Gottman (45 años investigando parejas en el laboratorio), Sue Johnson (terapia probada en clínica) y la teoría del apego. Lo traduje de lo científico a lo humano, sin «siente el universo»." },
+  { q: '¿Cuánto dura el curso y cómo se hace?',
+    a: "Son 10 pasos de «otra vez peleamos» a «somos un equipo». En diferido — sola o junto a mí. El segundo grupo empieza el 26 de julio." },
+];
+
+const graph = [
+  { '@type': 'WebSite', '@id': 'https://ageeva.win/#website', url: 'https://ageeva.win/', name: 'Валентина Агеева — психология отношений', inLanguage: 'ru-RU' },
+  { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva', url: 'https://ageeva.win/', jobTitle: 'Coach de relaciones', description: 'Ayudo a las mujeres a mantener sus relaciones y ser felices en ellas — basándome en la teoría del apego y el trabajo de John Gottman y Sue Johnson.', image: 'https://ageeva.win/assets/og-cover.webp', sameAs: ['https://instagram.com/ageeva_win', 'https://t.me/valli790'] },
+  { '@type': 'WebPage', '@id': 'https://ageeva.win/es.html#webpage', url: 'https://ageeva.win/es.html', name: 'Psicología de pareja para mujeres — Valentina Ageeva', isPartOf: { '@id': 'https://ageeva.win/#website' }, about: { '@id': 'https://ageeva.win/#person' }, inLanguage: 'es', datePublished: published, dateModified: modified },
+  { '@type': 'Course', '@id': 'https://ageeva.win/#course', name: 'Relaciones para toda la vida', description: 'Un curso de 10 pasos: cómo salvar tu relación, romper el ciclo de peleas y volver a escuchar a tu pareja. Basado en los métodos de John Gottman, Sue Johnson y la teoría del apego.', url: 'https://ageeva.win/es/course.html', inLanguage: 'es', provider: { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva' }, hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', startDate: '2026-07-26', inLanguage: 'es' } },
+  { '@type': 'BreadcrumbList', '@id': 'https://ageeva.win/es.html#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://ageeva.win/es.html' }] },
+  { '@type': 'FAQPage', '@id': 'https://ageeva.win/es.html#faq', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 ---
 <Layout
   lang="es"
   altPath=""
   i18n={true}
-  title="Psicología de pareja para mujeres — Valentina Ageeva | Por la familia, sin «déjalo y ya»"
+  title="Psicología de pareja para mujeres — Valentina Ageeva"
   description="Ayudo a las mujeres a quedarse en su relación y a ser felices en ella. Test gratuito de estilo de apego y el curso «Relaciones para toda la vida»."
   keywords="psicología de pareja, cómo salvar una relación, test de estilo de apego, coach de relaciones para mujeres, Gottman, Sue Johnson, Valentina Ageeva"
   canonical="https://ageeva.win/es.html"
@@ -14,6 +40,8 @@ import Layout from '../../layouts/Layout.astro';
   twTitle="Psicología de pareja para mujeres — Valentina Ageeva"
   twDescription="Quédate en tu relación y sé feliz. Test gratuito de estilo de apego + el curso «Relaciones para toda la vida»."
 >
+  <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
+  <link rel="preload" as="image" href="/assets/photo-hero.webp" fetchpriority="high" slot="head">
 
 <!-- 1. HERO -->
 <section class="hero">
@@ -69,7 +97,7 @@ import Layout from '../../layouts/Layout.astro';
 <section class="section">
   <div class="container grid grid-2" style="align-items:center">
     <div class="photo photo--round">
-      <img src="/assets/photo-round2.webp" alt="Valentina Ageeva" loading="lazy">
+      <img src="/assets/photo-round2.webp" alt="Valentina Ageeva — coach de relaciones" width="934" height="1280" loading="lazy" decoding="async">
     </div>
     <div>
       <span class="eyebrow">Quién soy</span>
@@ -153,6 +181,25 @@ import Layout from '../../layouts/Layout.astro';
       <div class="quote"><p>«Había resistencia a hacer las tareas — precisamente porque sabía que funciona. De esas de «quiero, pero escuece». Gracias por enseñar a usar la inteligencia con los hombres de un modo femenino.»</p><div class="who">— participante del primer grupo</div></div>
       <div class="quote"><p>«Se convirtió en un punto de inflexión interno. La forma de explicar es viva, sin guiones gastados. El feedback te ayuda a verte desde fuera. Lo siento — esto es solo el principio.»</p><div class="who">— participante del primer grupo</div></div>
       <div class="quote"><p>«No esperaba que funcionara tan rápido. El próximo año o dos voy a seguir trabajando en mí para convertirme en una Mujer de las sanas. En el colegio no enseñan lo que da este curso — y es una pena.»</p><div class="who">— participante del primer grupo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container narrow">
+    <div class="center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Lo que suelen preguntar</h2>
+      <hr class="rule center">
+    </div>
+    <div class="faq" style="margin-top:26px">
+      {faq.map((f) => (
+        <details class="faq-item" style="border-bottom:1px solid var(--line,#ecdfd8);padding:16px 2px">
+          <summary style="font-family:var(--serif,Georgia,serif);font-size:19px;color:var(--rose-ink,#7a3b52);cursor:pointer">{f.q}</summary>
+          <p style="margin:12px 0 0;color:var(--muted,#6b5d5a);line-height:1.65">{f.a}</p>
+        </details>
+      ))}
     </div>
   </div>
 </section>
