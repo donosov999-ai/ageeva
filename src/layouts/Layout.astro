@@ -22,15 +22,15 @@ const STR = {
   ru: { b1: 'Отношения', b2: 'длиною в жизнь', about: 'Обо мне', course: 'Курс', tests: 'Тесты', free: 'Бесплатное', freeBtn: 'Бесплатный тест',
     tag: 'Живая реальность вместо красивой обёртки из соцсетей. И живая ты.',
     sec: 'Разделы', cAbout: 'Обо мне — моя история', cCourse: 'Курс «Отношения длиною в жизнь»', cTests: 'Бесплатные тесты', cBlog: 'Блог про отношения',
-    con: 'Связь', cTg: 'Написать в Telegram', cPdf: 'Получить PDF-гайд', cPrices: 'Тарифы курса', offer: 'Оферта', privacy: 'Политика конфиденциальности', locale: 'ru_RU' },
+    con: 'Связь', cTg: 'Написать в Telegram', cBot: 'Бот-помощница в Telegram', cPdf: 'Получить PDF-гайд', cPrices: 'Тарифы курса', offer: 'Оферта', privacy: 'Политика конфиденциальности', locale: 'ru_RU' },
   en: { b1: 'Relationships', b2: 'for a lifetime', about: 'About', course: 'Course', tests: 'Tests', free: 'Free', freeBtn: 'Free test',
     tag: 'Real life instead of a pretty social-media wrapper. And the real you.',
     sec: 'Sections', cAbout: 'About — my story', cCourse: 'Course «Relationships for a Lifetime»', cTests: 'Free tests', cBlog: 'Relationship blog',
-    con: 'Contact', cTg: 'Message on Telegram', cPdf: 'Get the PDF guide', cPrices: 'Course pricing', offer: 'Terms', privacy: 'Privacy Policy', locale: 'en_US' },
+    con: 'Contact', cTg: 'Message on Telegram', cBot: 'AI assistant on Telegram', cPdf: 'Get the PDF guide', cPrices: 'Course pricing', offer: 'Terms', privacy: 'Privacy Policy', locale: 'en_US' },
   es: { b1: 'Relaciones', b2: 'para toda la vida', about: 'Sobre mí', course: 'Curso', tests: 'Tests', free: 'Gratis', freeBtn: 'Test gratis',
     tag: 'La vida real en lugar de un bonito envoltorio de redes. Y la verdadera tú.',
     sec: 'Secciones', cAbout: 'Sobre mí — mi historia', cCourse: 'Curso «Relaciones para toda la vida»', cTests: 'Tests gratis', cBlog: 'Blog de relaciones',
-    con: 'Contacto', cTg: 'Escribir por Telegram', cPdf: 'Recibir la guía PDF', cPrices: 'Precios del curso', offer: 'Términos', privacy: 'Política de privacidad', locale: 'es_ES' },
+    con: 'Contacto', cTg: 'Escribir por Telegram', cBot: 'Asistente IA en Telegram', cPdf: 'Recibir la guía PDF', cPrices: 'Precios del curso', offer: 'Términos', privacy: 'Política de privacidad', locale: 'es_ES' },
 };
 const T = STR[lang] || STR.ru;
 const base = lang === 'ru' ? '' : '/' + lang;
@@ -140,6 +140,7 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
       <div>
         <h4>{T.con}</h4>
         <a href="https://t.me/valli790" target="_blank" rel="noopener" data-goal="tg_click">{T.cTg}</a>
+        <a href="https://t.me/ageevawin_bot" target="_blank" rel="noopener" data-goal="bot_click">{T.cBot}</a>
         <a href="https://instagram.com/ageeva_win" target="_blank" rel="noopener" data-goal="ig_click">Instagram @ageeva_win</a>
         <a href={L('free.html')}>{T.cPdf}</a>
       </div>
