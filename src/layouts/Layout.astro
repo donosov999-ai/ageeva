@@ -154,5 +154,14 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 {cms && <script src="/assets/cms.js" defer is:inline></script>}
 <script src="/assets/app.js" defer is:inline></script>
 <slot name="scripts" />
+
+<script is:inline>
+  window.chatwootSettings = { locale: "ru", position: "right", launcherTitle: "Спросить Валю" };
+  (function(d,t){var BASE="https://chatwoot.asibots.pro";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE+"/packs/js/sdk.js";g.defer=!0;g.async=!0;s.parentNode.insertBefore(g,s);
+    g.onload=function(){window.chatwootSDK.run({websiteToken:"9gdCjmdnAyMcEp62AstCAM98",baseUrl:BASE});};
+  })(document,"script");
+</script>
 </body>
 </html>
