@@ -75,5 +75,13 @@ body{
   .card,.btn-ghost,.btn-primary{ transition:none !important; }
   .card:hover{ transform:none !important; }
 }
-/* fixed-фон лагает на мобильных → обычная прокрутка */
-@media (max-width:640px){ body{ background-attachment: scroll !important; } }
+/* fixed-фон лагает на мобильных → обычная прокрутка; + нижний тулбар не должен перекрываться виджетами */
+@media (max-width:640px){
+  body{ background-attachment: scroll !important; }
+  /* нижний тулбар .mbar — safe-area под home indicator iPhone */
+  .mbar{ padding-bottom: env(safe-area-inset-bottom, 0) !important; }
+  /* питомец на мобиле скрыт (дублирует Telegram в тулбаре, крупный кадр крыл CTA); на десктопе остаётся */
+  #mascot-host{ display: none !important; }
+  /* багфикс-кнопка поднята НАД нижним тулбаром, а не поверх него */
+  #bugfix-root{ position: fixed !important; left: 10px !important; bottom: calc(64px + env(safe-area-inset-bottom, 0)) !important; z-index: 90 !important; }
+}
