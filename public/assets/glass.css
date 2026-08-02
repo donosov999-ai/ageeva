@@ -1,0 +1,79 @@
+/* ===========================================================
+   Apple Liquid Glass — слой ПОВЕРХ style.css (не заменяет).
+   Своя айдентика Вали: rose / cream / gold. §8 INFRA_REGISTRY.
+   Меняет только внешность существующих элементов, не вёрстку.
+   =========================================================== */
+
+/* --- фактура под стеклом (§8 правило: без неё стекло = серая муть) --- */
+body{
+  background:
+    radial-gradient(42vw 42vw at 6% 4%,  rgba(215,163,155,.50), transparent 62%),
+    radial-gradient(40vw 40vw at 94% 26%, rgba(201,168,118,.44), transparent 62%),
+    radial-gradient(38vw 38vw at 28% 92%, rgba(232,207,198,.46), transparent 62%),
+    radial-gradient(34vw 34vw at 80% 78%, rgba(215,163,155,.36), transparent 62%),
+    linear-gradient(160deg,#FCF8F3 0%,#F7ECE4 60%,#F4E3DC 100%) !important;
+  background-attachment: fixed !important;
+}
+/* секции прозрачны → фактура просвечивает по всему сайту */
+.section, .bg-cream2, .bg-blush, .bg-white{ background: transparent !important; }
+
+/* --- стекло на существующих элементах --- */
+.site-header{
+  background: rgba(255,255,255,.45) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid rgba(255,255,255,.55);
+  box-shadow: 0 8px 30px rgba(150,105,95,.12), inset 0 1px 0 rgba(255,255,255,.7);
+}
+.card{
+  position: relative; overflow: hidden;
+  background: rgba(255,255,255,.40) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,.6) !important;
+  box-shadow: 0 20px 50px rgba(150,105,95,.16), inset 0 1px 0 rgba(255,255,255,.8) !important;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+}
+.card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background: radial-gradient(340px circle at 50% -10%, rgba(255,255,255,.55), transparent 60%);
+  opacity:0; transition: opacity .4s;
+}
+.card:hover::after{ opacity:1; }
+.card > *{ position: relative; z-index: 1; }
+.card:hover{
+  transform: translateY(-5px); border-color: rgba(215,163,155,.7) !important;
+  box-shadow: 0 30px 64px rgba(150,105,95,.24), 0 0 0 1px rgba(215,163,155,.3), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+.dock{
+  background: rgba(255,255,255,.5) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.7); backdrop-filter: blur(24px) saturate(1.7);
+  border: 1px solid rgba(255,255,255,.62) !important;
+  box-shadow: 0 20px 50px rgba(150,105,95,.2), inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+/* --- интерактив кнопок: idle-стекло → hover-заливка цветом действия (§8) --- */
+.btn-ghost{
+  -webkit-backdrop-filter: blur(12px) saturate(1.4); backdrop-filter: blur(12px) saturate(1.4);
+  background: rgba(255,255,255,.38) !important; border: 1px solid rgba(255,255,255,.6) !important;
+  transition: .22s ease;
+}
+.btn-ghost:hover{
+  background: rgba(215,163,155,.92) !important; color:#fff !important;
+  transform: translateY(-2px); box-shadow: 0 12px 28px rgba(190,126,117,.35);
+}
+.btn-primary{ transition: .22s ease; }
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 32px rgba(190,126,117,.4); }
+
+/* --- доступность (§8: иначе стекло = баг) --- */
+@media (prefers-reduced-transparency: reduce){
+  .site-header,.card,.dock,.btn-ghost{
+    -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+    background: rgba(255,255,255,.93) !important;
+  }
+  body{ background: linear-gradient(160deg,#FCF8F3,#F4E3DC) !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  .card,.btn-ghost,.btn-primary{ transition:none !important; }
+  .card:hover{ transform:none !important; }
+}
+/* fixed-фон лагает на мобильных → обычная прокрутка */
+@media (max-width:640px){ body{ background-attachment: scroll !important; } }
