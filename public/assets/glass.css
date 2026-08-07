@@ -17,6 +17,9 @@ body{
 /* секции прозрачны → фактура просвечивает по всему сайту */
 .section, .bg-cream2, .bg-blush, .bg-white{ background: transparent !important; }
 
+/* hero-заголовок: балансировка переносов, чтобы тире не оставалось одно на широких экранах */
+.hero h1{ text-wrap: balance; }
+
 /* --- стекло на существующих элементах --- */
 .site-header{
   background: rgba(255,255,255,.45) !important;
