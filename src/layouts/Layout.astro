@@ -57,21 +57,6 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content={robots}>
 <meta name="color-scheme" content="light only">
-<script is:inline>
-(function(){try{
-  var p=location.pathname;
-  if(/^\/(en|es)(\/|\.html|$)/.test(p))return;            // уже на EN/ES
-  if(localStorage.getItem('langChosen'))return;           // выбор уже сделан (ручной или авто)
-  var L=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(function(x){return(x||'').slice(0,2).toLowerCase();});
-  if(L.indexOf('ru')>=0)return;                           // в языках есть русский → остаёмся на RU
-  var t=L.indexOf('es')>=0?'es':(L.indexOf('en')>=0?'en':'');
-  if(!t)return;                                           // не en/es → дефолт RU
-  localStorage.setItem('langChosen','auto-'+t);
-  location.replace(p==='/'?('/'+t+'.html'):('/'+t+p));    // ТА ЖЕ страница на языке t
-}catch(e){}
-try{document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.lang-switch a');if(a){try{localStorage.setItem('langChosen','manual');}catch(_){}}},true);}catch(e){}
-})();
-</script>
 <!-- Yandex.Metrika counter -->
 <script is:inline type="text/javascript" set:html={METRIKA}></script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
