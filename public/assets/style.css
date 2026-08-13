@@ -270,7 +270,7 @@ strong{font-weight:700}
     background:var(--cream);border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(150,105,95,.12);
     max-height:0;overflow:hidden;transition:max-height .3s ease;align-items:stretch;
   }
-  .nav-links.open{max-height:420px}
+  .nav-links.open{max-height:80vh;overflow-y:auto}
   .nav-links a{padding:15px 24px;border-top:1px solid var(--line);opacity:1}
   .nav-links .nav-cta{margin:14px 24px}
   .nav-toggle{display:block}
