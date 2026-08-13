@@ -1,0 +1,19 @@
+{
+  "name": "Валентина Агеева — психология отношений",
+  "short_name": "Агеева",
+  "description": "Отношения длиною в жизнь. Бесплатные тесты, курс и персональные разборы от наставника по отношениям.",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FCF8F3",
+  "theme_color": "#BE7E75",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
