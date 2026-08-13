@@ -266,8 +266,8 @@ strong{font-weight:700}
   .foot{grid-template-columns:1fr 1fr}
   .section{padding:62px 0}
   .nav-links{
-    position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;
-    background:var(--cream);border-bottom:1px solid var(--line);
+    position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;z-index:60;
+    background:var(--cream);border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(150,105,95,.12);
     max-height:0;overflow:hidden;transition:max-height .3s ease;align-items:stretch;
   }
   .nav-links.open{max-height:420px}
