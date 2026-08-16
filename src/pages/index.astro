@@ -48,18 +48,32 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   <div class="container">
     <div>
       <span class="eyebrow">Психология отношений</span>
-      <h1 id="idxHeroTitle">Все учат уходить.<br>Я учу оставаться&nbsp;— и не жалеть об этом.</h1>
+      <h1 id="idxHeroTitle">Все учат уходить.<br>Я учу оставаться —&nbsp;и не жалеть об этом.</h1>
       <p class="lead" id="idxHeroLead">Отношения не нужно спасать, в грязь не нужно вставать, ты уже умеешь любить и быть любимой — просто никто не объяснил механику реальных действий. Я помогу выбраться из замкнутого круга одних и тех же ошибок.</p>
+      <p class="hero-stance">Не «беги при первом флаге» — а разобраться и остаться</p>
       <div class="btn-row">
         <a href="free.html" class="btn btn-primary btn-lg">Пройти бесплатный тест →</a>
         <a href="course.html" class="btn btn-ghost btn-lg">Про курс «Отношения длиною в жизнь»</a>
       </div>
+      <p class="hero-microtrust">Бесплатно · 5 минут · без регистрации</p>
+      <p class="hero-science">В основе — <strong>Готтман, Сью Джонсон</strong> и теория привязанности. Не эзотерика.</p>
     </div>
     <div class="photo photo--portrait">
       <img src="/assets/photo-hero.webp" alt="Валентина Агеева" id="photoHero" width="853" height="1280" fetchpriority="high" decoding="async">
+      <p class="hero-photo-cap"><strong>Валентина Агеева</strong> · наставник по отношениям</p>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-stance{display:inline-block;margin:2px 0 22px;padding:7px 16px;border-radius:999px;background:rgba(215,163,155,.15);border:1px solid rgba(215,163,155,.42);font-size:.9rem;font-weight:600;color:var(--rose-ink,#9a5f57)}
+  .hero-microtrust{margin:14px 0 0;font-size:.87rem;letter-spacing:.01em;color:var(--muted,#8a7a72)}
+  .hero-science{margin:9px 0 0;font-size:.87rem;color:var(--muted,#8a7a72)}
+  .hero-science strong{color:var(--rose-ink,#9a5f57);font-weight:700}
+  .hero-photo-cap{margin:12px 0 0;text-align:center;font-size:.9rem;color:var(--muted,#8a7a72)}
+  .hero-photo-cap strong{color:var(--rose-ink,#9a5f57);font-weight:700}
+  @media(max-width:860px){ .hero-stance{font-size:.85rem;margin-bottom:18px} .hero-photo-cap{margin-top:10px} }
+</style>
 
 <!-- 2. КОМУ ЭТО -->
 <section class="section bg-cream2">
