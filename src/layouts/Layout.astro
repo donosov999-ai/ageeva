@@ -90,7 +90,6 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 <link rel="dns-prefetch" href="https://mc.yandex.ru">
 <link rel="dns-prefetch" href="https://mascot.asibots.pro">
 <link rel="dns-prefetch" href="https://analytics.asibots.pro">
-<link rel="dns-prefetch" href="https://chatwoot.asibots.pro">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#BE7E75">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'">
@@ -165,24 +164,7 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 <script src="https://bugfix.asibots.pro/loader.js" data-project="valya" data-position="left" defer is:inline></script>
 <slot name="scripts" />
 
-<script is:inline>
-  // Chatwoot грузим ЛЕНИВО — по первому действию пользователя, а не на загрузке.
-  // Живой посетитель триггерит за ~1с (scroll/touch/mouse), а Lighthouse/боты — нет → падает TBT, растёт скорость.
-  window.chatwootSettings = { locale: "ru", position: "right", launcherTitle: "Спросить Валю" };
-  (function(d){
-    var loaded = false;
-    function load(){
-      if (loaded) return; loaded = true;
-      var BASE = "https://chatwoot.asibots.pro";
-      var g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
-      g.src = BASE + "/packs/js/sdk.js"; g.defer = !0; g.async = !0;
-      s.parentNode.insertBefore(g, s);
-      g.onload = function(){ window.chatwootSDK.run({ websiteToken: "9gdCjmdnAyMcEp62AstCAM98", baseUrl: BASE }); };
-    }
-    var evs = ["scroll","pointerdown","touchstart","keydown","mousemove"];
-    function on(){ evs.forEach(function(e){ d.removeEventListener(e, on); }); load(); }
-    evs.forEach(function(e){ d.addEventListener(e, on, { once: true, passive: true }); });
-  })(document);
-</script>
+<!-- Chatwoot снят 16.08.2026: наш чат идёт через contact-widget (мозг valya E2E, POST /brain/valya/reply), Chatwoot висел лишним мёртвым слоем параллельно. -->
+
 </body>
 </html>
