@@ -1,3 +1,4 @@
+/* ageeva-test-icons · VER 1 · 01.10.2026 */
 /* Иконки тестов ageeva.win — единый набор аккуратных outline-SVG (один стиль линий).
    Покрывает и статичные карточки (хаб /tests, /free — по data-goal=hub_/free_),
    и динамические тесты Готтмана (через window.testIconSVG(goal), зовётся из tests-list.js).

@@ -1,3 +1,4 @@
+/* ageeva-post-render · VER 1 · 01.10.2026 */
 /* Рендерер отдельной статьи блога: /post.html?s=<slug> тянет пост из valya_posts и рисует в стилях сайта. */
 (function () {
   var SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';

@@ -1,3 +1,4 @@
+/* ageeva-test-render · VER 1 · 01.10.2026 */
 /* Рендерер теста: /test.html?s=<slug>. Соло + парный режим (передай телефон → сравнение). */
 (function () {
   var SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';

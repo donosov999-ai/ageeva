@@ -1,3 +1,4 @@
+/* ageeva-cms · VER 1 · 01.10.2026 */
 /* Supabase CMS bridge for ageeva.win
    Публичное чтение (отзывы, блог) + RPC для админки. Без SDK, чистый fetch.
    anon-ключ публичный и защищён RLS — записи только через SECURITY DEFINER функции с проверкой пароля. */

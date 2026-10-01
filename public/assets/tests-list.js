@@ -1,3 +1,4 @@
+/* ageeva-tests-list · VER 1 · 01.10.2026 */
 /* Подмешивает включённые тесты из valya_tests в сетку #dynTests (на /free и /tests/). */
 (function () {
   var box = document.getElementById('dynTests');
