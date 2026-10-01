@@ -1,4 +1,4 @@
-/* ageeva-test-render · VER 1 · 01.10.2026 */
+/* ageeva-test-render · VER 2 · 01.10.2026 */
 /* Рендерер теста: /test.html?s=<slug>. Соло + парный режим (передай телефон → сравнение). */
 (function () {
   var SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';
@@ -122,7 +122,7 @@
         body: JSON.stringify({ p_slug: test.slug, p_title: test.title, p_name: name, p_contact: channel + ': ' + contactRaw, p_channel: channel, p_score: score, p_max: maxScore(), p_band: band ? band.title : '', p_answers: answers, p_consent: true })
       })
         .then(function (r) { if (!r.ok) throw 0; return r.text(); })
-        .then(function () { captured = true; if (window.ym) { try { ym(109819083, 'reachGoal', 'test_lead'); } catch (e) {} } showSolo(score, band, pct); })
+        .then(function () { captured = true; if (window.ym) { try { ym(109819083, 'reachGoal', 'test_lead'); } catch (e) {} } if (window.rybbit) { try { window.rybbit.event('test_lead', { slug: (typeof test !== 'undefined' && test && test.slug) || '' }); } catch (e) {} } showSolo(score, band, pct); })
         .catch(function () { btn.disabled = false; btn.textContent = 'Получить результат →'; msg.textContent = 'Не удалось сохранить. Попробуй ещё раз.'; });
     });
   }
@@ -140,7 +140,7 @@
     document.getElementById('quizRetry').addEventListener('click', function () { isPartner = false; result1 = null; render(false); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     var pb = document.getElementById('quizPair');
     if (pb) pb.addEventListener('click', function () { result1 = { score: score, band: band, pct: pct }; showInterlude(); });
-    if (window.ym) { try { ym(109819083, 'reachGoal', 'test_done'); } catch (e) {} }
+    if (window.ym) { try { ym(109819083, 'reachGoal', 'test_done'); } catch (e) {} } if (window.rybbit) { try { window.rybbit.event('test_done', { slug: (typeof test !== 'undefined' && test && test.slug) || '' }); } catch (e) {} }
   }
 
   function showInterlude() {
@@ -184,7 +184,7 @@
       if (navigator.share) navigator.share({ text: share }).catch(function () {});
       else window.open('https://t.me/share/url?url=' + encodeURIComponent('https://ageeva.win/test.html?s=' + test.slug) + '&text=' + encodeURIComponent(share), '_blank');
     });
-    if (window.ym) { try { ym(109819083, 'reachGoal', 'test_pair_done'); } catch (e) {} }
+    if (window.ym) { try { ym(109819083, 'reachGoal', 'test_pair_done'); } catch (e) {} } if (window.rybbit) { try { window.rybbit.event('test_pair_done', { slug: (typeof test !== 'undefined' && test && test.slug) || '' }); } catch (e) {} }
   }
 
   function mount() {
