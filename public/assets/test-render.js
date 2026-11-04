@@ -1,4 +1,4 @@
-/* ageeva-test-render · VER 4 · 04.11.2026 */
+/* ageeva-test-render · VER 5 · 04.11.2026 */
 /* Рендерер теста: /test.html?s=<slug>. Соло + парный режим (передай телефон → сравнение). */
 (function () {
   var SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';
@@ -133,7 +133,7 @@
     res.innerHTML = '<div class="qresult"><span class="eyebrow">Результат</span><h2>' + esc(band ? band.title : '') + '</h2>' +
       '<div class="qbar"><span style="width:' + pct + '%"></span></div><p class="qscore">' + score + ' из ' + max + '</p>' +
       '<p>' + esc(band ? band.text : '') + '</p>' + (captured ? '<p style="color:var(--rose-ink);font-weight:600;font-size:.92rem">✓ Результат сохранён — пришлём тебе и при желании разберём глубже.</p>' : '') + (test.help ? test.help : '') + '<div style="margin:20px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn btn-primary btn-lg cta-shine" href="' + pdfFor(test.slug) + '" target="_blank" rel="noopener" data-goal="pdf_download">📄 Скачать разбор (PDF)</a><a class="btn btn-ghost btn-lg" href="https://t.me/ageevawin_bot?start=' + pdfKey(test.slug) + '" target="_blank" rel="noopener" data-goal="tg_pdf">📲 Получить в Telegram</a></div>' +
-      '<div class="qcta"><p class="lead">Это один из «этажей» крепких отношений по Готтману. На курсе «Отношения длиною в жизнь» собираем всю картину — шаг за шагом.</p>' +
+      '<div class="qcta"><p class="lead">Это один из «этажей» крепких отношений по Готтману. Остальные этажи — в других тестах: вместе они складываются в общую картину.</p>' +
       '<div class="btn-row center">' + pairBtn + '<a class="btn btn-ghost btn-lg" href="/tests/">Другие тесты</a></div></div>' +
       '<button type="button" class="qretry" id="quizRetry">Пройти заново</button></div>';
     res.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -175,7 +175,7 @@
     res.innerHTML = '<div class="qresult"><span class="eyebrow">Вы вдвоём</span><h2>' + esc(v.t) + '</h2>' +
       '<div class="pairbars">' + bar('Ты', r1.score, max, r1.band ? r1.band.title : '') + bar('Партнёр', r2.score, max, r2.band ? r2.band.title : '') + '</div>' +
       '<p>' + esc(v.x) + '</p>' +
-      '<div class="qcta"><p class="lead">Сравнить ответы — это уже разговор, который сближает. А собрать из таких разговоров крепкую систему на годы — это курс «Отношения длиною в жизнь».</p>' +
+      '<div class="qcta"><p class="lead">Сравнить ответы — это уже разговор, который сближает. Возвращайтесь к такому разговору время от времени и пробуйте другие тесты — вместе они дают общую картину.</p>' +
       '<div class="btn-row center"><button type="button" class="btn btn-ghost btn-lg" id="quizShare">Поделиться →</button></div></div>' +
       '<button type="button" class="qretry" id="quizRetry">Пройти заново</button></div>';
     res.scrollIntoView({ behavior: 'smooth', block: 'start' });
