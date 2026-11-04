@@ -15,9 +15,9 @@ function toMarkdown(html) {
   b = b.replace(/<(script|style|noscript|svg|form|button|select|nav)[^>]*>[\s\S]*?<\/\1>/gi, '')
        .replace(/<header[^>]*class="site-header"[\s\S]*?<\/header>/i, '')
        .replace(/<footer[\s\S]*?<\/footer>/i, '')
-       .replace(/<h([1-3])[^>]*>([\s\S]*?)<\/h\1>/gi, (m, l, t) => '\n' + '#'.repeat(+l) + ' ' + t.replace(/<br\s*\/?>/gi, ' ') + '\n')
+       .replace(/<h([1-3])[^>]*>([\s\S]*?)<\/h\1>/gi, (m, l, t) => '\n' + '#'.repeat(+l) + ' ' + t.replace(/<br[^>]*>/gi, ' ') + '\n')
        .replace(/<li[^>]*>/gi, '\n- ')
-       .replace(/<\/(p|div|section|summary|details|ul|ol|tr)>/gi, '\n').replace(/<br\s*\/?>/gi, '\n')
+       .replace(/<\/(p|div|section|summary|details|ul|ol|tr)>/gi, '\n').replace(/<br[^>]*>/gi, '\n')
        .replace(/<[^>]+>/g, '');
   return dec(b).split('\n').map((l) => l.replace(/[ \t]+/g, ' ').trim()).filter(Boolean).join('\n').replace(/\n(#+ )/g, '\n\n$1');
 }
