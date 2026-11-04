@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * *'   # раз в сутки: тексты тестов берутся из Supabase при сборке — правки из админки доезжают сами
 
 permissions:
   contents: read
@@ -38,3 +40,16 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+        if: github.event_name == 'push'
+      - name: IndexNow — сообщить Яндексу и Bing об обновлении (только при пуше)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: |
+          python3 - <<'PY' > indexnow.json
+          import re, json
+          urls = re.findall(r"<loc>([^<]+)</loc>", open("public/sitemap.xml", encoding="utf-8").read())
+          print(json.dumps({"host": "ageeva.win", "key": "6830e9879b4800798a8e4c0b9366e08a", "keyLocation": "https://ageeva.win/6830e9879b4800798a8e4c0b9366e08a.txt", "urlList": urls}))
+          PY
+          sleep 45
+          curl -sS -m 30 -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json
