@@ -7,7 +7,8 @@ const DIST = new URL('../dist/', import.meta.url).pathname;
 const SITE = 'https://ageeva.win';
 const PAGES = ['index.html', 'about.html', 'free.html', 'help.html', 'tests/index.html',
   ...readdirSync(join(DIST, 'tests')).filter((f) => f.endsWith('-test.html')).map((f) => 'tests/' + f),
-  ...readdirSync(join(DIST, 'test')).filter((f) => f.endsWith('.html')).sort().map((f) => 'test/' + f)];
+  ...readdirSync(join(DIST, 'test')).filter((f) => f.endsWith('.html')).sort().map((f) => 'test/' + f),
+  ...(existsSync(join(DIST, 'stati')) ? readdirSync(join(DIST, 'stati')).filter((f) => f.endsWith('.html')).sort().map((f) => 'stati/' + f) : [])];
 
 const dec = (s) => s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&#x27;/g, "'");
 function toMarkdown(html) {

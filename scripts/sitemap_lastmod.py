@@ -38,6 +38,12 @@ def lastmod(path):
     if m: return git_date(f"public/tests/{m.group(1)}.html")
     m = re.fullmatch(r"/test/([\w-]+)\.html", path)
     if m: return max(git_date("src/pages/test/[slug].astro"), tests.get(m.group(1), "1970-01-01"))
+    m = re.fullmatch(r"/stati/([\w-]+)\.html", path)
+    if m and (ROOT / f"src/content/articles/{m.group(1)}.md").exists():
+        u = re.search(r"^updated: (\S+)", (ROOT / f"src/content/articles/{m.group(1)}.md").read_text(encoding="utf-8"), re.M)
+        return u.group(1) if u else TODAY
+    if path == "/stati.html" or path.startswith("/stati/hub/"):
+        return max((re.search(r"^updated: (\S+)", f.read_text(encoding="utf-8"), re.M) or [0, "1970-01-01"])[1] for f in (ROOT / "src/content/articles").glob("*.md"))
     raise SystemExit("нет правила lastmod для " + path)
 
 p = ROOT / "public/sitemap.xml"; xml = p.read_text(encoding="utf-8"); out = []

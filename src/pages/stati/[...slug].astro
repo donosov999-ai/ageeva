@@ -1,0 +1,104 @@
+---
+// ageeva-articles · VER 1 · 04.11.2026
+// Индекс /stati.html, хабы /stati/hub/<хаб>.html и статьи /stati/<slug>.html. Нет опубликованных статей → страниц нет вообще.
+import Layout from '../../layouts/Layout.astro';
+import { HUBS, allArticles } from '../../lib/articles.js';
+
+export function getStaticPaths() {
+  const A = allArticles();
+  if (!A.length) return [];
+  const hubs = [...new Set(A.map((a) => a.hub))].filter((h) => HUBS[h]);
+  return [
+    { params: { slug: undefined }, props: { kind: 'index' } },
+    ...hubs.map((h) => ({ params: { slug: 'hub/' + h }, props: { kind: 'hub', hub: h } })),
+    ...A.map((a) => ({ params: { slug: a.slug }, props: { kind: 'article', article: a } })),
+  ];
+}
+const { kind, hub, article } = Astro.props;
+const A = allArticles();
+const SITE = 'https://ageeva.win';
+const crumbs = [{ n: 'Главная', u: SITE + '/' }, { n: 'Статьи', u: SITE + '/stati.html' }];
+let title, description, canonical, h1, eyebrow, ld;
+const person = { '@type': 'Person', name: 'Валентина Агеева', url: SITE + '/about.html' };
+if (kind === 'article') {
+  const H = HUBS[article.hub];
+  crumbs.push({ n: H.title, u: `${SITE}/stati/hub/${article.hub}.html` }, { n: article.title, u: `${SITE}/stati/${article.slug}.html` });
+  title = article.seoTitle || article.title; description = article.description; canonical = `${SITE}/stati/${article.slug}.html`;
+  h1 = article.title; eyebrow = H.title;
+} else if (kind === 'hub') {
+  crumbs.push({ n: HUBS[hub].title, u: `${SITE}/stati/hub/${hub}.html` });
+  title = `${HUBS[hub].title} — статьи Валентины Агеевой`; description = HUBS[hub].lead + ' Статьи об отношениях без «бросай при первом же» — по мотивам исследований Готтмана и теории привязанности.';
+  canonical = `${SITE}/stati/hub/${hub}.html`; h1 = HUBS[hub].title; eyebrow = 'Статьи';
+} else {
+  title = 'Статьи об отношениях — Валентина Агеева'; description = 'Статьи Валентины Агеевой об отношениях: ссоры и примирение, привязанность, семья и деньги, знакомства. Без «бросай при первом же» — как разобраться и остаться.';
+  canonical = SITE + '/stati.html'; h1 = 'Статьи об отношениях'; eyebrow = 'Читать';
+}
+const graph = [{ '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.n, item: c.u })) }];
+if (kind === 'article') {
+  graph.push({ '@type': 'Article', headline: article.title, description, inLanguage: 'ru', author: person, mainEntityOfPage: canonical,
+    datePublished: String(article.date), dateModified: String(article.updated || article.date), image: SITE + '/assets/og-cover.webp' });
+  if (article.faq && article.faq.length) graph.push({ '@type': 'FAQPage', mainEntity: article.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+}
+ld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+const inHub = kind === 'article' ? A.filter((a) => a.hub === article.hub && a.slug !== article.slug) : [];
+---
+<Layout title={title} description={description} canonical={canonical}>
+<script type="application/ld+json" is:inline set:html={ld} slot="head"></script>
+
+<section class="hero"><div class="container narrow center">
+  <nav class="crumbs" aria-label="Хлебные крошки">
+    {crumbs.map((c, i) => (i < crumbs.length - 1 ? <><a href={c.u.replace(SITE, '')}>{c.n}</a><span aria-hidden="true"> › </span></> : <span aria-current="page">{c.n}</span>))}
+  </nav>
+  <span class="eyebrow">{eyebrow}</span>
+  <h1>{h1}</h1>
+  {kind !== 'article' && <p class="lead">{kind === 'hub' ? HUBS[hub].lead : 'Разбираемся, а не убегаем.'}</p>}
+</div></section>
+
+{kind === 'article' && (<>
+<section class="section"><div class="container narrow"><div class="story">
+  {article.lead && <p class="lead">{article.lead}</p>}
+  <article.Content />
+</div>
+
+{article.test && (
+  <div class="panel" style="margin-top:36px">
+    <h3>Проверь себя</h3>
+    <p style="margin:0 0 14px">Короткий тест по теме: «{article.testTitle}» — {article.testText || 'узнай, где у вас сейчас всё в порядке, а где стоит присмотреться'}.</p>
+    <a class="btn btn-primary" href={article.test.startsWith('/') ? article.test : `/test/${article.test}.html`} data-goal="article_to_test">Пройти тест →</a>
+  </div>
+)}
+
+<p style="margin-top:28px;font-size:.95rem;color:var(--muted)">Это не диагностика и не замена консультации специалиста. Если в отношениях небезопасно — <a href="/help.html" style="text-decoration:underline">куда обратиться</a>.</p>
+
+{article.sources && article.sources.length > 0 && (
+  <div style="margin-top:22px;font-size:.88rem;color:var(--muted)">
+    <strong>Источники</strong>
+    <ul style="margin:8px 0 0 18px">{article.sources.map((s) => (<li><a href={s.url} rel="noopener" target="_blank" style="text-decoration:underline">{s.label}</a></li>))}</ul>
+  </div>
+)}
+
+{article.faq && article.faq.length > 0 && (<div class="faq" style="margin-top:30px"><h2>Частые вопросы</h2>
+  {article.faq.map((f) => (<details class="faq-item" style="border-bottom:1px solid var(--line,#ecdfd8);padding:16px 2px"><summary style="font-family:var(--serif,Georgia,serif);font-size:19px;color:var(--rose-ink,#7a3b52);cursor:pointer">{f.q}</summary><p style="margin:12px 0 0;color:var(--muted,#6b5d5a);line-height:1.65">{f.a}</p></details>))}
+</div>)}
+
+{inHub.length > 0 && (<div style="margin-top:40px"><h2>Читать дальше</h2><div class="grid grid-2" style="margin-top:16px">
+  {inHub.slice(0, 4).map((a) => (<a class="card" href={`/stati/${a.slug}.html`}><h3>{a.title}</h3><p>{a.description}</p><span class="more">Читать →</span></a>))}
+</div></div>)}
+
+<div class="cta-band" style="margin-top:44px"><h2>С чего начать</h2><p>5 минут, бесплатно, без регистрации — и уже понятнее, что с вами происходит.</p>
+  <div class="btn-row center"><a href="/free.html" class="btn btn-primary btn-lg" data-goal="article_to_free">Пройти бесплатный тест →</a><a href="/tests/" class="btn btn-ghost btn-lg">Все тесты</a></div></div>
+{/* ШАГ КУРСА: когда набор откроется — здесь ссылка на модуль article.module (см. KEYWORDS_30_TOPICS) */}
+</div></section>
+</>)}
+
+{kind === 'hub' && (<section class="section"><div class="container narrow"><div class="grid grid-2">
+  {A.filter((a) => a.hub === hub).map((a) => (<a class="card" href={`/stati/${a.slug}.html`}><h3>{a.title}</h3><p>{a.description}</p><span class="more">Читать →</span></a>))}
+</div></div></section>)}
+
+{kind === 'index' && (<section class="section"><div class="container narrow">
+  {Object.entries(HUBS).filter(([h]) => A.some((a) => a.hub === h)).map(([h, H]) => (<div style="margin-bottom:34px"><h2><a href={`/stati/hub/${h}.html`}>{H.title}</a></h2><p style="color:var(--muted)">{H.lead}</p>
+    <div class="grid grid-2" style="margin-top:14px">{A.filter((a) => a.hub === h).map((a) => (<a class="card" href={`/stati/${a.slug}.html`}><h3>{a.title}</h3><p>{a.description}</p><span class="more">Читать →</span></a>))}</div></div>))}
+</div></section>)}
+
+<style>.crumbs{font-size:.88rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--rose-ink);text-decoration:underline}</style>
+</Layout>
