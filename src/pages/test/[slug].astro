@@ -12,42 +12,75 @@ const METRIKA = `(function(m,e,t,r,i,k,a){
 export async function getStaticPaths() {
   const SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';
   const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dnZoZWVvY29iaGlvdGhmZ2VpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTQ1ODcsImV4cCI6MjA5MjA5MDU4N30.IJ5i3UkC0GoIWGFnLKmc1UeX2iqn8LzNYfvEfj-3hIY';
+  const sel = 'slug,title,subtitle,intro,source,scale,questions,bands,pair,updated_at';
   let rows = [];
-  try {
-    const r = await fetch(SB_URL + '/rest/v1/valya_tests?enabled=eq.true&select=slug,title,subtitle', { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } });
-    rows = await r.json();
-    if (!Array.isArray(rows)) rows = [];
-  } catch (e) { rows = []; }
-  return rows.map((t) => ({ params: { slug: t.slug }, props: { test: t } }));
+  for (let attempt = 0; attempt < 3 && !rows.length; attempt++) {
+    try {
+      const r = await fetch(SB_URL + '/rest/v1/valya_tests?enabled=eq.true&order=sort_order&select=' + sel, { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } });
+      const j = await r.json();
+      if (Array.isArray(j)) rows = j;
+    } catch (e) {}
+  }
+  // Пустой ответ = сборка падает, а не тихо сносит все страницы тестов с сайта.
+  if (!rows.length) throw new Error('valya_tests пуст или недоступен — сборка остановлена, чтобы не удалить страницы тестов');
+  return rows.map((t, i) => ({
+    params: { slug: t.slug },
+    props: { test: t, others: [1, 2, 3, 4, 5, 6].map((k) => rows[(i + k) % rows.length]).map((o) => ({ slug: o.slug, title: o.title, subtitle: o.subtitle })) },
+  }));
 }
 
-const { test } = Astro.props;
+const { test, others } = Astro.props;
 const title = test.title || 'Тест';
-const desc = (test.subtitle || 'Бесплатный тест об отношениях от психолога Валентины Агеевой. Без регистрации.').slice(0, 165);
+const qs = test.questions || [];
+const n = qs.length;
+const sc = (test.scale && test.scale.length) ? test.scale : ['Да, точно', 'Скорее да', 'Скорее нет', 'Нет'];
+const maxScore = n * (sc.length - 1);
+const lc = (x) => (x ? x.charAt(0).toLowerCase() + x.slice(1) : '');
+const cut = (x, m) => (x.length <= m ? x : x.slice(0, m).replace(/\s+\S*$/, '') + '…');
+
+// Описание: «Название» — подзаголовок. + самый длинный хвост, что влезает в 158 знаков
+const sub = test.subtitle || '';
+const base = sub ? `«${title}» — ${lc(sub).replace(/[.?!]+$/, '')}.` : `Бесплатный тест «${title}».`;
+const tails = [` ${n} утверждений по мотивам Готтмана. Бесплатно, без регистрации.`, ` ${n} утверждений. Бесплатно, без регистрации.`, ' Бесплатно.'];
+let desc = cut(base, 158);
+for (const t of tails) { if ((base + t).length <= 158) { desc = base + t; break; } }
+
+const pageTitle = `${title} — тест по мотивам Готтмана`;
 const canonical = `https://ageeva.win/test/${test.slug}.html`;
-const ogTitle = `${title} — тест об отношениях`;
+const ogTitle = pageTitle;
+const bands = (test.bands || []).map((b, i, arr) => ({ ...b, from: i === 0 ? 0 : arr[i - 1].max + 1, to: i === arr.length - 1 ? maxScore : b.max }));
+const faq = [
+  { q: `Сколько вопросов в тесте «${title}»?`, a: `${n} утверждений. К каждому выбираешь один из ${sc.length} вариантов: «${sc.join('», «')}». Результат появляется сразу, как ответишь на все.` },
+  { q: 'Это диагноз?', a: 'Нет. Тест — повод внимательнее посмотреть на себя и на пару, а не диагностика и не замена консультации специалиста. Если в отношениях есть насилие или тебе страшно — обратись к специалисту.' },
+  ...(test.pair ? [{ q: 'Можно ли пройти тест вдвоём с партнёром?', a: 'Да. После своего результата нажми «Сравнить с партнёром», передай телефон — партнёр ответит на те же вопросы, и вы увидите, где ваши ответы совпадают, а где расходятся.' }] : []),
+  { q: 'Нужна ли регистрация?', a: 'Нет. Тест бесплатный. Оставлять контакт не обязательно: после ответов можно нажать «Просто показать результат».' },
+];
+const mod = (test.updated_at || '').slice(0, 10);
 const jsonld = {
-  "@context": "https://schema.org",
-  "@type": "Quiz",
-  "name": title,
-  "description": desc,
-  "url": canonical,
-  "inLanguage": "ru",
-  "about": { "@type": "Thing", "name": "Психология отношений" },
-  "author": { "@type": "Person", "name": "Валентина Агеева", "url": "https://ageeva.win/about.html" },
-  "isAccessibleForFree": true
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Quiz', '@id': canonical + '#quiz', name: title, description: desc, url: canonical, inLanguage: 'ru',
+      about: { '@type': 'Thing', name: 'Психология отношений' },
+      author: { '@type': 'Person', name: 'Валентина Агеева', url: 'https://ageeva.win/about.html' },
+      isAccessibleForFree: true, ...(mod ? { dateModified: mod } : {}) },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://ageeva.win/' },
+      { '@type': 'ListItem', position: 2, name: 'Тесты', item: 'https://ageeva.win/tests/' },
+      { '@type': 'ListItem', position: 3, name: title, item: canonical } ] },
+    { '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
 };
 ---
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="version" content="ageeva-tests · VER 3 · 04.11.2026">
+<meta name="version" content="ageeva-tests · VER 4 · 04.11.2026">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <script is:inline type="text/javascript" set:html={METRIKA}></script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109819083" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<title>{title} — тест об отношениях · Валентина Агеева</title>
+<title>{pageTitle}</title>
 <meta name="description" content={desc}>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href={canonical}>
@@ -90,12 +123,63 @@ const jsonld = {
 </header>
 <div id="testRoot">
   <section class="hero"><div class="container narrow center">
-    <span class="eyebrow">Тест об отношениях</span>
+    <span class="eyebrow">Тест</span>
     <h1>{title}</h1>
-    <p class="lead">{desc}</p>
+    {sub && <p class="lead">{sub}</p>}
   </div></section>
-  <div class="container narrow center" style="padding:46px 24px;color:var(--muted)">Загружаю тест…</div>
+  <section class="section"><div class="container narrow">
+    {test.intro && <p class="lead" style="margin-bottom:26px">{test.intro}</p>}
+    <form id="quizForm">
+      {qs.map((q, i) => (
+        <div class="qcard" data-i={i}>
+          <p class="qtext">{i + 1}. {q.q}</p>
+          <div class="qopts">{sc.map((lab, o) => (<button type="button" class="qopt" data-i={i} data-o={o}>{lab}</button>))}</div>
+        </div>
+      ))}
+      <div class="qsubmit"><button type="button" class="btn btn-primary btn-lg" id="quizGo">Показать результат →</button><p class="qhint" id="quizHint"></p></div>
+    </form>
+    <div id="quizResult"></div>
+  </div></section>
 </div>
+<!-- Блок ниже JS не перезаписывает (он меняет только #testRoot): текст для поиска и перелинковка. -->
+<section class="section section--tight seo-info">
+  <div class="container narrow">
+    <span class="eyebrow">Разбор</span>
+    <h2>Как читать результат</h2>
+    <p>Баллы считаются автоматически, максимум — {maxScore}. Ниже — что означает каждый диапазон.</p>
+    {bands.map((b) => (
+      <div class="panel" style="margin-top:16px">
+        <h3>{b.title}</h3>
+        <p style="color:var(--muted);font-size:.9rem;margin:0 0 8px">{b.from}–{b.to} баллов</p>
+        <p style="margin:0">{b.text}</p>
+      </div>
+    ))}
+    <h2 style="margin-top:44px">Откуда этот тест</h2>
+    <p>Вопросы адаптированы по мотивам методики Джона Готтмана. Это инструмент для самонаблюдения, а не диагностика и не замена консультации специалиста.</p>
+    {test.source && <p style="color:var(--muted);font-size:.92rem">Источник: {test.source}</p>}
+    <p style="font-size:.95rem">Если тебе небезопасно в отношениях — <a href="/help.html" style="text-decoration:underline">куда обратиться</a>.</p>
+    <h2 style="margin-top:44px">Частые вопросы</h2>
+    <div class="faq" style="margin-top:14px">
+      {faq.map((f) => (
+        <details class="faq-item" style="border-bottom:1px solid var(--line,#ecdfd8);padding:16px 2px">
+          <summary style="font-family:var(--serif,Georgia,serif);font-size:19px;color:var(--rose-ink,#7a3b52);cursor:pointer">{f.q}</summary>
+          <p style="margin:12px 0 0;color:var(--muted,#6b5d5a);line-height:1.65">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <h2 style="margin-top:44px">Ещё тесты про отношения</h2>
+    <div class="grid grid-2" style="margin-top:18px">
+      {others.map((o) => (
+        <a href={`/test/${o.slug}.html`} class="card">
+          <h3>{o.title}</h3>
+          <p>{o.subtitle}</p>
+          <span class="more">Пройти тест →</span>
+        </a>
+      ))}
+    </div>
+    <p class="center" style="margin-top:28px"><a href="/tests/" class="btn btn-ghost">Все тесты</a> <a href="/free.html" class="btn btn-primary">Тест на тип привязанности</a></p>
+  </div>
+</section>
 <script src="/assets/test-render.js" is:inline></script>
 <script src="/assets/app.js" is:inline></script>
 <script src="https://mascot.asibots.pro/loader.js" data-skin="valya" data-onclick-url="https://t.me/ageevawin_bot" data-mobile="raise" data-autorefresh="300" defer is:inline></script>
