@@ -1,4 +1,4 @@
-/* ageeva-app · VER 3 · 04.11.2026 */
+/* ageeva-app · VER 4 · 04.11.2026 */
 /* ===========================================================
    Сайт Вали — конверсионные хуки (vanilla JS, без зависимостей)
    Верхний+нижний бар (все ширины, ужимание до иконок при скролле) · exit-intent ·
@@ -52,6 +52,7 @@
       tests: "M9 6h11M9 12h11M9 18h11M4.5 6l1 1 2-2M4.5 12l1 1 2-2M4.5 18l1 1 2-2",
       about: "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z",
       write: "M21 3L3 10.5l6 2.5 2.5 6zM9 13l12-10",
+      articles: "M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7",
       gift: "M4 11h16v9H4zM3 7h18v4H3zM12 7v13M12 7C10 4 7 4 7 6s3 1 5 1c2 0 5 1 5-1s-3-2-5 1",
       up: "M12 19V5M6 11l6-6 6 6"
     };
@@ -84,6 +85,7 @@
         if (a.classList.contains("nav-cta")) key = "test";
         else if (href.indexOf("about.html") > -1) key = "about";
         else if (href.indexOf("/tests") > -1 || href.indexOf("tests/") === 0) key = "tests";
+        else if (href.indexOf("stati.html") > -1) key = "articles";
         else if (href.indexOf("free.html") > -1) key = "gift";
         if (!key) return;
         var txt = a.textContent.replace(/\s+/g, " ").trim();
