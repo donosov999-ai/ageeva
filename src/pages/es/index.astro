@@ -9,19 +9,18 @@ const faq = [
     a: "No se trata de irte, sino de entender. La mayoría de los cursos enseñan a irte a la primera incomodidad. Yo te ayudo a entender qué pasa, tu parte en ello y cómo cambiarlo. Si hay algo que reparar, lo reparamos. Si no, al menos te entenderás a ti misma." },
   { q: '¿Qué es el estilo de apego y por qué conocer el mío?',
     a: "Es cómo te comportas en la cercanía: ansiosa, evitativa o segura. Al conocer tu estilo, entiendes por qué reaccionas así y de dónde viene. Empieza con el test gratuito de estilo de apego — 5 minutos." },
-  { q: '¿El curso funciona si mi pareja no quiere participar?',
+  { q: '¿Esto funciona si mi pareja no quiere participar?',
     a: "Sí. Empiezas por ti misma — cambias tus reacciones, y la dinámica de la pareja cambia también. La participación de tu pareja no es necesaria para que la relación empiece a mejorar." },
-  { q: '¿En qué se basa el curso — es esoterismo?',
+  { q: '¿En qué se basa esto — es esoterismo?',
     a: "No. Se basa en John Gottman (45 años investigando parejas en el laboratorio), Sue Johnson (terapia probada en clínica) y la teoría del apego. Lo traduje de lo científico a lo humano, sin «siente el universo»." },
-  { q: '¿Cuánto dura el curso y cómo se hace?',
-    a: "Son 10 pasos de «otra vez peleamos» a «somos un equipo». En diferido — sola o junto a mí. El segundo grupo empieza el 26 de julio." },
+  { q: '¿Puedo apuntarme al curso ahora?',
+    a: "Por ahora la inscripción está cerrada. Mientras tanto puedes hacer los tests gratuitos: te ayudan a ver por dónde empezar." },
 ];
 
 const graph = [
   { '@type': 'WebSite', '@id': 'https://ageeva.win/#website', url: 'https://ageeva.win/', name: 'Валентина Агеева — психология отношений', inLanguage: 'ru-RU' },
   { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva', url: 'https://ageeva.win/', jobTitle: 'Coach de relaciones', description: 'Ayudo a las mujeres a mantener sus relaciones y ser felices en ellas — basándome en la teoría del apego y el trabajo de John Gottman y Sue Johnson.', image: 'https://ageeva.win/assets/og-cover.webp', sameAs: ['https://instagram.com/ageeva_win', 'https://t.me/valli790'] },
   { '@type': 'WebPage', '@id': 'https://ageeva.win/es.html#webpage', url: 'https://ageeva.win/es.html', name: 'Psicología de pareja para mujeres — Valentina Ageeva', isPartOf: { '@id': 'https://ageeva.win/#website' }, about: { '@id': 'https://ageeva.win/#person' }, inLanguage: 'es', datePublished: published, dateModified: modified },
-  { '@type': 'Course', '@id': 'https://ageeva.win/#course', name: 'Relaciones para toda la vida', description: 'Un curso de 10 pasos: cómo salvar tu relación, romper el ciclo de peleas y volver a escuchar a tu pareja. Basado en los métodos de John Gottman, Sue Johnson y la teoría del apego.', url: 'https://ageeva.win/es/course.html', inLanguage: 'es', provider: { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva' }, hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', startDate: '2026-07-26', inLanguage: 'es' } },
   { '@type': 'BreadcrumbList', '@id': 'https://ageeva.win/es.html#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://ageeva.win/es.html' }] },
   { '@type': 'FAQPage', '@id': 'https://ageeva.win/es.html#faq', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
@@ -32,13 +31,13 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   altPath=""
   i18n={true}
   title="Psicología de pareja para mujeres — Valentina Ageeva"
-  description="Ayudo a las mujeres a quedarse en su relación y a ser felices en ella. Test gratuito de estilo de apego y el curso «Relaciones para toda la vida»."
+  description="Ayudo a las mujeres a quedarse en su relación y a ser felices en ella. Test gratuito de estilo de apego, sin registro. Y tests cortos de pareja inspirados en Gottman."
   keywords="psicología de pareja, cómo salvar una relación, test de estilo de apego, coach de relaciones para mujeres, Gottman, Sue Johnson, Valentina Ageeva"
   canonical="https://ageeva.win/es.html"
   ogTitle="Psicología de pareja para mujeres — Valentina Ageeva. Por la familia, sin «déjalo y ya»"
-  ogDescription="Ayudo a las mujeres a quedarse en su relación y a ser felices en ella. Test gratuito de estilo de apego y el curso «Relaciones para toda la vida»."
+  ogDescription="Ayudo a las mujeres a quedarse en su relación y a ser felices en ella. Test gratuito de estilo de apego, sin registro. Y tests cortos de pareja inspirados en Gottman."
   twTitle="Psicología de pareja para mujeres — Valentina Ageeva"
-  twDescription="Quédate en tu relación y sé feliz. Test gratuito de estilo de apego + el curso «Relaciones para toda la vida»."
+  twDescription="Quédate en tu relación y sé feliz. Test gratuito de estilo de apego. Y tests cortos de pareja inspirados en Gottman."
 >
   <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
   <link rel="preload" as="image" href="/assets/photo-hero.webp" fetchpriority="high" slot="head">
@@ -52,7 +51,6 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
       <p class="lead">No tienes que rescatar la relación ni tienes que suplicar — ya sabes amar y dejarte amar. Solo que nadie te explicó la mecánica de qué hacer en concreto. Te ayudo a salir del bucle de los mismos errores de siempre.</p>
       <div class="btn-row">
         <a href="/es/free.html" class="btn btn-primary btn-lg">Hacer el test gratis →</a>
-        <a href="/es/course.html" class="btn btn-ghost btn-lg">Sobre el curso «Relaciones para toda la vida»</a>
       </div>
     </div>
     <div class="photo photo--portrait">
@@ -126,11 +124,11 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
         <p>Descubre tu estilo de apego en 5 minutos. Verás por qué reaccionas como reaccionas — y de dónde viene.</p>
         <span class="more">Hacer el test →</span>
       </a>
-      <a href="/es/course.html" class="card">
-        <span class="ico">❤</span>
-        <h3>Curso «Relaciones para toda la vida»</h3>
-        <p>10 pasos del «volvimos a discutir» al «somos un equipo». A tu ritmo — sola o acompañada por mí.</p>
-        <span class="more">Ver el curso →</span>
+      <a href="https://t.me/valli790" target="_blank" rel="noopener" class="card" data-goal="tg_click">
+        <span class="ico">✈</span>
+        <h3>Escríbeme</h3>
+        <p>¿Dudas sobre el test o tu situación? Escríbeme por Telegram.</p>
+        <span class="more">Abrir Telegram →</span>
       </a>
     </div>
   </div>
@@ -154,7 +152,7 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   <div class="container narrow">
     <div class="center">
       <span class="eyebrow">Honesta desde el principio</span>
-      <h2>Para quién NO es el curso</h2>
+      <h2>Para quién NO es esto</h2>
       <hr class="rule center">
     </div>
     <div class="panel no" style="margin-top:10px">
@@ -208,12 +206,11 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <section class="section">
   <div class="container">
     <div class="cta-band">
-      <span class="eyebrow">Segundo grupo — comienza el 26 de julio</span>
+      <span class="eyebrow">Primer paso</span>
       <h2>¿No sabes por dónde empezar? Empieza por el test</h2>
-      <p>5 minutos, gratis, y ya se ve más claro qué te está pasando de verdad. Y a partir de ahí el curso queda al alcance de la mano.</p>
+      <p>5 minutos, gratis, y ya se ve más claro qué te está pasando de verdad.</p>
       <div class="btn-row center">
         <a href="/es/free.html" class="btn btn-primary btn-lg">Hacer el test gratis →</a>
-        <a href="/es/course.html" class="btn btn-ghost btn-lg">Directo al curso →</a>
       </div>
     </div>
   </div>

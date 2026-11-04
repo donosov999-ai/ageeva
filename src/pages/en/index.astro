@@ -9,19 +9,18 @@ const faq = [
     a: "I'm not about leaving — I'm about figuring it out. Most courses teach you to leave at the first discomfort. I help you understand what's happening, your own part in it, and how to change it. If there's something to repair, we repair it. If not, at least you'll understand yourself." },
   { q: 'What is an attachment style and why should I know mine?',
     a: "It's how you behave in closeness: anxious, avoidant, or secure. Knowing your style, you understand why you react the way you do and where it comes from. Start with the free attachment-style test — 5 minutes." },
-  { q: "Does the course work if my partner won't take part?",
+  { q: "Does this work if my partner won't take part?",
     a: "Yes. You start with yourself — you change your reactions, and the dynamic in the couple shifts too. Your partner's participation isn't required for the relationship to start improving." },
-  { q: 'What is the course based on — is it esoterics?',
+  { q: 'What is this based on — is it esoterics?',
     a: "No. It's built on John Gottman (45 years of researching couples in the lab), Sue Johnson (therapy tested in the clinic), and attachment theory. I translated it from the scientific into the human — without «feel the universe»." },
-  { q: 'How long is the course and how does it run?',
-    a: "It's 10 steps from «we fought again» to «we're a team». On-demand — on your own or together with me. The second group starts July 26." },
+  { q: 'Can I join the course right now?',
+    a: "Enrollment is closed at the moment. In the meantime you can take the free tests — they help you see where to start." },
 ];
 
 const graph = [
   { '@type': 'WebSite', '@id': 'https://ageeva.win/#website', url: 'https://ageeva.win/', name: 'Валентина Агеева — психология отношений', inLanguage: 'ru-RU' },
   { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva', url: 'https://ageeva.win/', jobTitle: 'Relationship coach', description: 'I help women save their relationships and be happy in them — based on attachment theory and the work of John Gottman and Sue Johnson.', image: 'https://ageeva.win/assets/og-cover.webp', sameAs: ['https://instagram.com/ageeva_win', 'https://t.me/valli790'] },
   { '@type': 'WebPage', '@id': 'https://ageeva.win/en.html#webpage', url: 'https://ageeva.win/en.html', name: 'Relationship Psychology for Women — Valentina Ageeva', isPartOf: { '@id': 'https://ageeva.win/#website' }, about: { '@id': 'https://ageeva.win/#person' }, inLanguage: 'en', datePublished: published, dateModified: modified },
-  { '@type': 'Course', '@id': 'https://ageeva.win/#course', name: 'Relationships for a Lifetime', description: 'A 10-step course: how to save your relationship, break the cycle of fights, and hear your partner again. Based on the methods of John Gottman, Sue Johnson, and attachment theory.', url: 'https://ageeva.win/en/course.html', inLanguage: 'en', provider: { '@type': 'Person', '@id': 'https://ageeva.win/#person', name: 'Valentina Ageeva' }, hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', startDate: '2026-07-26', inLanguage: 'en' } },
   { '@type': 'BreadcrumbList', '@id': 'https://ageeva.win/en.html#breadcrumb', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ageeva.win/en.html' }] },
   { '@type': 'FAQPage', '@id': 'https://ageeva.win/en.html#faq', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
@@ -32,13 +31,13 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   altPath=""
   i18n={true}
   title="Relationship Psychology for Women — Valentina Ageeva"
-  description="I help women stay in their relationships and be happy in them. A free attachment-style test and the course «Relationships for a Lifetime»."
+  description="I help women stay in their relationships and be happy in them. A free attachment-style test, no sign-up. Plus short relationship tests inspired by Gottman."
   keywords="relationship psychology, how to save a relationship, attachment style test, relationship coach for women, Gottman, Sue Johnson, Valentina Ageeva"
   canonical="https://ageeva.win/en.html"
   ogTitle="Relationship Psychology for Women — Valentina Ageeva. For family, without «just leave»"
-  ogDescription="I help women stay in their relationships and be happy in them. Free attachment-style test and the course «Relationships for a Lifetime»."
+  ogDescription="I help women stay in their relationships and be happy in them. Free attachment-style test, no sign-up. Plus short relationship tests inspired by Gottman."
   twTitle="Relationship Psychology for Women — Valentina Ageeva"
-  twDescription="Stay in your relationship and be happy. Free attachment-style test + the course «Relationships for a Lifetime»."
+  twDescription="Stay in your relationship and be happy. Free attachment-style test. Plus short relationship tests inspired by Gottman."
 >
   <script type="application/ld+json" is:inline set:html={jsonld} slot="head"></script>
   <link rel="preload" as="image" href="/assets/photo-hero.webp" fetchpriority="high" slot="head">
@@ -52,7 +51,6 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
       <p class="lead">You don't have to rescue the relationship, you don't have to grovel — you already know how to love and be loved. No one just explained the mechanics of what to actually do. I'll help you out of the loop of the same old mistakes.</p>
       <div class="btn-row">
         <a href="/en/free.html" class="btn btn-primary btn-lg">Take the free test →</a>
-        <a href="/en/course.html" class="btn btn-ghost btn-lg">About the course «Relationships for a Lifetime»</a>
       </div>
     </div>
     <div class="photo photo--portrait">
@@ -126,11 +124,11 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
         <p>Find your attachment style in 5 minutes. You'll see why you react the way you do — and where it comes from.</p>
         <span class="more">Take the test →</span>
       </a>
-      <a href="/en/course.html" class="card">
-        <span class="ico">❤</span>
-        <h3>Course «Relationships for a Lifetime»</h3>
-        <p>10 steps from «we fought again» to «we're a team». On-demand — on your own or together with me.</p>
-        <span class="more">See the course →</span>
+      <a href="https://t.me/valli790" target="_blank" rel="noopener" class="card" data-goal="tg_click">
+        <span class="ico">✈</span>
+        <h3>Write to me</h3>
+        <p>Questions about the test or your situation? Message me on Telegram.</p>
+        <span class="more">Open Telegram →</span>
       </a>
     </div>
   </div>
@@ -154,7 +152,7 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   <div class="container narrow">
     <div class="center">
       <span class="eyebrow">Honest upfront</span>
-      <h2>Who the course is NOT for</h2>
+      <h2>Who this is NOT for</h2>
       <hr class="rule center">
     </div>
     <div class="panel no" style="margin-top:10px">
@@ -208,12 +206,11 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <section class="section">
   <div class="container">
     <div class="cta-band">
-      <span class="eyebrow">Second group — starts July 26</span>
+      <span class="eyebrow">First step</span>
       <h2>Don't know where to start — start with the test</h2>
-      <p>5 minutes, free, and it's already clearer what's actually going on with you. And from there the course is within reach.</p>
+      <p>5 minutes, free, and it's already clearer what's actually going on with you.</p>
       <div class="btn-row center">
         <a href="/en/free.html" class="btn btn-primary btn-lg">Take the free test →</a>
-        <a href="/en/course.html" class="btn btn-ghost btn-lg">Straight to the course →</a>
       </div>
     </div>
   </div>

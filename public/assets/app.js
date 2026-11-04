@@ -1,4 +1,4 @@
-/* ageeva-app · VER 1 · 01.10.2026 */
+/* ageeva-app · VER 2 · 04.11.2026 */
 /* ===========================================================
    Сайт Вали — конверсионные хуки (vanilla JS, без зависимостей)
    Бот-бар (моб) · dock (десктоп) · exit-intent · sticky-CTA ·
@@ -43,7 +43,7 @@
     bar.innerHTML =
       '<a href="/free.html" data-p="free" data-goal="bar_test"><span class="mbar__i">✦</span>Тест</a>' +
       '<a href="/tests/" data-p="tests" data-goal="bar_tests"><span class="mbar__i">✶</span>Тесты</a>' +
-      '<a href="/course.html" data-p="course" data-goal="bar_course"><span class="mbar__i">❤</span>Курс</a>' +
+      '<a href="/about.html" data-p="about" data-goal="bar_about"><span class="mbar__i">❤</span>Обо мне</a>' +
       '<a href="' + TG_URL + '" target="_blank" rel="noopener" data-goal="tg_click"><span class="mbar__i">✈</span>Telegram</a>';
     document.body.appendChild(bar);
     var act = bar.querySelector('[data-p="' + page + '"]');

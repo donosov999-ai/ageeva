@@ -115,10 +115,7 @@ import Layout from '../../layouts/Layout.astro';
     <span class="eyebrow">Qué sigue</span>
     <h2>Después del test</h2>
     <hr class="rule center">
-    <p class="lead">El bot de Telegram te enviará enseguida tu resultado y la guía PDF. Y a partir de ahí — sin spam ni ventas a la cara: de vez en cuando compartiré análisis e historias. Si quieres ir más a fondo — ahí te cuento sobre el curso «Relaciones para toda la vida». Si no quieres — simplemente te quedas con el test y la guía.</p>
-    <div class="btn-row center" style="margin-top:10px">
-      <a href="course.html" class="btn btn-ghost btn-lg">¿Y qué es el curso «Relaciones para toda la vida»?</a>
-    </div>
+    <p class="lead">El bot de Telegram te enviará enseguida tu resultado y la guía PDF. Y a partir de ahí — sin spam ni ventas a la cara: de vez en cuando compartiré análisis e historias. Si prefieres no hacerlo — simplemente te quedas con el test y la guía.</p>
   </div>
 </section>
 
@@ -202,7 +199,7 @@ import Layout from '../../layouts/Layout.astro';
     else if(max==='wave'){ rec='<strong>Ansioso.</strong> Aprende a calmarte tú misma (técnica 5-4-3-2-1, respiración 4-7-8) ANTES de «presionar» a tu pareja. Si tu pareja es evitativa, tu ansiedad la asusta; en lugar de comprobaciones, dilo claro: «necesito que me lo confirmes».'; }
     else{ rec='<strong>Evitativo.</strong> Aprende a quedarte en contacto 20 minutos, aunque tengas ganas de irte. Si tu pareja es ansiosa, tu retirada es un detonante para ella; en lugar de desaparecer: «necesito 20 minutos y vuelvo».'; }
     html+='<div class="note">'+rec+'</div>';
-    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Compartir el resultado →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Trabajarlo en el curso →</a></div></div>';
+    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Compartir el resultado →</button></div></div>';
     html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>Para la pareja: la trampa «ansioso + evitativo»</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">El ciclo más frecuente: una pide cercanía — el otro se retira — la primera entra en pánico y pide aún más — el segundo se retira más lejos. Es el «perseguidor — distanciador» (Sue Johnson, TFE). La salida: ambos aprenden a <strong>nombrar el ciclo</strong>, en lugar de pelear dentro de él.</p></div>';
     var box=document.getElementById('result');
     box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});

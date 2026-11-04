@@ -115,10 +115,7 @@ import Layout from '../../layouts/Layout.astro';
     <span class="eyebrow">What's next</span>
     <h2>After the test</h2>
     <hr class="rule center">
-    <p class="lead">A Telegram bot will send you your result and the PDF guide right away. After that — no spam and no hard selling: every now and then I'll share breakdowns and stories. If you want to go deeper, that's where I'll tell you about the course «Relationships for a Lifetime». If you don't, you simply keep the test and the guide.</p>
-    <div class="btn-row center" style="margin-top:10px">
-      <a href="course.html" class="btn btn-ghost btn-lg">So what's the course «Relationships for a Lifetime»?</a>
-    </div>
+    <p class="lead">A Telegram bot will send you your result and the PDF guide right away. After that — no spam and no hard selling: every now and then I'll share breakdowns and stories. If you'd rather not, you simply keep the test and the guide.</p>
   </div>
 </section>
 
@@ -202,7 +199,7 @@ import Layout from '../../layouts/Layout.astro';
     else if(max==='wave'){ rec='<strong>Anxious.</strong> Learn to soothe yourself first (the 5-4-3-2-1 technique, 4-7-8 breathing) BEFORE you start «pulling at» your partner. If your partner is avoidant, your anxiety scares him; instead of checking, say it plainly: «I need reassurance.»'; }
     else{ rec='<strong>Avoidant.</strong> Learn to stay in contact for 20 minutes, even when you want to leave. If your partner is anxious, your leaving is a trigger for him; instead of disappearing — «I need 20 minutes, I’ll be back.»'; }
     html+='<div class="note">'+rec+'</div>';
-    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Share my result →</button><a class="btn btn-primary" href="course.html" data-goal="test_to_course">Work on it in the course →</a></div></div>';
+    html+='<div class="atest-btns"><button type="button" class="btn btn-ghost" onclick="shareAttach()" data-goal="share_result">Share my result →</button></div></div>';
     html+='<div class="result-box" style="margin-top:18px;background:#fff"><h3>For couples: the «anxious + avoidant» trap</h3><p style="font-size:14px;color:var(--muted);margin:8px 0 0;">The most common cycle: one demands closeness — the other withdraws — the first panics and demands more — the second withdraws further. This is «pursuer — withdrawer» (Sue Johnson, EFT). The way out: both learn to <strong>name the cycle</strong> instead of fighting inside it.</p></div>';
     var box=document.getElementById('result');
     box.innerHTML=html; box.scrollIntoView({behavior:'smooth'});
