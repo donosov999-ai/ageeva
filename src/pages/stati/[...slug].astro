@@ -27,7 +27,7 @@ if (kind === 'article') {
   h1 = article.title; eyebrow = H.title;
 } else if (kind === 'hub') {
   crumbs.push({ n: HUBS[hub].title, u: `${SITE}/stati/hub/${hub}.html` });
-  title = `${HUBS[hub].title} — статьи Валентины Агеевой`; description = HUBS[hub].lead + ' Статьи об отношениях без «бросай при первом же» — по мотивам исследований Готтмана и теории привязанности.';
+  title = `${HUBS[hub].title} — статьи Валентины Агеевой`; description = (HUBS[hub].lead + ' Статьи Валентины Агеевой: разборы, примеры разговоров, вопросы себе.').slice(0, 165);
   canonical = `${SITE}/stati/hub/${hub}.html`; h1 = HUBS[hub].title; eyebrow = 'Статьи';
 } else {
   title = 'Статьи об отношениях — Валентина Агеева'; description = 'Статьи Валентины Агеевой об отношениях: ссоры и примирение, привязанность, семья и деньги, знакомства. Без «бросай при первом же» — как разобраться и остаться.';
@@ -93,7 +93,9 @@ const inHub = kind === 'article' ? A.filter((a) => a.hub === article.hub && a.sl
 
 {kind === 'hub' && (<section class="section"><div class="container narrow"><div class="grid grid-2">
   {A.filter((a) => a.hub === hub).map((a) => (<a class="card" href={`/stati/${a.slug}.html`}><h3>{a.title}</h3><p>{a.description}</p><span class="more">Читать →</span></a>))}
-</div></div></section>)}
+</div>
+  {HUBS[hub].myths && (<div style="margin-top:34px"><h2>Мифы по теме</h2><ul>{HUBS[hub].myths.map((m) => (<li style="margin-bottom:8px">{m}</li>))}</ul></div>)}
+</div></section>)}
 
 {kind === 'index' && (<section class="section"><div class="container narrow">
   {Object.entries(HUBS).filter(([h]) => A.some((a) => a.hub === h)).map(([h, H]) => (<div style="margin-bottom:34px"><h2><a href={`/stati/hub/${h}.html`}>{H.title}</a></h2><p style="color:var(--muted)">{H.lead}</p>
