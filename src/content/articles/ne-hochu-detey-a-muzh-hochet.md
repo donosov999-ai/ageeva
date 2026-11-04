@@ -5,7 +5,7 @@ description: "Что делать, если один из пары хочет д
 hub: semya-i-dengi
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["не хочу детей а муж хочет", "не хочу рожать что делать", "чайлдфри и муж"]
 module: "М6 «Путь к семье»"
 test: "commitment"

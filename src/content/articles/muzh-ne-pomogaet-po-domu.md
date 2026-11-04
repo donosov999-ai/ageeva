@@ -5,7 +5,7 @@ description: "Что делать, если весь быт лежит на те
 hub: govorit-i-slyshat
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["муж не помогает по дому и с детьми", "муж не помогает по дому что делать", "невидимый труд"]
 module: "М4 «Коммуникация и забота»"
 test: "chaos-control"

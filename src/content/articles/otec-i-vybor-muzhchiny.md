@@ -5,7 +5,7 @@ description: "Как отношения с отцом могут влиять н
 hub: privyazannost
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["отец и выбор мужчины", "как отношения с отцом влияют на отношения с мужчинами", "почему я выбираю мужчин похожих на отца"]
 module: "М1 «Внутренняя работа»"
 test: "family-of-origin"

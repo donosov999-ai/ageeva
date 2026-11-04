@@ -5,7 +5,7 @@ description: "Как помириться после сильной ссоры �
 hub: ssory-i-krizisy
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["как помириться после ссоры с мужем", "как помириться после сильной ссоры", "как помириться после долгой ссоры"]
 module: "М5 «Конфликты и кризисы»"
 test: repair-attempts

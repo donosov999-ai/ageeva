@@ -5,7 +5,7 @@ description: "Как ссориться, не разрушая отношени�
 hub: ssory-i-krizisy
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["как правильно ссориться с мужем", "как перестать постоянно ссориться с мужем", "как спорить с мужем"]
 module: "М5 «Конфликты и кризисы»"
 test: "harsh-startup"

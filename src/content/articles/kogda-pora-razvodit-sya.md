@@ -5,7 +5,7 @@ description: "Как понять, что отношения исчерпаны,
 hub: ssory-i-krizisy
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["когда пора разводиться с мужем признаки", "когда точно пора разводиться", "стоит ли разводиться"]
 module: "М5 «Конфликты и кризисы»"
 test: "commitment"

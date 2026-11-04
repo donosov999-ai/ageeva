@@ -5,7 +5,7 @@ description: "Муж не слышит и не понимает? Формула 
 hub: govorit-i-slyshat
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["муж не слышит меня", "что делать если муж меня не слышит", "муж не слышит меня и не понимает", "как научиться слушать мужа"]
 module: "М4 «Коммуникация и забота»"
 test: accepting-influence

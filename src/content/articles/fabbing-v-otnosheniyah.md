@@ -5,7 +5,7 @@ description: "Что такое фаббинг (игнорирование па�
 hub: govorit-i-slyshat
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["фаббинг в отношениях", "фаббинг что это", "фаббинг в отношениях как бороться"]
 module: "М4 «Коммуникация и забота»"
 test: "turning-towards"

@@ -5,7 +5,7 @@ description: "Почему пара ссорится по кругу из-за �
 hub: ssory-i-krizisy
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["почему мы с мужем постоянно ссоримся", "постоянные ссоры в семье", "как перестать ссориться с мужем"]
 module: "М5 «Конфликты и кризисы»"
 test: "flooding"

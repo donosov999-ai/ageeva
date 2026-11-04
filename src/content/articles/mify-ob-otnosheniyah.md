@@ -5,7 +5,7 @@ description: "Шесть распространённых мифов об отн
 hub: privyazannost
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["мифы об отношениях", "мифы о любви", "почему отношения не получаются", "убеждения об отношениях"]
 module: "М1 «Внутренняя работа»"
 test: "/free.html"

@@ -5,7 +5,7 @@ description: "Почему в отношениях повторяется оди
 hub: privyazannost
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["почему я выбираю не тех мужчин", "почему в отношениях повторяется один и тот же сценарий"]
 module: "М1 «Внутренняя работа»"
 test: "/free.html"

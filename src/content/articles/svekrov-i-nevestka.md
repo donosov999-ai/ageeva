@@ -5,7 +5,7 @@ description: "Что делать, если свекровь лезет в се�
 hub: semya-i-dengi
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["свекровь и невестка", "свекровь вмешивается в семью", "как общаться со свекровью"]
 module: "Вне программы курса"
 test: "family-of-origin"

@@ -5,7 +5,7 @@ description: "Муж стал чужим человеком: откуда бер
 hub: govorit-i-slyshat
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["муж стал чужим что делать", "почему муж стал чужим человеком", "муж стал чужим после измены"]
 module: "М4 «Коммуникация и забота»"
 test: "emotional-disengagement"

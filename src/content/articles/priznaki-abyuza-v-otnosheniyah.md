@@ -5,7 +5,7 @@ description: "Как распознать абьюз в отношениях: э
 hub: bezopasnost
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["признаки абьюза в отношениях", "абьюз в отношениях как распознать", "пассивный абьюз", "эмоциональный абьюз"]
 module: "Вне воронки — безопасность"
 test: "respect-boundaries"

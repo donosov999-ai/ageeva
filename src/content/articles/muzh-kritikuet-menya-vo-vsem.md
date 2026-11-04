@@ -5,7 +5,7 @@ description: "Почему муж критикует и презирает, че
 hub: ssory-i-krizisy
 date: 2026-11-04
 updated: 2026-11-04
-draft: true
+draft: false
 keywords: ["муж критикует меня во всём", "постоянная критика от мужа", "презрение в отношениях"]
 module: "М5 «Конфликты и кризисы»"
 test: "/tests/four-horsemen-test.html"
