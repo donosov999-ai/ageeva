@@ -1,4 +1,4 @@
-/* ageeva-test-render · VER 3 · 04.11.2026 */
+/* ageeva-test-render · VER 4 · 04.11.2026 */
 /* Рендерер теста: /test.html?s=<slug>. Соло + парный режим (передай телефон → сравнение). */
 (function () {
   var SB_URL = 'https://iuvvheeocobhiothfgei.supabase.co';
@@ -197,7 +197,7 @@
       .then(function (rows) {
         if (!rows || !rows.length) { root.innerHTML = ph('Тест не найден или выключен'); return; }
         test = rows[0];
-        if (test.title) document.title = test.title + ' — тест · Отношения длиною в жизнь';
+        if (test.title && location.pathname.indexOf('/test/') !== 0) document.title = test.title + ' — тест · Отношения длиною в жизнь'; // на предрендеренных /test/<slug>.html title уже верный — не перезаписываем
         render(false);
       })
       .catch(function () { root.innerHTML = ph('Не удалось загрузить тест'); });
